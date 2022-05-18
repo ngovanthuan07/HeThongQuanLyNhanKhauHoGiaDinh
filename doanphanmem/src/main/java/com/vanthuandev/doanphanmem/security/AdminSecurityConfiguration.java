@@ -55,8 +55,12 @@ public class AdminSecurityConfiguration extends WebSecurityConfigurerAdapter  {
                 .successHandler(loginSuccessHandler)
                 .and().logout().logoutUrl("/admin/process-logout")
                 .logoutSuccessHandler(logoutHandler)
+//                .invalidateHttpSession(true)
+//                .deleteCookies("JSESSIONID")
                 .and()
-                .exceptionHandling().accessDeniedPage("/admin-panel/accessDenied");
+                .exceptionHandling().accessDeniedPage("/admin-panel/accessDenied")
+
+        ;
         http.cors().and().csrf().disable();
     }
 }

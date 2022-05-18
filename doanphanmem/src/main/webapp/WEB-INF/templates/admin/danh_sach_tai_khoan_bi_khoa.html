@@ -11,12 +11,12 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Quản lý tài khoàn<small></small></h3>
+                <h3>Quản lý tài khoản bị khoá<small></small></h3>
             </div>
 
             <div class="title_right">
                 <div class="col-md-5 col-sm-5   form-group pull-right top_search">
-                    <form th:action="@{/admin/danhsachtaikhoan/searchpaginated}">
+                    <form th:action="@{/admin/danhsachtaikhoanbikhoa/searchpaginated}">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Tìm kiếm..." th:name="username" th:value="${username}">
                             <input type="hidden" th:name="size" th:value="${nguoiDungPage.size}">
@@ -61,7 +61,7 @@
             <div class="col-md-12 col-sm-12  ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Quản lý tài khoản <small>Danh sách tái khoản</small></h2>
+                        <h2>Quản lý tài khoản <small>Danh sách tái khoản bị hoá</small></h2>
                     </div>
                     <div class="x_content">
                         <table class="table">
@@ -72,7 +72,6 @@
                                 <th>Tài khoản</th>
                                 <th>CMND</th>
                                 <th>Vai trò</th>
-                                <th>Chỉnh sửa</th>
                                 <th>Khoá tài khoản</th>
                             </tr>
                             </thead>
@@ -83,10 +82,6 @@
                                 <td th:text="${nguoidung.username}"></td>
                                 <td th:text="${nguoidung.cmnd}"></td>
                                 <td th:text="${nguoidung.vaiTros[0].tenVaiTro}"></td>
-                                <td th:if="${!nguoidung.vaiTros[0].tenVaiTro.startsWith('Quản trị viên')}">
-                                    <a th:href="@{'/admin/capnhattaikhoan?id='} + ${nguoidung.maNguoiDung}"><i
-                                            class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;Sửa</a>
-                                </td>
                                 <td th:if="${nguoidung.vaiTros[0].tenVaiTro.startsWith('Quản trị viên')}"></td>
 
                                 <td th:if="${nguoidung.trangThai == 1 && !nguoidung.vaiTros[0].tenVaiTro.startsWith('Quản trị viên')}">
@@ -116,7 +111,7 @@
                                     <ul class="pagination justify-content-center"
                                         th:if="${nguoiDungPage.totalPages > 0}">
                                         <li th:class="${1 == nguoiDungPage.number + 1} ? 'page-item active' : 'page-item'">
-                                            <a th:href="@{/admin/danhsachtaikhoan/searchpaginated(username= ${username},
+                                            <a th:href="@{/admin/danhsachtaikhoanbikhoa/searchpaginated(username= ${username},
                                                                                   size=${nguoiDungPage.size},
                                                                                   page=${1})}" class="page-link">
                                                 First
@@ -127,7 +122,7 @@
                                             th:each="pageNumber : ${pageNumbers}"
                                             th:if="${nguoiDungPage.totalPages > 1}"
                                             th:class="${pageNumber == nguoiDungPage.number + 1} ? 'page-item active' : 'page-item'">
-                                            <a th:href="@{/admin/danhsachtaikhoan/searchpaginated(username= ${username},
+                                            <a th:href="@{/admin/danhsachtaikhoanbikhoa/searchpaginated(username= ${username},
                                                                                   size=${nguoiDungPage.size},
                                                                                   page=${pageNumber})}"
                                                class="page-link" th:text="${pageNumber}">
@@ -135,7 +130,7 @@
                                         </li>
 
                                         <li th:class="${nguoiDungPage.totalPages == nguoiDungPage.number + 1} ? 'page-item active' : 'page-item'">
-                                            <a th:href="@{/admin/danhsachtaikhoan/searchpaginated(username= ${username},
+                                            <a th:href="@{/admin/danhsachtaikhoanbikhoa/searchpaginated(username= ${username},
                                                                                   size=${nguoiDungPage.size},
                                                                                   page=${nguoiDungPage.totalPages})}"
                                                class="page-link">

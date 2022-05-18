@@ -5,6 +5,8 @@ import com.vanthuandev.doanphanmem.pojos.NguoiDung;
 import com.vanthuandev.doanphanmem.repository.NguoiDungRepository;
 import com.vanthuandev.doanphanmem.service.NguoiDungService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -57,6 +59,27 @@ public class NguoiDungServiceImpl implements NguoiDungService {
     }
 
     @Override
+    public Page<NguoiDung> findNguoiDungByUsernameOrCmndContaining(String username, String cmnd, Pageable pageable) {
+        return nguoiDungRepository.findNguoiDungByUsernameOrCmndContaining(username, cmnd, pageable);
+    }
+
+    @Override
+    public Page<NguoiDung> findNguoiDungByUsernameContaining(String username, Pageable pageable) {
+        return nguoiDungRepository.findNguoiDungByUsernameContaining(username, pageable);
+    }
+
+    @Override
+    public Page<NguoiDung> findNguoiDungByCmndContaining(String cmnd, Pageable pageable) {
+        return nguoiDungRepository.findNguoiDungByCmndContaining(cmnd, pageable);
+    }
+
+    @Override
+    public Page<NguoiDung> findAll(Pageable pageable) {
+        return nguoiDungRepository.findAll(pageable);
+    }
+
+
+    @Override
     public String updateNguoiDung(NguoiDung nguoiDung, String keyword) {
         Optional<NguoiDung> nguoiDungOptional = nguoiDungRepository.findNguoiDungByUsername(nguoiDung.getUsername());
         if(!nguoiDungOptional.isPresent()) {
@@ -82,6 +105,18 @@ public class NguoiDungServiceImpl implements NguoiDungService {
         }
         return nguoiDungOptional.get();
     }
+
+    @Override
+    public Page<NguoiDung> findNguoiDungByUsernameAndTrangThaiContaining(String username, int trangThai, Pageable pageable) {
+        return nguoiDungRepository.findNguoiDungByUsernameAndTrangThaiContaining(username, trangThai, pageable);
+    }
+
+    @Override
+    public Page<NguoiDung> findNguoiDungByTrangThaiContaining(int trangThai, Pageable pageable) {
+        return nguoiDungRepository.findNguoiDungByTrangThaiContaining(trangThai, pageable);
+    }
+
+
 
     @Override
     public List<NguoiDung> findAll() {
