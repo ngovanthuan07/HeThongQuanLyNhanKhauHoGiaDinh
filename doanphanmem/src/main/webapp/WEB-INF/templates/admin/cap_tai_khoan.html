@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/admin/base" >
+<head>
+</head>
+<body>
+<div class="right_col" role="main"  layout:fragment="content">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Quản lý tài khoản</h3>
+            </div>
+
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5 form-group pull-right top_search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">Go!</button>
+                                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Quản lý tài khoản
+                            <small th:if="${option.startsWith('edit')}">Cấp tài khoản</small>
+                            <small th:if="${option.startsWith('update')}">Cập nhật tài khoản</small>
+                        </h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <!--    form -->
+                        <form class="" th:action="@{${option.startsWith('edit') ? '/admin/captaikhoan' : 'admin/capnhattaikhoan'}}"
+                                       th:method="post"
+                                       th:object="${nguoidung}" novalidate>
+                            <span class="section">Thông tin người dùng</span>
+
+
+                            <div class="text-center text-danger"
+                                 th:if="${msgError != null || msgError != ''}"
+                                 th:text="${msgError}"/>
+                            <div class="text-center text-success"
+                                 th:if="${msgSuccess != null || msgSuccess != ''}"
+                                 th:text="${msgSuccess}"/>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Tên tài khoản<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control" th:field="*{username}" placeholder="Nhập tên tài khoản" required="required" th:disabled="${option.startsWith('update')}"/>
+                                    <div class="text-danger" th:if="${msg != null || msg != ''}" th:text="${msg}"> </div>
+                                    <div class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> </div>
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Họ Và Tên<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control" th:field="*{tenNguoiDung}" placeholder="Nhập tên người dùng" required="required" />
+                                    <div class="text-danger" th:if="${#fields.hasErrors('tenNguoiDung')}" th:errors="*{tenNguoiDung}"> </div>
+                                </div>
+                            </div>
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">CMND<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control" th:field="*{cmnd}" data-validate-length-range="5,15" type="text" placeholder="Nhập CMND"/></div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Mật khẩu<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control" type="password" id="password" th:field="*{password}" required />
+                                    <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> </div>
+                                </div>
+                            </div>
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Phân quyền tài khoản</label>
+                                <div class="col-md-6 col-sm-6">
+                                    <select class="select2_single form-control" th:field="*{vaiTros}">
+                                            <option th:each="vaitro : ${vaitros}"
+                                                    th:value="${vaitro.maVaiTro}"
+                                                    th:text="${vaitro.tenVaiTro}">
+                                            </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <input type="hidden" th:if="${option.startsWith('update')}" th:field="*{maNguoiDung}">
+                            <input type="hidden" th:if="${option.startsWith('update')}" th:field="*{username}">
+                            <div class="ln_solid">
+                                <div class="form-group">
+                                    <div class="col-md-6 offset-md-3">
+                                        <button type='submit' class="btn btn-primary" th:if="${option.startsWith('edit')}">Cấp tài khoản</button>
+                                        <button type='submit' class="btn btn-primary" th:if="${option.startsWith('update')}">Cập nhật</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->
+</body>
+</html>

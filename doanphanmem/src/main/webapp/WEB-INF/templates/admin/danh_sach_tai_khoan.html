@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/admin/base">
+<head>
+</head>
+<body>
+<div class="right_col" role="main" layout:fragment="content">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Danh sách tài khoàn người dùng <small></small></h3>
+            </div>
+
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row" style="display: block;">
+            <div class="col-md-12 col-sm-12  ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Quản lý tài khoản <small>Danh sách tái khoản</small></h2>
+                    </div>
+                    <div class="x_content">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Mã người dùng</th>
+                                <th>Tên người dùng</th>
+                                <th>Tài khoản</th>
+                                <th>CMND</th>
+                                <th>Vai trò</th>
+                                <th>Chỉnh sửa</th>
+                                <th>Khoá tài khoản</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="nguoidung : ${nguoidungs}">
+                                <td th:text="${nguoidung.maNguoiDung}"></td>
+                                <td th:text="${nguoidung.tenNguoiDung}"></td>
+                                <td th:text="${nguoidung.username}"></td>
+                                <td th:text="${nguoidung.cmnd}"></td>
+                                <td th:text="${nguoidung.vaiTros[0].tenVaiTro}"></td>
+                                <td th:if="${!nguoidung.vaiTros[0].tenVaiTro.startsWith('Quản trị viên')}">
+                                    <a th:href="@{'/admin/capnhattaikhoan?id='} + ${nguoidung.maNguoiDung}"><i
+                                        class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;Sửa</a>
+                                </td>
+                                <td th:if="${nguoidung.vaiTros[0].tenVaiTro.startsWith('Quản trị viên')}"></td>
+
+                                <td th:if="${nguoidung.trangThai == 1 && !nguoidung.vaiTros[0].tenVaiTro.startsWith('Quản trị viên')}">
+                                        <a th:href="@{'/admin/khoamotaikhoan?id='} + ${nguoidung.maNguoiDung}">
+                                            <i class="fa fa-solid fa-key text-danger" aria-hidden="true"></i>&nbsp;&nbsp;
+                                            Khoá tài khoản
+                                        </a>
+                                </td>
+
+                                <td th:if="${nguoidung.vaiTros[0].tenVaiTro.startsWith('Quản trị viên')}"></td>
+
+                                <td th:if="${nguoidung.trangThai == 0 && !nguoidung.vaiTros[0].tenVaiTro.startsWith('Quản trị viên')}">
+                                        <a th:href="@{'/admin/khoamotaikhoan?id='} + ${nguoidung.maNguoiDung}">
+                                                <i class="fa-solid fa-unlock-keyhole text-success" aria-hidden="true"></i>&nbsp;
+                                                 Mở khoá tài khoản
+                                        </a>
+                                </td>
+                                <td th:if="${nguoidung.vaiTros[0].tenVaiTro.startsWith('Quản trị viên')}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
+                                    <ul class="pagination">
+                                        <li class="paginate_button previous disabled" id="datatable_previous"><a
+                                                href="#" aria-controls="datatable" data-dt-idx="0"
+                                                tabindex="0">Previous</a></li>
+                                        <li class="paginate_button active"><a href="#" aria-controls="datatable"
+                                                                              data-dt-idx="1" tabindex="0">1</a></li>
+                                        <li class="paginate_button "><a href="#" aria-controls="datatable"
+                                                                        data-dt-idx="2" tabindex="0">2</a></li>
+                                        <li class="paginate_button "><a href="#" aria-controls="datatable"
+                                                                        data-dt-idx="3" tabindex="0">3</a></li>
+                                        <li class="paginate_button "><a href="#" aria-controls="datatable"
+                                                                        data-dt-idx="4" tabindex="0">4</a></li>
+                                        <li class="paginate_button "><a href="#" aria-controls="datatable"
+                                                                        data-dt-idx="5" tabindex="0">5</a></li>
+                                        <li class="paginate_button "><a href="#" aria-controls="datatable"
+                                                                        data-dt-idx="6" tabindex="0">6</a></li>
+                                        <li class="paginate_button next" id="datatable_next"><a href="#"
+                                                                                                aria-controls="datatable"
+                                                                                                data-dt-idx="7"
+                                                                                                tabindex="0">Next</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
