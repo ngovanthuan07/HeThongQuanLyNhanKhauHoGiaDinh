@@ -4,56 +4,56 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <!-- Meta, title, CSS, favicons, etc. -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/favicon.ico" type="image/ico" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico" type="image/ico"/>
 
-  <title>Gentelella Alela! | </title>
+    <title>Gentelella Alela! | </title>
 
-  <!-- Bootstrap -->
-  <link th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link th:href="@{/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
-  <!-- NProgress -->
-  <link th:href="@{/vendors/nprogress/nprogress.css}" rel="stylesheet">
-  <!-- iCheck -->
-  <link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link th:href="@{/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    <!-- NProgress -->
+    <link th:href="@{/vendors/nprogress/nprogress.css}" rel="stylesheet">
+    <!-- iCheck -->
+    <link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
 
-  <!-- bootstrap-progressbar -->
-  <link th:href="@{/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet">
-  <!-- JQVMap -->
-  <link th:href="@{/vendors/jqvmap/dist/jqvmap.min.css}" rel="stylesheet"/>
-  <!-- bootstrap-daterangepicker -->
-  <link th:href="@{/vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link th:href="@{/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet">
+    <!-- JQVMap -->
+    <link th:href="@{/vendors/jqvmap/dist/jqvmap.min.css}" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link th:href="@{/vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
 
-  <!-- Custom Theme Style -->
-  <link th:href="@{/build/css/custom.min.css}" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link th:href="@{/build/css/custom.min.css}" rel="stylesheet">
 </head>
 
 <body class="nav-md">
 <div class="container body">
-  <div class="main_container">
-    <div class="col-md-3 left_col">
-      <div th:replace="fragment/nguoidung/left-menu :: left-menu"></div>
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div th:replace="fragment/nguoidung/left-menu :: left-menu"></div>
+        </div>
+
+        <!-- top navigation -->
+        <div th:replace="fragment/nguoidung/top_nav :: top_nav"></div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div layout:fragment="content"></div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div th:replace="fragment/nguoidung/footer :: footer"></div>
+        </footer>
+        <!-- /footer content -->
     </div>
-
-    <!-- top navigation -->
-    <div th:replace="fragment/nguoidung/top_nav :: top_nav"></div>
-    <!-- /top navigation -->
-
-    <!-- page content -->
-    <div layout:fragment="content"></div>
-    <!-- /page content -->
-
-    <!-- footer content -->
-    <footer>
-      <div th:replace="fragment/nguoidung/footer :: footer"></div>
-    </footer>
-    <!-- /footer content -->
-  </div>
 </div>
 
 <!-- jQuery -->
@@ -96,5 +96,13 @@
 
 <!-- Custom Theme Scripts -->
 <script th:src="@{/build/js/custom.min.js}"></script>
+
+<script src="https://kit.fontawesome.com/176ee4c68c.js" crossorigin="anonymous"></script>
 </body>
+<th:block layout:fragment="script">
+    <script th:src="@{/js/validator.js}"></script>
+</th:block>
+<th:block layout:fragment="script">
+    <script th:src="@{/js/user.js}"></script>
+</th:block>
 </html>

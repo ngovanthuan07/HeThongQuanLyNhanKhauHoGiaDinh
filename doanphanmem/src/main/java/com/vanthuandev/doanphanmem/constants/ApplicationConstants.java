@@ -1,2 +1,5 @@
-package com.vanthuandev.doanphanmem.constants;public class ApplicationConstrants {
+package com.vanthuandev.doanphanmem.constants;
+
+public class ApplicationConstants {
+
 }

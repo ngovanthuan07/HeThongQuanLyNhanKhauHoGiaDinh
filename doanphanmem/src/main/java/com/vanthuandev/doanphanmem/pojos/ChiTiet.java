@@ -14,8 +14,7 @@ import javax.validation.constraints.Size;
 @Table
 public class ChiTiet {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int maChiTiet;
+    private String maChiTiet;
 
     @Size(max = 100)
     private String tuNgayThangNam;

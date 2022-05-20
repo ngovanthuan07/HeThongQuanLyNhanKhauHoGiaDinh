@@ -25,7 +25,6 @@ public class NhanKhau {
     @Size(min= 1, max = 50)
     private String hoVaTen;
 
-    @NotNull
     @Size(min= 1, max = 50)
     private String tenGoiKhac;
 
@@ -38,7 +37,10 @@ public class NhanKhau {
     private Date ngaySinh;
 
     @NotNull
-    private String queQuan;
+    private String nguyenQuan;
+
+    @NotNull
+    private  String noiSinh;
 
     @NotNull
     @Size(max = 50)
@@ -50,17 +52,29 @@ public class NhanKhau {
 
     @NotNull
     @Size(max = 50)
+    private String quocTich;
+
+    @Size(max = 50)
     private String ngheNghiep;
+
+    private String noiLamViec;
 
     @NotNull
     @Size(max = 50)
     private String cmnd;
 
-    @NotNull
     private int trangThai;
 
     @Size(max = 50)
     private String tinhTrang;
+
+    @NotNull
+    private String noiThuongTru;
+
+    @NotNull
+    private String choOHienNay;
+
+
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
