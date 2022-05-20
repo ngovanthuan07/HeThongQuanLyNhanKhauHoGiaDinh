@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/nguoidung/base">
+<head>
+</head>
+<body>
+<div class="right_col" role="main"  layout:fragment="content">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Đăng ký cấp sổ hộ khẩu</h3>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Đăng ký cấp sổ hộ khẩu
+                            <small >Đăng ký cấp sổ hộ khẩu</small>
+                        </h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <!--    form -->
+                        <form class="" th:action="@{/nguoidung/dangkycapsohokhau}"
+                              th:method="post"
+                               novalidate>
+                            <span class="section">Đăng ký cấp sổ hộ khẩu</span>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Họ và tên<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control" name="user" placeholder="Nhập họ và tên" required="required" />
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Họ và tên khác(Nếu có)<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control" name="user" placeholder="Nhập họ và tên khác" required="required" />
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Ngày tháng năm sinh<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control" type="date" name="date" required='required'>
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Giới tính<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> Nam
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> Nữ
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Nơi sinh<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control" name="user" placeholder="Nhập nơi sinh" required="required" />
+                                </div>
+                            </div>
+
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Nguyên quán<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control" name="user" placeholder="Nhập nguyên quán" required="required" />
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Dân tộc<span class="required">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input class="form-control" name="user" placeholder="Nhập tên dân tộc" required="required" />
+                                </div>
+
+                                <label class="col-form-label col-md-2 col-sm-2  label-align">Quốc tịch<span class="required">*</span></label>
+                                <div class="col-md-2 col-sm-2">
+                                    <input class="form-control" name="user" placeholder="Nhập quốc tịch" required="required" />
+                                </div>
+                            </div>
+                            <div class="field item form-group">
+
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">CMND/CCCD<span class="required">*</span></label>
+                                <div class="col-md-3 col-sm-3">
+                                    <input class="form-control" name="user" placeholder="Nhập CMND/CCCD" required="required" />
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Nơi thường trú<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control" name="user" placeholder="Nhập nơi thường trú" required="required" />
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Chỗ ở hiện nay<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control" name="user" placeholder="Nhập chỗ ở hiện nay" required="required" />
+                                </div>
+                            </div>
+
+                            <div class="ln_solid">
+                                <div class="form-group">
+                                    <div class="col-md-6 offset-md-3">
+                                        <button type='submit' class="btn btn-primary">Gửi đi</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->
+</body>
+</html>
