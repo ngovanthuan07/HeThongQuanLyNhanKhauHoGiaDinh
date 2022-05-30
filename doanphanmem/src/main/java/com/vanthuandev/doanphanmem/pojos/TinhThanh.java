@@ -25,10 +25,4 @@ public class TinhThanh {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tinhThanh", fetch = FetchType.LAZY)
     private Collection<QuanHuyen> quanHuyens;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tinhThanh", fetch = FetchType.LAZY)
-    private Collection<SoHoKhau> soHoKhaus;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tinhThanh", fetch = FetchType.LAZY)
-    private Collection<NhanKhauTamTru> nhanKhauTamTrus;
 }

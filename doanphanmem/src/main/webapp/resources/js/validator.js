@@ -1,5 +1,7 @@
 function Validator(formSelector) {
+
     var _this = this;
+
     function getParent(element, selector) {
         while (element.parentElement) {
             if (element.parentElement.matches(selector)) {
@@ -8,7 +10,6 @@ function Validator(formSelector) {
             element = element.parentElement;
         }
     }
-
     var formRules = {};
 
     /**
@@ -38,28 +39,6 @@ function Validator(formSelector) {
                     : `Vui lòng nhập tối đa ${max} kí tự`;
             };
         },
-        minAge: function (minAge) {
-            return function (value) {
-                let month_diff = Date.now() - new Date(value).getTime();
-                let age_dt = new Date(month_diff);
-                let year = age_dt.getUTCFullYear();
-                let age = Math.abs(year - 1970);
-                return age >= minAge
-                    ? undefined
-                    : `Tuổi phải lớn ${minAge}`;
-            }
-        },
-        maxAge: function (maxAge) {
-            return function (value) {
-                let month_diff = Date.now() - new Date(value).getTime();
-                let age_dt = new Date(month_diff);
-                let year = age_dt.getUTCFullYear();
-                let age = Math.abs(year - 1970);
-                return age <= maxAge
-                    ? undefined
-                    : `Tuổi phải nhỏ hơn ${maxAge}`;
-            }
-        }
     };
 
     // lấy ra form element trong DOM theo `formSelector`
@@ -92,20 +71,23 @@ function Validator(formSelector) {
                 }
             }
 
+
             // Lắng nghe sự kiện để validate (blur, change ...)
 
             input.onblur = handleValidate;
             input.oninput = handleClearError;
         }
     }
-
     function handleValidate(event) {
+        // lấy thẻ input vì nếu không chấm target nó chỉ rả về FocusEvent không phải thẻ input
         var rules = formRules[event.target.name];
         var errorMessage;
 
-        for (var rule of rules) {
+        // Việc dùng find sẽ không đũng mục đích bài toán bạn có thể tham khảo cách viết này ở comment.js
+        // tôi sẻ sử dụng cách này để viết dễ hiểu và đúng mục đích hơn
+        for(var rule of rules) {
             errorMessage = rule(event.target.value);
-            if (errorMessage) break;
+            if(errorMessage) break;
         }
 
         // Nếu có lỗi thì hiển thị message lỗi ra UI
@@ -121,6 +103,7 @@ function Validator(formSelector) {
                 }
             }
         }
+
         return !errorMessage;
     }
 
@@ -139,6 +122,9 @@ function Validator(formSelector) {
         }
     }
 
+
+
+
     // Xửa lý hàn vi submit form
     formElement.onsubmit = function (event) {
         event.preventDefault();
@@ -148,10 +134,13 @@ function Validator(formSelector) {
         var inputs = formElement.querySelectorAll("[name][rules]");
 
         for (var input of inputs) {
-            if (!handleValidate({target: input})) {
+            if (!handleValidate({ target: input })) {
+                console.log("Input Error: " ,input.name)
                 isValid = false;
             }
         }
+
+        console.log("isValid: ", isValid);
 
         if (isValid) {
             if (typeof _this.onSubmit === "function") {
@@ -191,7 +180,8 @@ function Validator(formSelector) {
             } else {
                 formElement.submit();
             }
+        } else {
+            alert("Có trường nhập không đúng")
         }
     };
-
 }

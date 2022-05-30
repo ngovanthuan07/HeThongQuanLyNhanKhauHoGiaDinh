@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html   lang="en"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns="http://www.w3.org/1999/xhtml"
->
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/congan/base">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <h1>welcome</h1>
-    <h1 th:if="${session.currentUser != null}" th:text="${session.currentUser['username']}"></h1>
-    <a th:href="@{/congan-panel/logout}">Log out</a>
+    <div class="col-md-12" layout:fragment="content">
+        <div class="text-center text-primary">Chào mừng bạn đến với cổng thông tin điện tử tp Đà Nẵng</div>
+    </div>
 </body>
 </html>

@@ -34,6 +34,7 @@
 </head>
 
 <body class="nav-md">
+<div id = "my-modal"></div>
 <div class="container body">
     <div class="main_container">
         <div class="col-md-3 left_col">
@@ -99,9 +100,10 @@
 
 <script src="https://kit.fontawesome.com/176ee4c68c.js" crossorigin="anonymous"></script>
 </body>
-<th:block layout:fragment="script">
-    <script th:src="@{/js/validator.js}"></script>
-</th:block>
+<script th:src="@{/js/modal-form.js}"></script>
+<script type="module" th:src="@{/js/address-form.js}"></script>
+<script th:src="@{/js/validator.js}"></script>
+
 <th:block layout:fragment="script">
     <script th:src="@{/js/user.js}"></script>
 </th:block>

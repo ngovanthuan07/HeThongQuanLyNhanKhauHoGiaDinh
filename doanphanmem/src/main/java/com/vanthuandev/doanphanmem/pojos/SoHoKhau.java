@@ -19,31 +19,36 @@ import java.util.Date;
 public class SoHoKhau {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int maSoHoKhau;
+    private int soHK;
 
     @NotNull
     @Size(max = 100)
-    private String chuHo;
+    private String noiDangKyThuongTru;
+
+    @NotNull
+    @Size(max = 20)
+    private String toSo;
 
     @Size(max = 100)
-    private String hoChinhSach;
+    private String hoNgoaiHuyenDen;
 
-    @Size(max = 250)
-    private  String diaChiThuongTru;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date ngayNopLuu;
 
-    @Size(max = 100)
-    private String tinhTrang;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date ngayTach;
+
+    private String trangThai;
+
+    private String chinhSach;
+
+    private String chiChu;
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ngayCapNhat;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "ma_tinh_thanh", referencedColumnName = "maTinhThanh")
-    private TinhThanh tinhThanh;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "soHoKhau", fetch = FetchType.LAZY)
-    private Collection<NhanKhauTachHo> nhanKhauTachHos;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "soHoKhau", fetch = FetchType.LAZY)
     private Collection<NhanKhauThuongTru> nhanKhauThuongTrus;

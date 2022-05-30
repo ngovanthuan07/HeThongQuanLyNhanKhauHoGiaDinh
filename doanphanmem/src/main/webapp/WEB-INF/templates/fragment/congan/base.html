@@ -1,100 +1,97 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <!-- Meta, title, CSS, favicons, etc. -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/favicon.ico" type="image/ico" />
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Do An Phan Mem</title>
+  <meta content="" name="description"/>
+  <meta content="" name="keywords"/>
+  <!-- Favicons -->
+  <link th:href="@{/assets/img/favicon.png}" rel="icon"/>
+  <link th:href="@{/assets/img/apple-touch-icon.png}" rel="apple-touch-icon"/>
 
-  <title>Gentelella Alela! | </title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"/>
 
-  <!-- Bootstrap -->
-  <link th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link th:href="@{/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
-  <!-- NProgress -->
-  <link th:href="@{/vendors/nprogress/nprogress.css}" rel="stylesheet">
-  <!-- iCheck -->
-  <link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link th:href="@{/assets/vendor/animate.css/animate.min.css}" rel="stylesheet"/>
+  <link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+  <link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet" />
+  <link th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet"/>
+  <script src="https://kit.fontawesome.com/176ee4c68c.js" crossorigin="anonymous"></script>
 
-  <!-- bootstrap-progressbar -->
-  <link th:href="@{/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet">
-  <!-- JQVMap -->
-  <link th:href="@{/vendors/jqvmap/dist/jqvmap.min.css}" rel="stylesheet"/>
-  <!-- bootstrap-daterangepicker -->
-  <link th:href="@{/vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link th:href="@{/assets/css/style.css}" rel="stylesheet"/>
+  <link th:href="@{/assets/css/css.css}" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 
-  <!-- Custom Theme Style -->
-  <link th:href="@{/build/css/custom.min.css}" rel="stylesheet">
+<!--  <script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>-->
+
+  <!--  ckeditor-->
+  <script type="text/javascript" th:src="@{/ckeditor/ckeditor.js}"></script>
+  <!--  selectpicker-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 </head>
+<body>
+<div id = "my-modal"></div>
+<div id="main">
 
-<body class="nav-md">
-<div class="container body">
-  <div class="main_container">
-    <div class="col-md-3 left_col">
-      <div th:replace="fragment/congan/left-menu :: left-menu"></div>
-    </div>
-
-    <!-- top navigation -->
-    <div th:replace="fragment/congan/top_nav :: top_nav"></div>
-    <!-- /top navigation -->
-
-    <!-- page content -->
-    <div layout:fragment="content"></div>
-    <!-- /page content -->
-
-    <!-- footer content -->
-    <footer>
-      <div th:replace="fragment/congan/footer :: footer"></div>
-    </footer>
-    <!-- /footer content -->
+  <div class="col-md-3 left_col">
+    <div th:replace="fragment/congan/left-menu :: left-menu"></div>
   </div>
+
+  <!-- Page content holder -->
+  <div class="page-content p-2" id="content">
+    <!-- ======= Header/Navbar ======= -->
+    <nav th:replace="fragment/congan/top-nav :: top-nav"> </nav>
+    <!-- Demo content -->
+    <br />
+    <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
+      <i class="fa fa-bars"></i>
+      <!-- <small class="text-uppercase font-weight-bold">Toggle</small> -->
+    </button>
+
+    <div layout:fragment="content"></div>
+    <!-- End demo content -->
+  </div>
+
 </div>
 
-<!-- jQuery -->
-<script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
-<!-- Bootstrap -->
-<script th:src="@{/vendors/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
-<!-- FastClick -->
-<script th:src="@{/vendors/fastclick/lib/fastclick.js}"></script>
-<!-- NProgress -->
-<script th:src="@{/vendors/nprogress/nprogress.js}"></script>
-<!-- Chart.js -->
-<script th:src="@{/vendors/Chart.js/dist/Chart.min.js}"></script>
-<!-- gauge.js -->
-<script th:src="@{/vendors/gauge.js/dist/gauge.min.js}"></script>
-<!-- bootstrap-progressbar -->
-<script th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
-<!-- iCheck -->
-<script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
-<!-- Skycons -->
-<script th:src="@{/vendors/skycons/skycons.js}"></script>
-<!-- Flot -->
-<script th:src="@{/vendors/Flot/jquery.flot.js}"></script>
-<script th:src="@{/vendors/Flot/jquery.flot.pie.js}"></script>
-<script th:src="@{/vendors/Flot/jquery.flot.time.js}"></script>
-<script th:src="@{/vendors/Flot/jquery.flot.stack.js}"></script>
-<script th:src="@{/vendors/Flot/jquery.flot.resize.js}"></script>
-<!-- Flot plugins -->
-<script th:src="@{/vendors/flot.orderbars/js/jquery.flot.orderBars.js}"></script>
-<script th:src="@{/vendors/flot-spline/js/jquery.flot.spline.min.js}"></script>
-<script th:src="@{/vendors/flot.curvedlines/curvedLines.js}"></script>
-<!-- DateJS -->
-<script th:src="@{/vendors/DateJS/build/date.js}"></script>
-<!-- JQVMap -->
-<script th:src="@{/vendors/jqvmap/dist/jquery.vmap.js}"></script>
-<script th:src="@{/vendors/jqvmap/dist/maps/jquery.vmap.world.js}"></script>
-<script th:src="@{/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js}"></script>
-<!-- bootstrap-daterangepicker -->
-<script th:src="@{/vendors/moment/min/moment.min.js}"></script>
-<script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center" >
+      <i class="bi bi-arrow-up-short"></i>
+  </a>
 
-<!-- Custom Theme Scripts -->
-<script th:src="@{/build/js/custom.min.js}"></script>
+  <!-- Vendor JS Files -->
+  <script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+
+  <!-- Template Main JS File -->
+  <script th:src="@{/assets/js/main.js}"></script>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <!--  Thư viện bootstrap-select  -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+  <!--  Xử lý js của tôi-->
+  <script th:src="@{/js/modal-form.js}"></script>
+  <script type="module" th:src="@{/js/address-form.js}"></script>
+<!--  <script th:src="@{/js/validator.js}"></script>-->
+  <!--  thymeleaf sử lý layout js-->
+  <th:block layout:fragment="validator"> </th:block>
+  <th:block layout:fragment="script"> </th:block>
+<script>
+    $(function () {
+      $("#sidebarCollapse").on("click", function () {
+        $("#sidebar, #content").toggleClass("active");
+      });
+    });
+  </script>
 </body>
 </html>

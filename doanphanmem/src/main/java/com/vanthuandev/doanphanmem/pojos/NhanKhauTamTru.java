@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
@@ -15,42 +16,38 @@ import java.util.Date;
 @Entity
 @Table
 public class NhanKhauTamTru {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int maNhanKhauTamTru;
 
-    private String noiTamTru;
+    @EmbeddedId
+    private NhanKhauTamTruPK nhanKhauTamTruPK;
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date ngayDen;
+    private Date tamTruTuNgay;
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date ngayDi;
+    private Date tamTruDenNgay;
 
-    @Size(max = 250)
+    private String noiThuongTru;
+
+    private String noiDangKiTamTru;
+
     private String lyDo;
 
-    @Size(max = 250)
-    private String quanHeVoiChuHo;
+    private String ghiChu;
 
-    @Size(max = 50)
-    private String cmndChuHo;
+    private String loaiSo;
 
-    @Size(max = 100)
-    private String tinhTrang;
+    private String trangThai;
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ngayCapNhat;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "ma_tinh_thanh", referencedColumnName = "maTinhThanh")
-    private TinhThanh tinhThanh;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "ma_nhan_khau", referencedColumnName = "maNhanKhau")
+    @MapsId("maNK")
+    @JoinColumn(name = "mank", referencedColumnName = "maNK")
     private NhanKhau nhanKhau;
 
 }

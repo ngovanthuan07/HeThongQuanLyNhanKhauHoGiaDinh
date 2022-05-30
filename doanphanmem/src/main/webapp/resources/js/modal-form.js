@@ -1,14 +1,14 @@
 /**
  * Yêu cẩu phải sử dụng boostrap 4
  * thêm 3 attribute vào một thẻ input nào đó để sử dung modal:
-                                    data-toggle="modal"
-                                    data-target="#exampleModal"
-                                    modal-form
- * thêm thẻ div vào dưới thẻ body project:         
-                                    <div id = "my-modal"></div>
- * thêm script: 
-                                    <script src="./js/modal-form.js"></script>
-                                    <script type="module" src="./js/address-form.js"></script>
+                     data-toggle="modal"
+                     data-target="#exampleModal"
+                     modal-form
+ * thêm thẻ div vào dưới thẻ body project:
+                     <div id = "my-modal"></div>
+ * thêm script:
+                     <script src="./js/modal-form.js"></script>
+                     <script type="module" src="./js/address-form.js"></script>
  */
 document.getElementById("my-modal").innerHTML = `
         <div

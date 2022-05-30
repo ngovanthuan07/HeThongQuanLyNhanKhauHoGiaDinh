@@ -67,6 +67,12 @@ public class SpringWebMVCConfigurer implements WebMvcConfigurer {
 
         registry.addResourceHandler("/build/**")
                 .addResourceLocations("/resources/build/");
+
+        registry.addResourceHandler("/assets/**")
+                .addResourceLocations("/resources/assets/");
+
+        registry.addResourceHandler("/ckeditor/**")
+                .addResourceLocations("/resources/ckeditor/");
     }
 
     @Bean

@@ -1,10 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/congan/base">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
 </head>
 <body>
-$END$
+<div layout:fragment="content">
+
+        <div class="d-flex justify-content-end">
+            <div div class="row" style="margin-right:2%">
+                <div class="input-group">
+                    <div class="form-outline">
+                        <input id="search-focus" type="search" class="form-control" placeholder="Tìm kiếm..."/>
+                    </div>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <!-- content -->
+        <div class="col-md-12">
+            <div class="card">
+                <div
+                        class="card-header text-white text-center"
+                        style="background-color: #009cde"
+                >
+                    Hộ khẩu
+                </div>
+                <div class="card-body">
+                    <br />
+                    <!-- table 1 -->
+                    <div class="card">
+                        <div class="card-header"></div>
+                        <div class="card-body">
+                            <div class="col-md-12 col-sm-12">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">Số hổ khẩu</th>
+                                        <th scope="col" class="text-center">Họ tên</th>
+                                        <th scope="col" class="text-center">Quan hệ</th>
+                                        <th scope="col" class="text-center">CMND/CCCD</th>
+                                        <th scope="col" class="text-center">Thường trú</th>
+                                        <th scope="col" class="text-center">Hành động</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="nktt : ${nhanKhauThuongKhauTru}">
+                                        <th scope="row" class="text-center" th:text="${nktt.soHoKhau.soHK}"></th>
+                                        <td class="text-center" th:text="${nktt.nhanKhau.hoVaTen}"></td>
+                                        <td class="text-center" th:text="${nktt.nhanKhau.quanHe.tenQH}"></td>
+                                        <td class="text-center" th:text="${nktt.nhanKhau.cmnd}"></td>
+                                        <td class="text-center" th:text="${nktt.soHoKhau.noiDangKyThuongTru}"></td>
+                                        <td class="text-center" >
+                                            <a th:href="@{/congan/danh-sach-chi-tiet-nhan-khau-thuong-tru(soHK=${nktt.soHoKhau.soHK})}" class="text-secondary">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                            &nbsp;
+                                            <a href="">
+                                                <i class="fa-solid fa-pen"></i>
+                                            </a>
+                                            &nbsp;
+                                            <a href="" class="text-danger">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+
+
+                                <div class="float-right">
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <a th:href="@{/congan}" class="btn"  style="background-color:#009cde; color:white"><i class="fa-solid fa-backward"></i>&nbsp; Về trang chủ</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+</div>
 </body>
 </html>

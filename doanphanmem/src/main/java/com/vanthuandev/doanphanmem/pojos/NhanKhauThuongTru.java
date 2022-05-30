@@ -18,33 +18,44 @@ import java.util.Date;
 public class NhanKhauThuongTru {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int maNhanKhauThuongTru;
+    private int maNKTT;
+
+    private String noiThuongTruTruocDay;
+
+    private String nhanKhauMoiSinh;
+
+    private String nhanKhauNgoaiHuyenDen;
+
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date ngayDi;
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ngayDen;
 
-    private String quanHeVoiChuHo;
-
-    @Size(max = 100)
-    private String tinhTrang;
-
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ngayCapNhat;
 
+    private String noiDen;
+
+    private String lyDo;
+
+    private String chuThich;
+
+    private int trangThai;
+
+    @Size(max = 100)
+    private String tinhTrang;
+
+    // -- quan he nhieu 1
     @ManyToOne(optional = false)
-    @JoinColumn(name = "ma_so_ho_khau", referencedColumnName = "maSoHoKhau")
+    @JoinColumn(name = "so_hk", referencedColumnName = "soHK")
     private SoHoKhau soHoKhau;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "ma_nhan_khau", referencedColumnName = "maNhanKhau")
+    @JoinColumn(name = "ma_nk", referencedColumnName = "maNK")
     private NhanKhau nhanKhau;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nhanKhauThuongTru", fetch = FetchType.LAZY)
-    private Collection<NhanKhauTachHo> nhanKhauTachHos;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nhanKhauThuongTru", fetch = FetchType.LAZY)
-    private Collection<NhanKhauTamVang> nhanKhauTamVangs;
 
 }

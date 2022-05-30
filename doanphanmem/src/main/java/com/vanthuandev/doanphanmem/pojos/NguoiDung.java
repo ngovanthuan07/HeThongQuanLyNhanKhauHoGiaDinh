@@ -49,12 +49,8 @@ public class NguoiDung {
     private String image;
 
     private int trangThai;
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "ma_vai_tro", referencedColumnName = "maVaiTro")
-//    private VaiTro vaiTro;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoiDung", fetch = FetchType.LAZY)
-    private Collection<NhanKhau> nhanKhaus;
+
 
 
     @ManyToMany(fetch = FetchType.EAGER)

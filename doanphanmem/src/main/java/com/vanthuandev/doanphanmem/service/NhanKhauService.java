@@ -4,5 +4,5 @@ import com.vanthuandev.doanphanmem.pojos.NhanKhau;
 
 public interface NhanKhauService {
 
-    NhanKhau save(NhanKhau nhanKhau);
+    <S extends NhanKhau> S save(S entity);
 }

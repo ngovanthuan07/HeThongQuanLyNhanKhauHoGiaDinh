@@ -1,17 +1,17 @@
 import {
-  getTinhThanh,
-  getQuanHuyenByIdTinhThanh,
-  getPhuongXaByIdQuanHuyen,
+    getTinhThanh,
+    getQuanHuyenByIdTinhThanh,
+    getPhuongXaByIdQuanHuyen,
 } from "./address.js";
 
 let tagHtmlModal;
 
-let tagTinhThanhModal= document.getElementById("tinhthanh")
+let tagTinhThanhModal = document.getElementById("tinhthanh")
 
 getTinhThanh((isArray) => {
     isArray.unshift({ma_tinh_thanh: "", ten_tinh_thanh: "Vui lòng chọn tỉnh thành phố"})
     tagTinhThanhModal.innerHTML = isArray.map(item => {
-            return `
+        return `
                 <option value="${item.ma_tinh_thanh}">${item.ten_tinh_thanh}</option>
             `
     }).join(" ")
@@ -19,14 +19,14 @@ getTinhThanh((isArray) => {
 
 tagTinhThanhModal.onchange = handleSelectTinhThanh
 
-let tagQuanHuyenModal= document.getElementById("quanhuyen")
+let tagQuanHuyenModal = document.getElementById("quanhuyen")
 
 function handleSelectTinhThanh() {
-    if(this.value) {
+    if (this.value) {
         getQuanHuyenByIdTinhThanh(parseInt(this.value), (isArray) => {
 
             isArray.unshift({ma_quan_huyen: "", ten_quan_huyen: "Vui lòng chọn quận huyện"})
-            
+
             tagQuanHuyenModal.innerHTML = isArray.map(item => {
                 return `
                     <option value="${item.ma_quan_huyen}">${item.ten_quan_huyen}</option>
@@ -35,15 +35,16 @@ function handleSelectTinhThanh() {
         })
     }
 }
-let tagPhuongXaModal= document.getElementById("phuongxa")
+
+let tagPhuongXaModal = document.getElementById("phuongxa")
 
 tagQuanHuyenModal.onchange = handleSelectQuanHuyen
 
 function handleSelectQuanHuyen() {
-    if(this.value) {
+    if (this.value) {
         getPhuongXaByIdQuanHuyen(parseInt(this.value), (isArray) => {
             isArray.unshift({ma_phuong_xa: "", ten_phuong_xa: "Vui lòng chọn quận huyện"})
-            
+
             tagPhuongXaModal.innerHTML = isArray.map(item => {
                 return `
                     <option value="${item.ma_phuong_xa}">${item.ten_phuong_xa}</option>
@@ -57,7 +58,7 @@ function handleSelectQuanHuyen() {
 
 let chooseAddress = document.getElementById("chooseAddress")
 
-chooseAddress.onclick = function() {
+chooseAddress.onclick = function () {
     let qg = document.getElementById("quocgia")
     let tt = document.getElementById("tinhthanh")
     let qh = document.getElementById("quanhuyen")
@@ -66,26 +67,42 @@ chooseAddress.onclick = function() {
     let messageModal = document.querySelector(".text-message-modal");
     // if(ctdc.value && px.value && qh.value && tt.value && qg.value)
     // {  
-        let fullAddress = `${ctdc.value ? ctdc.value.concat(", ") : ''} ${px.value ? px.options[px.selectedIndex].text.concat(", ") : ''} ${qh.value ? qh.options[qh.selectedIndex].text.concat(", ") : ''} ${tt.value ? tt.options[tt.selectedIndex].text.concat(", "): ''} ${qg.value} `.trim()
-        
-        fullAddress = fullAddress.split(" ")
-                                .filter(f => f !== '')
-                                .reduce((acc, cur) => acc += " " + cur, '').trim()
+    let fullAddress = `${ctdc.value ? ctdc.value.concat(", ") : ''} ${px.value ? px.options[px.selectedIndex].text.concat(", ") : ''} ${qh.value ? qh.options[qh.selectedIndex].text.concat(", ") : ''} ${tt.value ? tt.options[tt.selectedIndex].text.concat(", ") : ''} ${qg.value} `.trim()
 
-        console.log(fullAddress);
+    fullAddress = fullAddress.split(" ")
+        .filter(f => f !== '')
+        .reduce((acc, cur) => acc += " " + cur, '').trim()
+
+    if(fullAddress) {
         messageModal.innerHTML = ""
         let attribute = document.createAttribute("data-dismiss")
         attribute.value = "modal"
         chooseAddress.setAttributeNode(attribute)
         tagHtmlModal.value = fullAddress
+
+        // delete validation input click
+        var formGroup = getParent(tagHtmlModal, ".form-group");
+        if (formGroup.classList.contains("invalid")) {
+            formGroup.classList.remove("invalid");
+
+            var formMessage = formGroup.querySelector(".form-message");
+
+            if (formMessage) {
+                formMessage.innerText = "";
+            }
+        }
+    }
+
     // } else {
     //     messageModal.innerHTML = "Vui lòng không được để trống"
     // }
+
+
 }
 
 let modalForm = document.querySelectorAll("[modal-form]")
 modalForm.forEach((item, index) => {
-    item.onclick = function() {
+    item.onclick = function (e) {
         let tt = document.getElementById("tinhthanh").value = ""
         let qh = document.getElementById("quanhuyen").value = ""
         let px = document.getElementById("phuongxa").value = ""
@@ -94,4 +111,14 @@ modalForm.forEach((item, index) => {
         tagHtmlModal = item;
     }
 })
+
+
+function getParent(element, selector) {
+    while (element.parentElement) {
+        if (element.parentElement.matches(selector)) {
+            return element.parentElement;
+        }
+        element = element.parentElement;
+    }
+}
 

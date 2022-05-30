@@ -1,5 +1,5 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
-import { getDatabase,ref,set, get,child,update,remove} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
+import {getDatabase, ref,set,get,child,update, remove} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAZGWqKxgl1JELFLhoK32cgzy8kg0DyhAI",
@@ -37,7 +37,6 @@ export function getQuanHuyenByIdTinhThanh(id, callback) {
         .then((snapshot) => {
             if (snapshot.exists()) {
                 let isValue = snapshot.val().filter(item => item.ma_tinh_thanh === id)
-                console.log(isValue);
                 callback(isValue)
             } else {
                 alert("Not data found")
@@ -53,7 +52,6 @@ export function getPhuongXaByIdQuanHuyen(id, callback) {
         .then((snapshot) => {
             if (snapshot.exists()) {
                 let isValue = snapshot.val().filter(item => item.ma_quan_huyen === id)
-                console.log(isValue)
                 callback(isValue)
             } else {
                 alert("Not data found")
