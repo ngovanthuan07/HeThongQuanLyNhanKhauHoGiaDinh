@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/congan/base">
+<head>
+</head>
+<body>
+<div class="col-md-12" layout:fragment="content">
+    <!-- content -->
+    <div class="col-md-12">
+        <div class="card">
+            <div
+                    class="card-header text-white text-center"
+                    style="background-color: #009cde"
+            >
+                Danh sách chi tiết nhân khẩu tạm trú (Hộ gia đình)
+            </div>
+            <div class="card-body">
+                <br />
+                <!-- table 1 -->
+                <div class="card">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <div class="col-md-12 col-sm-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="text-center">Mã nhân khẩu</th>
+                                    <th scope="col" class="text-center">Họ và tên</th>
+                                    <th scope="col" class="text-center">CMND</th>
+                                    <th scope="col" class="text-center">Nơi đăng ký tạm trú</th>
+                                    <th scope="col" class="text-center">Tạm trú từ ngày</th>
+                                    <th scope="col" class="text-center">Tạm trú đến ngày</th>
+                                    <th scope="col" class="text-center">Tác vụ</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="nktt : ${nhanKhauTamTrus}">
+                                    <th scope="row" class="text-center" th:text="${nktt.nhanKhau.maNK}"/>
+                                    <td class="text-center" th:text="${nktt.nhanKhau.hoVaTen}"/>
+                                    <td class="text-center" th:text="${nktt.nhanKhau.cmnd}"/>
+                                    <td class="text-center" th:text="${nktt.noiDangKiTamTru}"/>
+                                    <td class="text-center" th:text="${nktt.tamTruTuNgay}"/>
+                                    <td class="text-center" th:text="${nktt.tamTruDenNgay}"/>
+                                    <td class="text-center" >
+                                        <a th:href="@{/congan/tamtru/danh-sach-chi-tiet-tam-tru/chitiet(
+                                                            maTT=${nktt.nhanKhauTamTruPK.maTT},
+                                                            maNK=${nktt.nhanKhauTamTruPK.maNK})}" class="text-success">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        &nbsp;
+                                        <a th:href="@{/congan/tamtru/danh-sach-chi-tiet-tam-tru/giahan(
+                                                            maTT=${nktt.nhanKhauTamTruPK.maTT},
+                                                            maNK=${nktt.nhanKhauTamTruPK.maNK})}" class="text-primary">
+                                            <i class="fa-solid fa-user-clock"></i>
+                                        </a>
+                                        &nbsp;
+                                        <a th:href="@{/congan/tamtru/danh-sach-chi-tiet-tam-tru/chinhsua(
+                                                            maTT=${nktt.nhanKhauTamTruPK.maTT},
+                                                            maNK=${nktt.nhanKhauTamTruPK.maNK})}" class="text-info">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        &nbsp;
+                                        <a th:href="@{/congan/tamtru/danh-sach-chi-tiet-tam-tru/xoa(
+                                                            maTT=${nktt.nhanKhauTamTruPK.maTT},
+                                                            maNK=${nktt.nhanKhauTamTruPK.maNK})}" class="text-secondary text-danger">
+                                            <i class="fa-solid fa-square-minus"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-right">
+                                <a
+                                        th:href="@{/congan/tamtru/quanlytramtru}"
+                                        class="btn"
+                                        style="background-color: #009cde; color: white"
+                                >
+                                    <i class="fa-solid fa-backward"></i>
+                                    &nbsp;
+                                    Quay lại
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

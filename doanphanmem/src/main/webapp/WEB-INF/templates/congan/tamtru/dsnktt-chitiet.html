@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/congan/base">
+<head>
+</head>
+<body>
+<div class="col-md-12" layout:fragment="content">
+    <!-- End Header/Navbar -->
+    <br />
+    <div class="text-center">
+        <a  class="btn btn-outline-info"><i class="fa-solid fa-people-roof"></i>&nbsp; Thêm sổ (Gia đình)</a>
+        <a class="btn btn-outline-info"><i class="fa-solid fa-user-plus"></i>&nbsp; Thêm sổ (Cá nhân)</a>
+        <a  class="btn btn-outline-info"><i class="fa-solid fa-bullhorn"></i>&nbsp; Báo cáo nhân khẩu</a>
+    </div>
+    <br>
+    <!-- content -->
+    <div class="col-md-12">
+        <div class="card">
+            <div
+                    class="card-header text-white text-center"
+                    style="background-color: #009cde"
+            >
+                Danh sách tạm trú
+            </div>
+            <div class="card-body">
+                <br />
+                <!-- table 1 -->
+                <div class="card">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <div class="col-md-12 col-sm-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="text-center">Sổ tạm trú số</th>
+                                    <th scope="col" class="text-center">Người đại diện</th>
+                                    <th scope="col" class="text-center">Loại sổ</th>
+                                    <th scope="col" class="text-center">Nơi thường trú</th>
+                                    <th scope="col" class="text-center">Nơi đăng ký tạm trú</th>
+                                    <th scope="col" class="text-center">Tác vụ</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="nktt : ${nhanKhauTamTrus}">
+                                    <th scope="row" class="text-center" th:text="${nktt.nhanKhauTamTruPK.maTT}"/>
+                                    <td class="text-center" th:text="${nktt.nhanKhau.hoVaTen}"/>
+                                    <td class="text-center" th:if="${nktt.loaiTamTru.startsWith('Gia đình')}">
+                                        <span style="padding:5px;background-color:#3498db; border-radius: 10px; color: white;" th:text="${nktt.loaiTamTru}"/>
+                                    </td>
+                                    <td class="text-center" th:if="${nktt.loaiTamTru.startsWith('Cá nhân')}">
+                                        <span style="padding:5px;background-color:#f1c40f; border-radius: 10px; color: white;" th:text="${nktt.loaiTamTru}"/>
+                                    </td>
+                                    <td class="text-center" th:text="${nktt.noiThuongTru}"/>
+                                    <td class="text-center" th:text="${nktt.noiDangKiTamTru}"/>
+                                    <td class="text-center" >
+                                        <a th:href="@{'/congan/tamtru/danh-sach-chi-tiet-tam-tru?maTT= '+ ${nktt.nhanKhauTamTruPK.maTT}}" class="text-success">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        &nbsp;
+                                        <a th:href="@{'/congan/tamtru/add-them-thanh-vien-tam-tru?maTT= '+ ${nktt.nhanKhauTamTruPK.maTT}}" class="text-primary" th:if="${nktt.loaiTamTru.startsWith('Gia đình')}">
+                                            <i class="fa-solid fa-user-plus"></i>
+                                        </a>
+                                        &nbsp;
+                                        <a href="" class="text-secondary text-danger">
+                                            <i class="fa-solid fa-square-minus"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

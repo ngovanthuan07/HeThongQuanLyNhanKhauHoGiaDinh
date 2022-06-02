@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/congan/base">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<div class="col-md-12" layout:fragment="content">
+  <div class="card-body">
+    <br />
+    <div class="card">
+      <div class="card-header">Đăng ký thường trú</div>
+
+      <div class="card-body">
+        <div class="row mb-12">
+          <div class="col-md-3">
+            <span>Chọn nhân khẩu cần tách</span>
+          </div>
+          <div class="col-md-6">
+            <select class="form-control selectpicker"   id="tachHoKhau" multiple>
+              <option value="1">Nguyen Van A</option>
+              <option value="2">Nguyen Van B</option>
+              <option value="3">Nguyen Van C</option>
+              <option value="4">Nguyen Van D</option>
+              <option value="5">Nguyen Van F</option>
+            </select>
+
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <span>Thiết quan hệ hộ khẩu mới</span>
+        </div>
+        <div class="row mb-12 thiet-lap-thong-tinh-nhan-khau">
+
+        </div>
+
+        <br>
+
+        <div class="row">
+          <span>Thông tin hộ khẩu mới</span>
+        </div>
+        <div class="row">
+          <div class="row mb-12">
+            <div class="col-sm-2">
+              <label>Hồ sơ hộ khẩu mới</label>
+              <div>
+                <input
+                        type="text"
+                        name="name"
+                        value=""
+                        class="form-control"
+                />
+              </div>
+            </div>
+
+            <div class="col-sm-2">
+              <label>Hộ khẩu số</label>
+
+              <input
+                      type="text"
+                      name="name"
+                      value=""
+                      class="form-control"
+              />
+            </div>
+            <div class="col-sm-2">
+              <label>Số ĐKTT số</label>
+              <input
+                      type="text"
+                      name="name"
+                      value=""
+                      class="form-control"
+              />
+            </div>
+            <div class="col-sm-2">
+              <label>Tờ số</label>
+              <input
+                      type="text"
+                      name="name"
+                      value=""
+                      class="form-control"
+              />
+            </div>
+
+            <div class="col-sm-2">
+              <label>Ngày nội lưu</label>
+              <input
+                      type="date"
+                      name="name"
+                      value=""
+                      class="form-control"
+              />
+            </div>
+
+
+            <div class="col-sm-2">
+              <label>Ngày tách</label>
+              <input
+                      type="date"
+                      name="name"
+                      value=""
+                      class="form-control"
+              />
+            </div>
+          </div>
+        </div>
+        <br />
+
+
+
+      </div>
+
+      <div style="margin-bottom:10px">
+        <div class="row">
+          <div class="col text-center">
+            <button
+                    type="submit"
+                    class="btn"
+                    style="background-color: #009cde; color: white"
+            >
+              Tách hồ sơ
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let qh
+    function getQuanHe(callback) {
+      fetch('/api/quanhe')
+              .then(response => response.json())
+              .then(data => callback(data));
+    }
+
+    var lSelectPicker = []
+    $('.selectpicker').change(function (e) {
+      var options  = $('.selectpicker option:selected');
+      lSelectPicker = []
+      $(options).each(function(){
+        lSelectPicker.push({
+          maNhanKhau: $(this).val(),
+          tenNhanKhau: $(this).text(),
+          quanHe: undefined
+        });
+      });
+      getQuanHe(data => {
+        renderSelection(data)
+      })
+    })
+    function renderSelection(data) {
+      let thietLap = $('.thiet-lap-thong-tinh-nhan-khau');
+      if(lSelectPicker.length > 0) {
+        let htmlThietLap =  lSelectPicker.map(item => {
+          return `
+                <div class="col-sm-2">
+                    <label>${item.tenNhanKhau}</label>
+                    <div>
+                        <select name="quanHe"  class="form-control" onchange="handleSelectionQuanHe('${item.maNhanKhau}', this)">
+                            <option value="">Vui lòng chọn quan hệ</option>
+                            ${data.map(qh => {
+            return `
+                                    <option value="${qh.maQH}">${qh.tenQH}</option>
+                                `
+          }).join(" ")}
+                        </select>
+                    </div>
+                </div>
+            `
+        })
+        thietLap.html(htmlThietLap.join(" "))
+      }
+      else {
+        thietLap.html("")
+      }
+    }
+    function handleSelectionQuanHe(id, sel) {
+      console.log(sel.value)
+      if(sel.value) {
+        let i = lSelectPicker.findIndex(item => item.maNhanKhau === id)
+        lSelectPicker[i] = {
+          ...lSelectPicker[i],
+          quanHe: {
+            maQH: sel.value ,
+            tenQH: sel.options[sel.selectedIndex].text
+          }
+        }
+        console.log(lSelectPicker)
+
+      }
+    }
+  </script>
+</div>
+</body>
+</html>

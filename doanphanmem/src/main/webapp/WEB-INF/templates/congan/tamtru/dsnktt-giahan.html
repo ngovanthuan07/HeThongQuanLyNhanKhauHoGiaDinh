@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/congan/base">
+<head>
+</head>
+<body>
+<div class="col-md-12" layout:fragment="content">
+    <div class="card">
+        <div
+                class="card-header text-white text-center"
+                style="background-color: #009cde"
+        >
+            Thông tin chi tiết nhân khẩu tạm trú
+        </div>
+        <div class="card-body">
+            <br />
+            <!-- table 1 -->
+            <div class="card">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    <div class="col-md-12 col-sm-12">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Trường</th>
+                                <th scope="col">Nội dung</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Họ tên</td>
+                                <td th:text="${nhanKhauTamTru.nhanKhau.hoVaTen}"></td>
+                            </tr>
+                            <tr>
+                                <td>Ngày sinh</td>
+                                <td th:text="${nhanKhauTamTru.nhanKhau.ngaySinh}">01/01/2001</td>
+                            </tr>
+
+                            <tr>
+                                <td>Giới tính</td>
+                                <td th:text="${nhanKhauTamTru.nhanKhau.gioiTinh == 1 ? 'Nam' : 'Nữ'}"></td>
+                            </tr>
+                            <tr>
+                                <td>Tạm trú từ</td>
+                                <td th:text="${nhanKhauTamTru.tamTruTuNgay}"></td>
+                            </tr>
+                            <tr>
+                                <td>Tạm trú đến</td>
+                                <td th:text="${nhanKhauTamTru.tamTruDenNgay}"></td>
+                            </tr>
+                            <tr>
+                                <td>Thường trú</td>
+                                <td th:text="${nhanKhauTamTru.noiThuongTru}"></td>
+                            </tr>
+                            <tr>
+                                <td>Nguyên quán</td>
+                                <td th:text="${nhanKhauTamTru.nhanKhau.nguyenQuan}"></td>
+                            </tr>
+                            <tr>
+                                <td>Nơi làm việc</td>
+                                <td th:text="${nhanKhauTamTru.nhanKhau.noiLamViec}"></td>
+                            </tr>
+                            <tr>
+                                <td>Dân tộc</td>
+                                <td th:text="${nhanKhauTamTru.nhanKhau.danToc.tenDT}"></td>
+                            </tr>
+                            <tr>
+                                <td>Quốc tích</td>
+                                <td th:text="${nhanKhauTamTru.nhanKhau.quocTich}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-right">
+                        <a
+                                th:href="@{'/congan/tamtru/danh-sach-chi-tiet-tam-tru?maTT=' + ${maTT}}"
+                                class="btn"
+                                style="background-color: #009cde; color: white"
+                        >
+                            <i class="fa-solid fa-backward"></i>
+                            &nbsp;
+                            Quay lại
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
