@@ -15,10 +15,10 @@ btnDelete.onclick = function () {
     if(!isValue) {
         alert("Vui lòng nhập đầy đủ thông tin")
     } else {
-        console.log(isValue)
+        console.log(object)
         fetch("/congan/api/delete-nhankhauthuongtru", {
-            method: 'post',
-            body: JSON.stringify(formData),
+            method: 'delete',
+            body: JSON.stringify(object),
             headers: {
                 "Content-Type": "application/json"
             }
@@ -28,7 +28,7 @@ btnDelete.onclick = function () {
 
         }).then( data => {
             if(data) {
-                console.log(data)
+                window.location.href = `/congan/danh-sach-chi-tiet-nhan-khau-thuong-tru?soHK=${data}`
             } else {
                 alert("Thất bại")
             }

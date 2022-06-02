@@ -59,15 +59,30 @@ let form = new Validator('#myForm')
 
 form.onSubmit = function (formData) {
     let soHK = document.getElementById("soHK").value
+    let tomTatBanThan = CKEDITOR.instances['tomTatBanThan'].getData();
+    let tomTatGiaDinh = CKEDITOR.instances['tomTatGiaDinh'].getData();
+    if(Array.isArray(formData['hoNgoaiHuyenDen'])) {
+        formData['hoNgoaiHuyenDen'] =  1 * formData['hoNgoaiHuyenDen'][0]
+    } else {
+        formData['hoNgoaiHuyenDen'] = 0
+    }
+    if(Array.isArray(formData['nhanKhauMoiSinh'])) {
+        formData['nhanKhauMoiSinh'] =  1 * formData['nhanKhauMoiSinh'][0]
+    } else {
+        formData['nhanKhauMoiSinh'] = 0
+    }
     formData = {
         ...formData,
         quanHe,
         hocVan,
         danToc,
         tonGiao,
+        tomTatBanThan,
+        tomTatGiaDinh,
         "_id": soHK
     }
     console.log(formData)
+
     fetch("/congan/api/add-nhankhauthuongtru", {
         method: 'post',
         body: JSON.stringify(formData),
@@ -79,12 +94,18 @@ form.onSubmit = function (formData) {
         return res.json();
 
     }).then( data => {
-        if(data) {
-            console.log(data)
+        if(data.includes("Success")) {
+            let isCheck =  window.confirm("Tách hộ khẩu thành công");
+            if(isCheck) {
+                window.location.replace("/congan/quanly");
+            } else {
+                window.location.reload();
+            }
         } else {
-            alert("Thất bại")
+            alert("Tách hộ khẩu thất bại")
         }
     });
+
 }
 
 

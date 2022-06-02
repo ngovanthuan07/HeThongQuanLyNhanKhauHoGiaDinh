@@ -12,9 +12,7 @@ import {TOM_TAT_BAN_THAN, TOM_TAT_GIA_DINH} from "./CKEDITOR_Data.js"
 let form = new Validator('#myForm')
 
 form.onSubmit = function (formData) {
-    if(Array.isArray(formData['hoNgoaiHuyenDen'])) {
-        formData['hoNgoaiHuyenDen'] =  formData['hoNgoaiHuyenDen'][0]
-    }
+
     fetch("/congan/api/add-sohokhau", {
         method: 'post',
         body: JSON.stringify(formData),

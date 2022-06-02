@@ -48,10 +48,15 @@ public class NguoiDung {
 
     private String image;
 
+    private String diaChi;
+
+    private String soDT;
+
     private int trangThai;
 
 
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoiTao", fetch = FetchType.LAZY)
+    private Collection<DangKyHoSo> dangKyHoSos;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

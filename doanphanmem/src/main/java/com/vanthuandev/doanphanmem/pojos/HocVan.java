@@ -1,5 +1,6 @@
 package com.vanthuandev.doanphanmem.pojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +28,7 @@ public class HocVan {
         this.maHV = maHV;
         this.tenHV = tenHV;
     }
-
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hocVan", fetch = FetchType.LAZY)
     private Collection<NhanKhau> nhanKhaus;
 }

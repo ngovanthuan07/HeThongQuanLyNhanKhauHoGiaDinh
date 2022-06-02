@@ -46,6 +46,8 @@ public class NhanKhauThuongTru {
 
     private int trangThai;
 
+    private String noiChuyenDen;
+
     @Size(max = 100)
     private String tinhTrang;
 

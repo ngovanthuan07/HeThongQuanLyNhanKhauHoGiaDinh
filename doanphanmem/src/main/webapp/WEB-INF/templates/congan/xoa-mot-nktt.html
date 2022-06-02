@@ -18,21 +18,8 @@
                 Thông tin nhân khẩu thường trú
             </div>
             <br>
-
-            <div class="d-flex justify-content-end mr-3">
-                <a
-                        th:href="@{/congan/chi-tiet-nhan-khau/edit(maNK=${nhanKTT.nhanKhau.maNK})}"
-                        type="submit"
-                        class="btn"
-                        style="background-color: #e74c3c; color: white"
-                >
-                    <i class="fa-solid fa-pen"></i>
-                    &nbsp;
-                    Sửa thông tin
-                </a>
-            </div>
             <div class="card-body">
-                <br />
+                <br/>
                 <!-- table 1 -->
                 <div class="card">
                     <div class="card-header"></div>
@@ -76,7 +63,7 @@
                                 </tr>
                                 <tr>
                                     <td>Dân tộc</td>
-                                    <td  th:text="${nhanKTT.nhanKhau.danToc.tenDT}"></td>
+                                    <td th:text="${nhanKTT.nhanKhau.danToc.tenDT}"></td>
                                 </tr>
                                 <tr>
                                     <td>Tôn giáo</td>
@@ -129,18 +116,21 @@
                             <div class="col-md-12 col-sm-12">
                                 <div class="row mb-12 form-group">
                                     <div class="col-md-12">
-                                        <label>Tóm tắt bản thân (Từ đủ 14 tuổi trở lên đến nay ở đâyở đâu, làm gì)</label>
+                                        <label>Tóm tắt bản thân (Từ đủ 14 tuổi trở lên đến nay ở đâyở đâu, làm
+                                            gì)</label>
                                         <textarea name="tomTatBanThan" id="tomTatBanThan"></textarea>
-                                        <input type="hidden" id="tomTatBanThanInput" name="tomTatBanThan" th:value="${nhanKTT.nhanKhau.tomTatBanThan}">
+                                        <input type="hidden" id="tomTatBanThanInput" name="tomTatBanThan"
+                                               th:value="${nhanKTT.nhanKhau.tomTatBanThan}">
                                     </div>
                                 </div>
-                                <br />
+                                <br/>
 
                                 <div class="row mb-12 form-group">
                                     <div class="col-md-12">
                                         <label>Tóm tắt gia đình</label>
                                         <textarea name="tomTatGiaDinh" id="tomTatGiaDinh"></textarea>
-                                        <input type="hidden" id="tomTatGiaDinhInput" name="tomTatGiaDinh" th:value="${nhanKTT.nhanKhau.tomTatGiaDinh}">
+                                        <input type="hidden" id="tomTatGiaDinhInput" name="tomTatGiaDinh"
+                                               th:value="${nhanKTT.nhanKhau.tomTatGiaDinh}">
                                     </div>
 
                                 </div>
@@ -155,17 +145,138 @@
 
                             </script>
 
+                            <br>
+                            <div class="row mb-3">
+                                <form id="myForm">
+                                    <div class="col-md-3">
+                                        <span>Thông tin hồ sơ</span>
+                                    </div>
+                                    <br/>
+                                    <div class="col-md-12">
+                                        <span>Trường hợp xoá</span>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <!-- Default inline 1-->
+                                        <div
+                                                class="custom-control custom-radio custom-control-inline">
+                                            <input
+                                                    type="radio"
+                                                    class="custom-control-input"
+                                                    id="defaultInline1"
+                                                    name="lyDo"
+                                                    value="Chết mất tích"
+                                            />
+                                            <label class="custom-control-label" for="defaultInline1">Chết mất tích</label>
+                                        </div>
+
+                                        <!-- Default inline 2-->
+                                        <div
+                                                class="custom-control custom-radio custom-control-inline"
+                                        >
+                                            <input
+                                                    type="radio"
+                                                    class="custom-control-input"
+                                                    id="defaultInline2"
+                                                    name="lyDo"
+                                                    value="Tuyển dụng vào công CA, QĐ"
+                                            />
+                                            <label class="custom-control-label" for="defaultInline2"
+                                            >Tuyển dụng vào công CA, QĐ</label
+                                            >
+                                        </div>
+
+                                        <!-- Default inline 3-->
+                                        <div
+                                                class="custom-control custom-radio custom-control-inline"
+                                        >
+                                            <input
+                                                    type="radio"
+                                                    class="custom-control-input"
+                                                    id="defaultInline3"
+                                                    name="lyDo"
+                                                    value="Huỷ kết quả đăng ký"
+                                            />
+                                            <label class="custom-control-label" for="defaultInline3"
+                                            >Huỷ kết quả đăng ký</label
+                                            >
+                                        </div>
+
+                                        <!-- Default inline4-->
+                                        <div
+                                                class="custom-control custom-radio custom-control-inline"
+                                        >
+                                            <input
+                                                    type="radio"
+                                                    class="custom-control-input"
+                                                    id="defaultInline4"
+                                                    name="lyDo"
+                                                    value="Định cư nước ngoài về"
+                                            />
+                                            <label class="custom-control-label" for="defaultInline4"
+                                            >Định cư nước ngoài về</label
+                                            >
+                                        </div>
+                                        <!-- Default inline4-->
+                                        <div
+                                                class="custom-control custom-radio custom-control-inline"
+                                        >
+                                            <input
+                                                    type="radio"
+                                                    class="custom-control-input"
+                                                    id="defaultInline5"
+                                                    name="lyDo"
+                                                    value="Đăng ký nơi thường trú mới"
+                                            />
+                                            <label class="custom-control-label" for="defaultInline5"
+                                            >Đăng ký nơi thường trú mới</label
+                                            >
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-sm-2">
+                                        <label>Ngày xoá</label>
+                                        <div>
+                                            <input
+                                                    type="date"
+                                                    name="ngayCapNhat"
+                                                    value=""
+                                                    class="form-control"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label>Nơi chuyển đến</label>
+
+                                        <input
+                                                type="text"
+                                                name="noiChuyenDen"
+                                                value=""
+                                                class="form-control"
+                                        />
+                                    </div>
+                                    <input type="hidden" name="maNKTT" th:value="${nhanKTT.maNKTT}">
+                                </form>
+
+                            </div>
                         </div>
-                        <br />
 
-                        <div class="d-flex justify-content-end">
+                        <br/>
 
+                        <div class="d-flex justify-content-between">
+                            <button id="xoaThuongTru" class="btn btn-danger" style="color: white">
+                                <i class="fa-solid fa-trash-can"></i>
+                                Xoá thường trú
+                            </button>
                             <a
                                     th:href="@{/congan/danh-sach-chi-tiet-nhan-khau-thuong-tru(soHK=${nhanKTT.soHoKhau.soHK})}"
                                     type="submit"
                                     class="btn"
-                                    style="background-color: #009cde; color: white"
-                            >
+                                    style="background-color: #009cde; color: white">
+
                                 <i class="fa-solid fa-backward"></i>
                                 &nbsp;
                                 Quay lại
@@ -180,4 +291,7 @@
     <!-- Demo content -->
 </div>
 </body>
+<th:block layout:fragment="script">
+    <script type="module" th:src="@{/js/xoa-thuong-tru.js}"></script>
+</th:block>
 </html>

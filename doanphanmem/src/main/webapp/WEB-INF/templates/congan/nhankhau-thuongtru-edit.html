@@ -13,26 +13,27 @@
             <div
                     class="card-header text-white text-center"
                     style="background-color: #009cde">
-                Nhập hồ sơ hộ khẩu
+                Chỉnh sửa hồ sơ hộ khẩu
             </div>
             <div class="card-body">
-                <form id="myForm">
+                <form id="myForm" th:object="${nhanKhau}">
                 <div class="card">
                     <div class="card-header">Thông tin nhân khẩu</div>
                     <div class="card-body">
+                        <input type="hidden" th:field="*{maNK}">
                         <div class="row mb-12">
                             <div class="col-sm-2 form-group">
                                 <label>Quan hệ với chủ hộ</label>
-                                    <select id="selectQuanHe" rules="required" name="quanHe" value="" class="form-control selectpicker" data-live-search="true">
+                                    <select id="selectQuanHe" rules="required" name="quanHe" class="form-control selectpicker" data-live-search="true">
                                         <option value="">Chọn quan hệ</option>
                                         <option th:each="quanHe : ${quanHes}"
                                                 th:value="${quanHe.maQH}"
-                                                th:text="${quanHe.tenQH}">
+                                                th:text="${quanHe.tenQH}"
+                                                th:selected="${nhanKhau.quanHe.maQH == quanHe.maQH}"
+                                        >
                                         </option>
-                                        <span class="text-danger form-message"></span>
-
                                     </select>
-
+                                <span class="text-danger form-message"></span>
                             </div>
 
                             <div class="col-sm-2 form-group">
@@ -42,17 +43,17 @@
                                     <option value="">Chọn học vấn</option>
                                     <option th:each="hocVan : ${hocVans}"
                                             th:value="${hocVan.maHV}"
-                                            th:text="${hocVan.tenHV}">
+                                            th:text="${hocVan.tenHV}"
+                                            th:selected="${nhanKhau.hocVan.maHV == hocVan.maHV}">
                                     </option>
-                                    <span class="text-danger form-message"></span>
                                 </select>
+                                <span class="text-danger form-message"></span>
                             </div>
                             <div class="col-sm-2 form-group">
                                 <label>Trình độ chuyên môn</label>
                                 <input
                                         type="text"
-                                        name="trinhDoChuyenMon"
-                                        value=""
+                                        th:field="*{trinhDoChuyenMon}"
                                         class="form-control"
                                 />
                                 <span class="text-danger form-message"></span>
@@ -61,8 +62,7 @@
                                 <label>Nơi sinh</label>
                                 <input
                                         type="text"
-                                        name="noiSinh"
-                                        value=""
+                                        th:field="*{noiSinh}"
                                         class="form-control"
                                         data-toggle="modal"
                                         data-target="#exampleModal"
@@ -79,8 +79,7 @@
                                 <div>
                                     <input
                                             type="text"
-                                            name="hoVaTen"
-                                            value=""
+                                            th:field="*{hoVaTen}"
                                             class="form-control"
                                             rules="required"
                                     />
@@ -93,8 +92,7 @@
 
                                 <input
                                         type="text"
-                                        name="ngheNghiep"
-                                        value=""
+                                        th:field="*{ngheNghiep}"
                                         class="form-control"
                                         rules="required"
                                 />
@@ -104,8 +102,7 @@
                                 <label>Trình độ ngoại ngữ</label>
                                 <input
                                         type="text"
-                                        name="trinhDoNgoaiNgu"
-                                        value=""
+                                        th:field="*{trinhDoNgoaiNgu}"
                                         class="form-control"
                                 />
                             </div>
@@ -113,8 +110,7 @@
                                 <label>Nguyên quán</label>
                                 <input
                                         type="text"
-                                        name="nguyenQuan"
-                                        value=""
+                                        th:field="*{nguyenQuan}"
                                         class="form-control"
                                         data-toggle="modal"
                                         data-target="#exampleModal"
@@ -132,7 +128,7 @@
                                 <div>
                                     <input
                                             type="text"
-                                            name="tenGoiKhac"
+                                            th:field="*{tenGoiKhac}"
                                             class="form-control"
                                     />
                                 </div>
@@ -145,10 +141,11 @@
                                     <option value="">Chọn dân tộc</option>
                                     <option th:each="danToc : ${danTocs}"
                                             th:value="${danToc.maDT}"
-                                            th:text="${danToc.tenDT}">
+                                            th:text="${danToc.tenDT}"
+                                            th:selected="${nhanKhau.danToc.maDT == danToc.maDT}">
                                     </option>
-                                    <span class="text-danger form-message"></span>
                                 </select>
+                                <span class="text-danger form-message"></span>
                             </div>
                             <div class="col-sm-2 form-group">
                                 <label>Tôn giáo</label>
@@ -156,17 +153,17 @@
                                     <option value="">Chọn tôn giáo</option>
                                     <option th:each="tonGiao : ${tonGiaos}"
                                             th:value="${tonGiao.maTG}"
-                                            th:text="${tonGiao.tenTG}">
+                                            th:text="${tonGiao.tenTG}"
+                                            th:selected="${nhanKhau.tonGiao.maTG == tonGiao.maTG}">
                                     </option>
-                                    <span class="text-danger form-message"></span>
                                 </select>
+                                <span class="text-danger form-message"></span>
                             </div>
                             <div class="col-sm-6 form-group">
                                 <label>Nơi ở hiện nay</label>
                                 <input
                                         type="text"
-                                        name="noiOHienNay"
-                                        value=""
+                                        th:field="*{noiOHienNay}"
                                         class="form-control"
                                         data-toggle="modal"
                                         data-target="#exampleModal"
@@ -184,8 +181,7 @@
                                 <div>
                                     <input
                                             type="date"
-                                            name="ngaySinh"
-                                            value=""
+                                            th:field="*{ngaySinh}"
                                             class="form-control"
                                             rules="required"
                                     />
@@ -198,8 +194,7 @@
 
                                 <input
                                         type="text"
-                                        name="cmnd"
-                                        value=""
+                                        th:field="*{cmnd}"
                                         class="form-control"
                                 />
                             </div>
@@ -207,8 +202,7 @@
                                 <label>Quốc tịch</label>
                                 <input
                                         type="text"
-                                        name="quocTich"
-                                        value=""
+                                        th:field="*{quocTich}"
                                         class="form-control"
                                         rules="required"
                                 />
@@ -218,8 +212,7 @@
                                 <label>Nơi làm việc</label>
                                 <input
                                         type="text"
-                                        name="noiLamViec"
-                                        value=""
+                                        th:field="*{noiLamViec}"
                                         class="form-control"
                                         data-toggle="modal"
                                         data-target="#exampleModal"
@@ -236,8 +229,7 @@
                                 <div>
                                     <input
                                             type="date"
-                                            name="ngayDKTT"
-                                            value=""
+                                            th:field="*{ngayDKTT}"
                                             class="form-control"
                                             rules="required"
                                     />
@@ -249,8 +241,7 @@
                                 <label>Số hộ chiếu</label>
                                 <input
                                         type="text"
-                                        name="soHoChieu"
-                                        value=""
+                                        th:field="*{soHoChieu}"
                                         class="form-control"
                                 />
                             </div>
@@ -258,8 +249,7 @@
                                 <label>Biết tiếng dân tộc</label>
                                 <input
                                         type="text"
-                                        name="bietTiengDanToc"
-                                        value=""
+                                        th:field="*{bietTiengDanToc}"
                                         class="form-control"
                                 />
                             </div>
@@ -267,8 +257,7 @@
                                 <label>Nơi thường trú trước đây (Hộ ngoài huyện chuyển đến)</label>
                                 <input
                                         type="text"
-                                        name="noiThuongTruTruocDay"
-                                        value=""
+                                        th:field="*{noiThuongTruTruocDay}"
                                         class="form-control"
                                         data-toggle="modal"
                                         data-target="#exampleModal"
@@ -278,13 +267,23 @@
                         </div>
                         <br />
 
-                        <div class="row mb-3 form-group">
-                            <div class="col-md-2">
+                        <div class="row mb-12">
+                            <div class="col-md-2 form-group">
                                 <label>Giới tính</label>
                                 <select name="gioiTinh" class="form-control">
-                                    <option value="1">Nam</option>
-                                    <option value="2">Nữ</option>
+                                    <option value="1" th:selected="${nhanKhau.gioiTinh == 1}">Nam</option>
+                                    <option value="2" th:selected="${nhanKhau.gioiTinh == 2}">Nữ</option>
                                 </select>
+                            </div>
+                            <div class="col-md-2 form-group text-center">
+                                <label for="hoNgoaiHuyenDen">Hộ ngoài huyện đến</label>
+                                <br>
+                                <input class="form-check-input" id="hoNgoaiHuyenDen" name="hoNgoaiHuyenDen" type="checkbox" value="1" th:checked="${nhanKhau.hoNgoaiHuyenDen == 1 ? true : false}">
+                            </div>
+                            <div class="col-md-2 form-group  text-center">
+                                <label for="nhanKhauMoiSinh">Nhân khẩu mới sinh</label>
+                                <br>
+                                <input class="form-check-input" id="nhanKhauMoiSinh" name="nhanKhauMoiSinh" type="checkbox" value="1" th:checked="${nhanKhau.nhanKhauMoiSinh == 1 ? true : false}">
                             </div>
                         </div>
 
@@ -293,7 +292,7 @@
                         <div class="row mb-12 form-group">
                             <div class="col-md-12">
                                 <label>Tóm tắt bản thân (Từ đủ 14 tuổi trở lên đến nay ở đâyở đâu, làm gì)</label>
-                                <textarea name="tomTatBanThan" id="tomTatBanThan"></textarea>
+                                <textarea  id="tomTatBanThan" th:field="*{tomTatBanThan}"></textarea>
                             </div>
                         </div>
 
@@ -305,7 +304,7 @@
                         <div class="row mb-12 form-group">
                             <div class="col-md-12">
                                 <label>Tóm tắt gia đình</label>
-                                <textarea name="tomTatGiaDinh" id="tomTatGiaDinh"></textarea>
+                                <textarea  id="tomTatGiaDinh" th:field="*{tomTatGiaDinh}"></textarea>
                             </div>
 
                         </div>
@@ -317,8 +316,7 @@
                                 <label>Tiền án (Tội danh, hình phạt theo bản số)</label>
 
                                 <input
-                                        name="tienAn"
-                                        value=""
+                                        th:field="*{tienAn}"
                                         class="form-control"
                                         style="resize: false">
                             </div>
@@ -348,7 +346,7 @@
     <script th:src="@{/js/validator.js}"></script>
 </th:block>
 <th:block layout:fragment="script">
-    <script type="module" th:src="@{/js/them-nhankhau.js}"></script>
+    <script type="module" th:src="@{/js/edit-nhankhau.js}"></script>
 </th:block>
 
 </html>

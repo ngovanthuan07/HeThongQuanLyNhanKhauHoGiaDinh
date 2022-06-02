@@ -1,417 +1,201 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="fragment/congan/base">
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <div class="col-md-12" layout:fragment="content">
-  <form id="myForm">
+  <div class="card-body">
+    <br />
     <div class="card">
-      <div
-              class="card-header text-white text-center"
-              style="background-color: #009cde">
-        Nhập hồ sơ hộ khẩu
-      </div>
+      <div class="card-header">Đăng ký thường trú</div>
+
       <div class="card-body">
-        <div class="card">
-          <div class="card-header">Thông tin hồ sơ</div>
-          <div class="card-body">
-            <!-- dan toc  -->
-            <div class="row mb-3 form-group">
+        <div class="row mb-12">
+          <div class="col-md-3">
+            <span>Chọn nhân khẩu cần tách</span>
+          </div>
+          <div class="col-md-6">
+            <select class="form-control selectpicker"   id="tachHoKhau" multiple>
+              <option value="1">Nguyen Van A</option>
+              <option value="2">Nguyen Van B</option>
+              <option value="3">Nguyen Van C</option>
+              <option value="4">Nguyen Van D</option>
+              <option value="5">Nguyen Van F</option>
+            </select>
 
-              <div class="col-md-3">
-                <label>Tờ số</label>
-              </div>
+          </div>
+        </div>
 
-              <div class="col-md-2">
+
+
+        <div class="row">
+          <span>Thiết quan hệ hộ khẩu mới</span>
+        </div>
+        <div class="row mb-12 thiet-lap-thong-tinh-nhan-khau">
+
+        </div>
+
+        <br>
+
+        <div class="row">
+          <span>Thông tin hộ khẩu mới</span>
+        </div>
+        <div class="row">
+          <div class="row mb-12">
+            <div class="col-sm-2">
+              <label>Hồ sơ hộ khẩu mới</label>
+              <div>
                 <input
                         type="text"
-                        name="toSo"
+                        name="name"
                         value=""
                         class="form-control"
-                        rules="required"
                 />
-                <span class="text-danger form-message"></span>
               </div>
             </div>
 
-            <div class="row mb-3 form-group">
-              <div class="col-md-3">
-                <label>Ngày nộp lưu</label>
-              </div>
+            <div class="col-sm-2">
+              <label>Hộ khẩu số</label>
 
-              <div class="col-md-6">
-                <input
-                        placeholder="dd-mm-yyyy"
-                        name="ngayNopLuu"
-                        value=""
-                        type="date"
-                        class="form-control"
-                        rules="required"
-                />
-                <span class="text-danger form-message"></span>
-              </div>
+              <input
+                      type="text"
+                      name="name"
+                      value=""
+                      class="form-control"
+              />
+            </div>
+            <div class="col-sm-2">
+              <label>Số ĐKTT số</label>
+              <input
+                      type="text"
+                      name="name"
+                      value=""
+                      class="form-control"
+              />
+            </div>
+            <div class="col-sm-2">
+              <label>Tờ số</label>
+              <input
+                      type="text"
+                      name="name"
+                      value=""
+                      class="form-control"
+              />
             </div>
 
-            <div class="row mb-3 form-group">
-              <div class="col-md-3">
-                <label>Nơi đăng ký thường trú</label>
-              </div>
-
-              <div class="col-md-6">
-                <input
-                        name="noiDangKyThuongTru"
-                        value=""
-                        class="form-control"
-                        style="resize: false"
-                        data-toggle="modal"
-                        data-target="#exampleModal"
-                        rules="required"
-                        modal-form>
-                <span class="text-danger form-message"></span>
-              </div>
+            <div class="col-sm-2">
+              <label>Ngày nội lưu</label>
+              <input
+                      type="date"
+                      name="name"
+                      value=""
+                      class="form-control"
+              />
             </div>
 
-            <div class="row mb-3 form-group">
-              <div class="col-md-4">
-                <label>Hộ ngoài huyện đến</label>
-              </div>
 
-              <div class="col-md-1">
-                <input class="form-check-input" name="hoNgoaiHuyenDen" type="checkbox" value="" >
-              </div>
+            <div class="col-sm-2">
+              <label>Ngày tách</label>
+              <input
+                      type="date"
+                      name="name"
+                      value=""
+                      class="form-control"
+              />
             </div>
           </div>
         </div>
         <br />
-        <div class="card">
-          <div class="card-header">Thông tin nhân khẩu</div>
-          <div class="card-body">
-            <div class="row mb-12">
-              <div class="col-sm-2">
-                <label>Quan hệ với chủ hộ</label>
-                <div>
-                  <select id="selectQuanHe" name="quanHe" value="" class="form-control selectpicker" data-live-search="true">
-                    <option th:each="quanHe : ${quanHes}"
-                            th:value="${quanHe.maQH}"
-                            th:text="${quanHe.tenQH}">
-                    </option>
-                  </select>
-
-                  <!--                                    <input type="hidden" name="hidden_quanHe" id="hidden_quanHe">-->
-                </div>
-              </div>
-
-              <div class="col-sm-2">
-                <label>Học vấn</label>
-
-                <select id="selectHocVan" name="hocVan" class="form-control selectpicker" data-live-search="true">
-                  <option th:each="hocVan : ${hocVans}"
-                          th:value="${hocVan.maHV}"
-                          th:text="${hocVan.tenHV}">
-                  </option>
-                </select>
-              </div>
-              <div class="col-sm-2 form-group">
-                <label>Trình độ chuyên môn</label>
-                <input
-                        type="text"
-                        name="trinhDoChuyenMon"
-                        value=""
-                        class="form-control"
-                />
-                <span class="text-danger form-message"></span>
-              </div>
-              <div class="col-sm-6 form-group">
-                <label>Nơi sinh</label>
-                <input
-                        type="text"
-                        name="noiSinh"
-                        value=""
-                        class="form-control"
-                        data-toggle="modal"
-                        data-target="#exampleModal"
-                        rules="required"
-                        modal-form
-                />
-                <span class="text-danger form-message"></span>
-              </div>
-            </div>
-            <br />
-            <div class="row mb-12">
-              <div class="col-sm-2 form-group">
-                <label>Họ và tên</label>
-                <div>
-                  <input
-                          type="text"
-                          name="hoVaTen"
-                          value=""
-                          class="form-control"
-                          rules="required"
-                  />
-                  <span class="text-danger form-message"></span>
-                </div>
-              </div>
-
-              <div class="col-sm-2 form-group">
-                <label>Nghề nghiệp</label>
-
-                <input
-                        type="text"
-                        name="ngheNghiep"
-                        value=""
-                        class="form-control"
-                        rules="required"
-                />
-                <span class="text-danger form-message"></span>
-              </div>
-              <div class="col-sm-2 form-group">
-                <label>Trình độ ngoại ngữ</label>
-                <input
-                        type="text"
-                        name="trinhDoNgoaiNgu"
-                        value=""
-                        class="form-control"
-                />
-              </div>
-              <div class="col-sm-6 form-group">
-                <label>Nguyên quán</label>
-                <input
-                        type="text"
-                        name="nguyenQuan"
-                        value=""
-                        class="form-control"
-                        data-toggle="modal"
-                        data-target="#exampleModal"
-                        rules="required"
-                        modal-form
-                />
-                <span class="text-danger form-message"></span>
-              </div>
-            </div>
-
-            <br />
-            <div class="row mb-12">
-              <div class="col-sm-2 form-group">
-                <label>Tên gọi khác</label>
-                <div>
-                  <input
-                          type="text"
-                          name="tenGoiKhac"
-                          class="form-control"
-                  />
-                </div>
-              </div>
-
-              <div class="col-sm-2 ">
-                <label>Dân tộc</label>
-
-                <select id="selectDanToc" name="danToc" class="form-control selectpicker" data-live-search="true">
-                  <option th:each="danToc : ${danTocs}"
-                          th:value="${danToc.maDT}"
-                          th:text="${danToc.tenDT}">
-                  </option>
-                </select>
-              </div>
-              <div class="col-sm-2">
-                <label>Tôn giáo</label>
-                <select id="selectTonGiao" name="hocVan" class="form-control selectpicker" data-live-search="true">
-                  <option th:each="tonGiao : ${tonGiaos}"
-                          th:value="${tonGiao.maTG}"
-                          th:text="${tonGiao.tenTG}">
-                  </option>
-                </select>
-              </div>
-              <div class="col-sm-6 form-group">
-                <label>Nơi ở hiện nay</label>
-                <input
-                        type="text"
-                        name="noiOHienNay"
-                        value=""
-                        class="form-control"
-                        data-toggle="modal"
-                        data-target="#exampleModal"
-                        rules="required"
-                        modal-form
-                />
-                <span class="text-danger form-message"></span>
-              </div>
-            </div>
-
-            <br />
-            <div class="row mb-12">
-              <div class="col-sm-2 form-group">
-                <label>Ngày sinh</label>
-                <div>
-                  <input
-                          type="date"
-                          name="ngaySinh"
-                          value=""
-                          class="form-control"
-                          rules="required"
-                  />
-                </div>
-              </div>
-
-              <div class="col-sm-2 form-group">
-                <label>Số CMND/CCCD</label>
-
-                <input
-                        type="text"
-                        name="cmnd"
-                        value=""
-                        class="form-control"
-                />
-              </div>
-              <div class="col-sm-2 form-group">
-                <label>Quốc tịch</label>
-                <input
-                        type="text"
-                        name="quocTich"
-                        value=""
-                        class="form-control"
-                        rules="required"
-                />
-                <span class="text-danger form-message"></span>
-              </div>
-              <div class="col-sm-6 form-group">
-                <label>Nơi làm việc</label>
-                <input
-                        type="text"
-                        name="noiLamViec"
-                        value=""
-                        class="form-control"
-                        data-toggle="modal"
-                        data-target="#exampleModal"
-                        modal-form
-                />
-                <span class="text-danger form-message"></span>
-              </div>
-            </div>
-
-            <br />
-            <div class="row mb-12">
-              <div class="col-sm-2 form-group">
-                <label>Ngày ĐKTT</label>
-                <div>
-                  <input
-                          type="text"
-                          name="ngayDKTT"
-                          value=""
-                          class="form-control"
-                          rules="required"
-                  />
-                  <span class="text-danger form-message"></span>
-                </div>
-              </div>
-
-              <div class="col-sm-2 form-group">
-                <label>Số hộ chiếu</label>
-
-                <input
-                        type="text"
-                        name="soHoChieu"
-                        value=""
-                        class="form-control"
-                />
-              </div>
-              <div class="col-sm-2 form-group">
-                <label>Biết tiếng dân tộc</label>
-                <input
-                        type="text"
-                        name="bietTiengDanToc"
-                        value=""
-                        class="form-control"
-                />
-              </div>
-              <div class="col-sm-6 form-group">
-                <label>Nơi thường trú trước đây (Hộ ngoài huyện chuyển đến)</label>
-                <input
-                        type="text"
-                        name="noiThuongTruTruocDay"
-                        value=""
-                        class="form-control"
-                        data-toggle="modal"
-                        data-target="#exampleModal"
-                        modal-form
-                />
-              </div>
-            </div>
-            <br />
-
-            <div class="row mb-3">
-              <div class="col-md-2">
-                <label>Giới tính</label>
-                <select name="gioiTinh" class="form-control">
-                  <option value="1">Nam</option>
-                  <option value="2">Nữ</option>
-                </select>
-              </div>
-            </div>
-
-            <br />
-
-            <div class="row mb-12">
-              <div class="col-md-12">
-                <label>Tóm tắt bản thân (Từ đủ 14 tuổi trở lên đến nay ở đâyở đâu, làm gì)</label>
-                <textarea name="tomTatBanThan" id="tomTatBanThan"></textarea>
-              </div>
-            </div>
 
 
 
+      </div>
 
-            <br />
-
-            <div class="row mb-12">
-              <div class="col-md-12">
-                <label>Tóm tắt gia đình</label>
-                <textarea name="tomTatGiaDinh" id="tomTatGiaDinh"></textarea>
-              </div>
-
-            </div>
-            <br />
-
-
-            <div class="row mb-3">
-              <div class="col-md-12">
-                <label>Tiền án (Tội danh, hình phạt theo bản số)</label>
-
-                <input
-                        name="tienAn"
-                        value=""
-                        class="form-control"
-                        style="resize: false">
-              </div>
-            </div>
-
-            <div class="container">
-              <div class="row">
-                <div class="col text-center">
-                  <button
-                          id="saveSoTamTruAndNhanKhau"
-                          class="btn "
-                          style="background-color: #009cde; color: white">
-                    Cập nhật
-                  </button>
-                </div>
-              </div>
-            </div>
+      <div style="margin-bottom:10px">
+        <div class="row">
+          <div class="col text-center">
+            <button
+                    type="submit"
+                    class="btn"
+                    style="background-color: #009cde; color: white"
+            >
+              Tách hồ sơ
+            </button>
           </div>
         </div>
       </div>
     </div>
-  </form>
+  </div>
+
+  <script>
+    let qh
+    function getQuanHe(callback) {
+      fetch('/api/quanhe')
+              .then(response => response.json())
+              .then(data => callback(data));
+    }
+
+    var lSelectPicker = []
+    $('.selectpicker').change(function (e) {
+      var options  = $('.selectpicker option:selected');
+      lSelectPicker = []
+      $(options).each(function(){
+        lSelectPicker.push({
+          maNhanKhau: $(this).val(),
+          tenNhanKhau: $(this).text(),
+          quanHe: undefined
+        });
+      });
+      getQuanHe(data => {
+        renderSelection(data)
+      })
+    })
+    function renderSelection(data) {
+      let thietLap = $('.thiet-lap-thong-tinh-nhan-khau');
+      if(lSelectPicker.length > 0) {
+        let htmlThietLap =  lSelectPicker.map(item => {
+          return `
+                <div class="col-sm-2">
+                    <label>${item.tenNhanKhau}</label>
+                    <div>
+                        <select name="quanHe"  class="form-control" onchange="handleSelectionQuanHe('${item.maNhanKhau}', this)">
+                            <option value="">Vui lòng chọn quan hệ</option>
+                            ${data.map(qh => {
+            return `
+                                    <option value="${qh.maQH}">${qh.tenQH}</option>
+                                `
+          }).join(" ")}
+                        </select>
+                    </div>
+                </div>
+            `
+        })
+        thietLap.html(htmlThietLap.join(" "))
+      }
+      else {
+        thietLap.html("")
+      }
+    }
+    function handleSelectionQuanHe(id, sel) {
+      console.log(sel.value)
+      if(sel.value) {
+        let i = lSelectPicker.findIndex(item => item.maNhanKhau === id)
+        lSelectPicker[i] = {
+          ...lSelectPicker[i],
+          quanHe: {
+            maQH: sel.value ,
+            tenQH: sel.options[sel.selectedIndex].text
+          }
+        }
+        console.log(lSelectPicker)
+
+      }
+    }
+  </script>
 </div>
 </body>
-<th:block layout:fragment="validator">
-  <script th:src="@{/js/validator.js}"></script>
-</th:block>
-<th:block layout:fragment="script">
-  <script type="module" th:src="@{/js/hoso.js}"></script>
-</th:block>
-
 </html>

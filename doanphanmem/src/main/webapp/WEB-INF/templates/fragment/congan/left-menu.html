@@ -52,9 +52,9 @@
                     Tạm trú
                 </a>
                 <ul class="collapse list-unstyled sidebarContent" id="tamTru">
-                    <li><a href="#">Quản lý</a></li>
-                    <li><a href="#">Sổ tạm trú (Hộ)</a></li>
-                    <li><a href="#">Sổ tạm trú(Cá nhân)</a></li>
+                    <li><a th:href="@{/congan/tamtru/quanlytramtru}">Quản lý</a></li>
+                    <li><a th:href="@{/congan/tamtru/tamtruho}">Sổ tạm trú (Hộ)</a></li>
+                    <li><a th:href="@{/congan/tamtru/tamtrucanhan}">Sổ tạm trú(Cá nhân)</a></li>
                 </ul>
             </li>
             <li class="nav-item">
@@ -63,8 +63,9 @@
                     Biểu mẫu
                 </a>
                 <ul class="collapse list-unstyled sidebarContent" id="bieumau">
-                    <li><a href="#">Danh sách đăng ký thường trú</a></li>
-                    <li><a href="#">Danh sách đăng ký tạm trú</a></li>
+                    <li th:if="${session.loaiHoSos != null}" th:each="lhs : ${session.loaiHoSos}">
+                        <a th:href="@{/congan/bieumau/ho-so(maLHS=${lhs.maLHS}) }" th:text="${lhs.tenLHS}"></a>
+                    </li>
                     <li><a href="#">Khác</a></li>
                 </ul>
             </li>
@@ -85,8 +86,9 @@
                     Tài Khoản
                 </a>
                 <ul class="collapse list-unstyled sidebarContent" id="taikhoan">
-                    <li><a href="#">Thông tin tài khoản</a></li>
-                    <li><a href="#">Đổi mật khẩu</a></li>
+<!--                    <li><a href="#">Thông tin tài khoản</a></li>-->
+<!--                    <li><a href="#">Đổi mật khẩu</a></li>-->
+                    <li><a th:href="@{/congan-panel/logout}">Đăng xuất</a></li>
                 </ul>
             </li>
         </ul>

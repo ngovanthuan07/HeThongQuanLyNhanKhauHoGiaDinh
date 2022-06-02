@@ -12,11 +12,11 @@
     <br />
     <div class="text-center">
         <a  class="btn btn-outline-info"><i class="fa-solid fa-pen"></i>&nbsp; Sửa hồ sơ</a>
-        <a class="btn btn-outline-info"><i class="fa-solid fa-plus"></i>&nbsp; Đăng ký</a>
-        <a  class="btn btn-outline-info"><i class="fa-solid fa-address-card"></i>&nbsp; Tách hộ</a>
+        <a th:href="@{/congan/hoso/them-nhankhau(soHK = ${soHoKhau})}" class="btn btn-outline-info"><i class="fa-solid fa-plus"></i>&nbsp; Đăng ký</a>
+        <a th:href="@{/congan/tach-nhan-khau(soHK = ${soHoKhau})}"  class="btn btn-outline-info"><i class="fa-solid fa-address-card"></i>&nbsp; Tách hộ</a>
         <a  class="btn btn-outline-info"><i class="fa-solid fa-arrow-right-arrow-left"></i>&nbsp;Cấp đổi</a>
         <a  class="btn btn-outline-info"><i class="fa-solid fa-people-arrows-left-right"></i>&nbsp;Cấp lại</a>
-        <a  class="btn btn-outline-info"><i class="fa-solid fa-trash"></i>&nbsp;Xoá thường trú</a>
+        <a th:href="@{/congan/danh-sach-chi-tiet-nhan-khau-thuong-tru-bi-xoa(soHK = ${soHoKhau})}" class="btn btn-outline-info"><i class="fa-solid fa-trash"></i>&nbsp;Xoá thường trú</a>
     </div>
     <br>
     <!-- content -->
@@ -54,15 +54,15 @@
                                     <td class="text-center" th:text="${nktt.nhanKhau.cmnd}"></td>
                                     <td class="text-center" th:text="${nktt.soHoKhau.noiDangKyThuongTru}"></td>
                                     <td class="text-center" >
-                                        <a th:href="@{/congan/chi-tiet-nhan-khau(soHK=${nktt.nhanKhau.maNK})}" class="text-secondary">
+                                        <a th:href="@{/congan/chi-tiet-nhan-khau(maNK=${nktt.nhanKhau.maNK}, soHK=${nktt.soHoKhau.soHK})}" class="text-secondary">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
                                         &nbsp;
-                                        <a href="">
+                                        <a th:href="@{/congan/chi-tiet-nhan-khau/edit(maNK=${nktt.nhanKhau.maNK})}">
                                             <i class="fa-solid fa-pen"></i>
                                         </a>
                                         &nbsp;
-                                        <a href="" class="text-danger">
+                                        <a th:href="@{/congan/chi-tiet-nhan-khau/delete(maNK=${nktt.nhanKhau.maNK}, soHK=${nktt.soHoKhau.soHK})}" class="text-danger">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>
                                     </td>

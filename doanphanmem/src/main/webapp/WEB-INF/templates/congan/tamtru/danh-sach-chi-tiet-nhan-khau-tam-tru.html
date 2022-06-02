@@ -46,19 +46,25 @@
                                     <td class="text-center" >
                                         <a th:href="@{/congan/tamtru/danh-sach-chi-tiet-tam-tru/chitiet(
                                                             maTT=${nktt.nhanKhauTamTruPK.maTT},
-                                                            maNK=${nktt.nhanKhauTamTruPK.maTT})}" class="text-success">
+                                                            maNK=${nktt.nhanKhauTamTruPK.maNK})}" class="text-success">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
                                         &nbsp;
-                                        <a th:href="@{'/congan/tamtru/add-them-thanh-vien-tam-tru?maTT= '+ ${nktt.nhanKhauTamTruPK.maTT}}" class="text-primary">
+                                        <a th:href="@{/congan/tamtru/danh-sach-chi-tiet-tam-tru/giahan(
+                                                            maTT=${nktt.nhanKhauTamTruPK.maTT},
+                                                            maNK=${nktt.nhanKhauTamTruPK.maNK})}" class="text-primary">
                                             <i class="fa-solid fa-user-clock"></i>
                                         </a>
                                         &nbsp;
-                                        <a th:href="@{'/congan/tamtru/add-them-thanh-vien-tam-tru?maTT= '+ ${nktt.nhanKhauTamTruPK.maTT}}" class="text-info">
+                                        <a th:href="@{/congan/tamtru/danh-sach-chi-tiet-tam-tru/chinhsua(
+                                                            maTT=${nktt.nhanKhauTamTruPK.maTT},
+                                                            maNK=${nktt.nhanKhauTamTruPK.maNK})}" class="text-info">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                         &nbsp;
-                                        <a href="" class="text-secondary text-danger">
+                                        <a th:href="@{/congan/tamtru/danh-sach-chi-tiet-tam-tru/xoa(
+                                                            maTT=${nktt.nhanKhauTamTruPK.maTT},
+                                                            maNK=${nktt.nhanKhauTamTruPK.maNK})}" class="text-secondary text-danger">
                                             <i class="fa-solid fa-square-minus"></i>
                                         </a>
                                     </td>
@@ -67,7 +73,17 @@
 
                                 </tbody>
                             </table>
-
+                            <div class="d-flex justify-content-right">
+                                <a
+                                        th:href="@{/congan/tamtru/quanlytramtru}"
+                                        class="btn"
+                                        style="background-color: #009cde; color: white"
+                                >
+                                    <i class="fa-solid fa-backward"></i>
+                                    &nbsp;
+                                    Quay lại
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

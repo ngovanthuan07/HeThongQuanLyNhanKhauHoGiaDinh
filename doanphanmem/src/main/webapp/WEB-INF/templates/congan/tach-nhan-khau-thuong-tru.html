@@ -1,10 +1,254 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/congan/base">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-$END$
+<div class="col-md-12" layout:fragment="content">
+    <div class="card-body">
+        <br />
+        <div class="card">
+            <div class="card-header">Đăng ký thường trú</div>
+
+            <div class="card-body">
+                <div class="row mb-12">
+                    <div class="col-md-3">
+                        <span>Chọn nhân khẩu cần tách</span>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-control selectpicker"   id="tachHoKhau" multiple>
+                            <option th:each="nhanKhauTT : ${nhanKhauThuongKhauTru}"
+                                    th:value="${nhanKhauTT.nhanKhau.maNK}"
+                                    th:text="${nhanKhauTT.nhanKhau.hoVaTen}"></option>
+                        </select>
+
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <span>Thiết quan hệ hộ khẩu mới</span>
+                </div>
+                <div class="row mb-12 thiet-lap-thong-tinh-nhan-khau">
+
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <span>Thông tin hộ khẩu mới</span>
+                </div>
+                <div class="row">
+                    <div class="row mb-12">
+                        <div class="col-sm-2">
+                            <label>Số ĐKTT số trước đây</label>
+                            <div>
+                                <input
+                                        type="text"
+                                        name="soHK"
+                                        th:value="${soHK}"
+                                        class="form-control"
+                                        rule
+                                        disabled
+                                />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label>Tờ số</label>
+                            <input
+                                    type="text"
+                                    name="toSo"
+                                    value=""
+                                    rule
+                                    class="form-control"
+                            />
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label>Ngày nộp lưu</label>
+                            <input
+                                    type="date"
+                                    name="ngayNopLuu"
+                                    value=""
+                                    rule
+                                    class="form-control"
+                            />
+                        </div>
+
+
+                        <div class="col-sm-2">
+                            <label>Ngày tách</label>
+                            <input
+                                    type="date"
+                                    name="ngayTach"
+                                    value=""
+                                    rule
+                                    class="form-control"
+                            />
+                        </div>
+
+                        <div class="col-sm-2 form-group">
+                            <label>Nơi đăng ký thường trú</label>
+                            <input
+                                    type="text"
+                                    name="noiDangKyThuongTru"
+                                    value=""
+                                    rule
+                                    data-toggle="modal"
+                                    data-target="#exampleModal"
+                                    modal-form=""
+                                    class="form-control"
+                            />
+                            <span class="text-danger form-message"></span>
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+
+
+            </div>
+
+            <div style="margin-bottom:10px">
+                <div class="row">
+                    <div class="col text-center">
+                        <button
+                                id = "tachNhanKhauThuongTru"
+                                class="btn"
+                                style="background-color: #009cde; color: white"
+                        >
+                            Tách hồ sơ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let qh
+        function getQuanHe(callback) {
+            fetch('/api/quanhe')
+                .then(response => response.json())
+                .then(data => callback(data));
+        }
+
+        var lSelectPicker = []
+        $('.selectpicker').change(function (e) {
+            var options  = $('.selectpicker option:selected');
+            lSelectPicker = []
+            $(options).each(function(){
+                lSelectPicker.push({
+                    maNK: $(this).val(),
+                    hoVaTen: $(this).text(),
+                    quanHe: undefined
+                });
+            });
+            getQuanHe(data => {
+                renderSelection(data)
+            })
+        })
+        function renderSelection(data) {
+            let thietLap = $('.thiet-lap-thong-tinh-nhan-khau');
+            if(lSelectPicker.length > 0) {
+                let htmlThietLap =  lSelectPicker.map(item => {
+                    return `
+                <div class="col-sm-2">
+                    <label>${item.hoVaTen}</label>
+                    <div>
+                        <select name="quanHe"  class="form-control" onchange="handleSelectionQuanHe('${item.maNK}', this)">
+                            <option value="">Vui lòng chọn quan hệ</option>
+                            ${data.map(qh => {
+                        return `
+                                    <option value="${qh.maQH}">${qh.tenQH}</option>
+                                `
+                    }).join(" ")}
+                        </select>
+                    </div>
+                </div>
+            `
+                })
+                thietLap.html(htmlThietLap.join(" "))
+            }
+            else {
+                thietLap.html("")
+            }
+        }
+        function handleSelectionQuanHe(id, sel) {
+            let quanHe;
+            if(sel.value) {
+                quanHe = {
+                    maQH: sel.value ,
+                    tenQH: sel.options[sel.selectedIndex].text
+                }
+            }
+            let i = lSelectPicker.findIndex(item => item.maNK === id)
+            lSelectPicker[i] = {
+                ...lSelectPicker[i],
+                quanHe
+            }
+            console.log("Danh sách nhân khẩu: ", lSelectPicker)
+        }
+
+        let tachNhanKhauThuongTru = document.getElementById('tachNhanKhauThuongTru')
+        tachNhanKhauThuongTru.onclick = function () {
+            let inputs = document.querySelectorAll('[name][rule]')
+            let tachHoKhau = document.getElementById('tachHoKhau').value
+            let quanHe = lSelectPicker.every(qh => qh.quanHe)
+            let shk = {}
+            if(inputs) {
+                let isValue = true
+                for (let input of inputs) {
+                   if(!input.value || !tachHoKhau || !quanHe) {
+                       isValue = false
+                       break
+                   } else {
+                       shk[input.name] = input.value
+                   }
+                }
+                if(isValue) {
+                    let soHK = shk['soHK']
+                    delete shk['soHK']
+                    let formData = {
+                        'soHK': soHK,
+                        'soHoKhau': JSON.stringify(shk),
+                        'nhanKhaus': JSON.stringify(lSelectPicker),
+                    }
+                    console.log(formData)
+                    fetch("/congan/api/tach-nhankhauthuongtru", {
+                        method: 'post',
+                        body: JSON.stringify(formData),
+                        headers: {"Content-Type": "application/json"}
+                    }).then( res => {
+                        console.info(res);
+                        return res.json();
+
+                    }).then( data => {
+                        console.log(data)
+                        if(data.includes("Success")) {
+                            let isCheck =  window.confirm("Tách hộ khẩu thành công");
+                            if(isCheck) {
+                                window.location.replace("/congan/quanly");
+                            } else {
+                                window.location.reload();
+                            }
+                        } else {
+                            alert("Tách hộ khẩu thất bại")
+                        }
+                    });
+                } else {
+                    alert("Không được để trống")
+                }
+            }
+
+
+        }
+    </script>
+</div>
 </body>
 </html>

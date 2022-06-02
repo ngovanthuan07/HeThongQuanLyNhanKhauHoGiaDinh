@@ -71,7 +71,7 @@ form.onSubmit = function (formData) {
         'nhanKhauTamTru': JSON.stringify(nhanKhauTamTru),
         'nhanKhau': JSON.stringify(formData)
     }
-    fetch("/congan/api/tamtru/add-tam-tru-ca-nhan", {
+    fetch("/congan/api/tamtru/add-tam-tru-ho", {
         method: 'post',
         body: JSON.stringify(obj),
         headers: {
@@ -82,8 +82,14 @@ form.onSubmit = function (formData) {
         return res.json();
 
     }).then( data => {
-        if(data.includes("Success")) {
-            alert("Thành công")
+        if(data.includes("/congan")) {
+            let isCheck =  window.confirm("Bạn có muốn thêm một người trong sổ tạm trú hay không");
+            if(isCheck) {
+                window.location.replace(data);
+            } else {
+
+                window.location.reload();
+            }
         } else {
             alert("Thất bại")
         }

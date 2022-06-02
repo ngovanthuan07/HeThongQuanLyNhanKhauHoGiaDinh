@@ -5,6 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-  <h1>Welcome</h1>
+<h1>Welcome</h1>
+<h1 th:if="${session.currentUser != null}" th:text="${session.currentUser['username']}"></h1>
+<a th:href="@{/nguoidung-panel/logout}">Log out</a>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.vanthuandev.doanphanmem.pojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,7 @@ public class QuanHe {
         this.tenQH = tenQH;
     }
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "quanHe", fetch = FetchType.LAZY)
     private Collection<NhanKhau> nhanKhaus;
 

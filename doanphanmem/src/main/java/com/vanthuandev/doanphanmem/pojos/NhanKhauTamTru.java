@@ -1,5 +1,6 @@
 package com.vanthuandev.doanphanmem.pojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,9 +29,16 @@ public class NhanKhauTamTru {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date tamTruDenNgay;
 
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date ngayDangKyTamTru;
+
     private String noiThuongTru;
 
+
     private String noiDangKiTamTru;
+
+    private String loaiTamTru;
 
     private String lyDo;
 
@@ -38,12 +46,15 @@ public class NhanKhauTamTru {
 
     private String loaiSo;
 
-    private String trangThai;
+    private int trangThai;
+
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date ngayGiaHan;
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ngayCapNhat;
-
 
     @ManyToOne(optional = false)
     @MapsId("maNK")

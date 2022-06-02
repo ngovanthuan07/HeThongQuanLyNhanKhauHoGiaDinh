@@ -1,6 +1,8 @@
 package com.vanthuandev.doanphanmem.controllers.police;
 
+import com.vanthuandev.doanphanmem.pojos.NhanKhau;
 import com.vanthuandev.doanphanmem.pojos.NhanKhauThuongTru;
+import com.vanthuandev.doanphanmem.pojos.SoHoKhau;
 import com.vanthuandev.doanphanmem.service.*;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
@@ -8,11 +10,14 @@ import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/congan**")
@@ -34,9 +39,18 @@ public class PoliceController {
     @Autowired
     private NhanKhauThuongTruService nhanKhauThuongTruService;
 
+    @Autowired
+    private NhanKhauService nhanKhauService;
+
+    @Autowired
+    private SoHoKhauService soHoKhauService;
+
+    @Autowired
+    private LoaiHoSoService loaiHoSoService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String index() {
+    public String index(HttpSession httpSession) {
+        httpSession.setAttribute("loaiHoSos", loaiHoSoService.findAll());
         return "congan/welcome";
     }
 
@@ -66,10 +80,64 @@ public class PoliceController {
     }
 
     @RequestMapping(value="/danh-sach-chi-tiet-nhan-khau-thuong-tru", method = RequestMethod.GET)
-    public String danhsachchitietnhankhauthuongtru(Model model, @RequestParam(value = "soHK", required = false) Integer soHK) {
-        List<NhanKhauThuongTru> nhanKhauThuongTrus = nhanKhauThuongTruService.findAllBySoHKAndTrangThai(soHK, 1);
-
-        model.addAttribute("nhanKhauThuongKhauTru", nhanKhauThuongTrus);
+    public String danhSachChiTietNhanLhauThuongTru(Model model,
+                                                   @RequestParam(value = "soHK", required = false) Integer soHK) {
+        List<NhanKhauThuongTru> nktt = nhanKhauThuongTruService.findAllBySoHKAndTrangThai(soHK,1);
+        model.addAttribute("soHoKhau", soHK);
+        model.addAttribute("nhanKhauThuongKhauTru", nktt);
         return "congan/list-nk-thuong-tru";
+    }
+
+    @RequestMapping(value="/danh-sach-chi-tiet-nhan-khau-thuong-tru-bi-xoa", method = RequestMethod.GET)
+    public String danhSachChiTietNhanKhauThuongTruBiXoa(Model model,
+                                                   @RequestParam(value = "soHK", required = false) Integer soHK) {
+        List<NhanKhauThuongTru> soHoKhau = nhanKhauThuongTruService.findAllBySoHKAndTrangThai(soHK,0);
+        model.addAttribute("soHoKhau", soHK);
+        model.addAttribute("nhanKhauThuongKhauTru", soHoKhau);
+        return "congan/lish-xoa-thuong-tru";
+    }
+
+    @RequestMapping(value="/chi-tiet-nhan-khau", method = RequestMethod.GET)
+    public String chiTietNhanKhauThuongTru(Model model,
+                                           @RequestParam(value = "maNK", required = false) Integer maNK,
+                                           @RequestParam(value = "soHK", required = false) Integer soHK) {
+        Optional<NhanKhauThuongTru> nktt = nhanKhauThuongTruService.findNhanKhauThuongTruByNhanKhauAndSoHoKhauAndTrangThai(maNK,soHK,1);
+
+        model.addAttribute("nhanKTT", nktt.get());
+
+        return "congan/chi-tiet-nktt";
+    }
+
+    @RequestMapping(value="/chi-tiet-nhan-khau/edit", method = RequestMethod.GET)
+    public String chiTietNhanKhauThuongTruEdit(Model model,
+                                           @RequestParam(value = "maNK", required = false) Integer maNK) {
+        Optional<NhanKhau> nhanKhau = nhanKhauService.findById(maNK);
+        model.addAttribute("nhanKhau", nhanKhau.get());
+        model.addAttribute("danTocs", danTocService.findAll());
+        model.addAttribute("tonGiaos", tonGiaoService.findAll());
+        model.addAttribute("hocVans", hocVanService.findAll());
+        model.addAttribute("quanHes", quanHeService.findAll());
+
+        return "congan/nhankhau-thuongtru-edit";
+    }
+
+    @RequestMapping(value="/chi-tiet-nhan-khau/delete", method = RequestMethod.GET)
+    public String xoaThuongTru(Model model,
+                                           @RequestParam(value = "maNK", required = false) Integer maNK,
+                                           @RequestParam(value = "soHK", required = false) Integer soHK) {
+        Optional<NhanKhauThuongTru> nktt = nhanKhauThuongTruService.findNhanKhauThuongTruByNhanKhauAndSoHoKhauAndTrangThai(maNK,soHK,1);
+
+        model.addAttribute("nhanKTT", nktt.get());
+
+        return "congan/xoa-mot-nktt";
+    }
+
+    @RequestMapping(value = "/tach-nhan-khau", method = RequestMethod.GET)
+    public String tachNhanKhau(Model model,
+                               @RequestParam(value = "soHK", required = false) Integer soHK) {
+        List<NhanKhauThuongTru> nktt = nhanKhauThuongTruService.findAllBySoHKAndTrangThai(soHK,1);
+        model.addAttribute("soHK", soHK);
+        model.addAttribute("nhanKhauThuongKhauTru", nktt);
+        return "congan/tach-nhan-khau-thuong-tru";
     }
 }

@@ -29,9 +29,8 @@
                                                 th:value="${quanHe.maQH}"
                                                 th:text="${quanHe.tenQH}">
                                         </option>
-                                        <span class="text-danger form-message"></span>
-
                                     </select>
+                                <span class="text-danger form-message"></span>
 
                             </div>
 
@@ -44,8 +43,8 @@
                                             th:value="${hocVan.maHV}"
                                             th:text="${hocVan.tenHV}">
                                     </option>
-                                    <span class="text-danger form-message"></span>
                                 </select>
+                                <span class="text-danger form-message"></span>
                             </div>
                             <div class="col-sm-2 form-group">
                                 <label>Trình độ chuyên môn</label>
@@ -147,8 +146,8 @@
                                             th:value="${danToc.maDT}"
                                             th:text="${danToc.tenDT}">
                                     </option>
-                                    <span class="text-danger form-message"></span>
                                 </select>
+                                <span class="text-danger form-message"></span>
                             </div>
                             <div class="col-sm-2 form-group">
                                 <label>Tôn giáo</label>
@@ -158,8 +157,8 @@
                                             th:value="${tonGiao.maTG}"
                                             th:text="${tonGiao.tenTG}">
                                     </option>
-                                    <span class="text-danger form-message"></span>
                                 </select>
+                                <span class="text-danger form-message"></span>
                             </div>
                             <div class="col-sm-6 form-group">
                                 <label>Nơi ở hiện nay</label>
@@ -278,13 +277,23 @@
                         </div>
                         <br />
 
-                        <div class="row mb-3 form-group">
-                            <div class="col-md-2">
+                        <div class="row mb-12">
+                            <div class="col-md-2 form-group">
                                 <label>Giới tính</label>
                                 <select name="gioiTinh" class="form-control">
                                     <option value="1">Nam</option>
                                     <option value="2">Nữ</option>
                                 </select>
+                            </div>
+                            <div class="col-md-2 form-group text-center">
+                                <label for="hoNgoaiHuyenDen">Hộ ngoài huyện đến</label>
+                                <br>
+                                <input class="form-check-input" id="hoNgoaiHuyenDen" name="hoNgoaiHuyenDen" type="checkbox" value="1">
+                            </div>
+                            <div class="col-md-2 form-group  text-center">
+                                <label for="nhanKhauMoiSinh">Nhân khẩu mới sinh</label>
+                                <br>
+                                <input class="form-check-input" id="nhanKhauMoiSinh" name="nhanKhauMoiSinh" type="checkbox" value="1">
                             </div>
                         </div>
 

@@ -54,6 +54,8 @@ form.onSubmit = function (formData) {
          tamTruTuNgay : formData['tamTruTuNgay'],
          tamTruDenNgay : formData['tamTruDenNgay'],
     }
+    let maTT = formData['maTT']
+    delete formData['maTT']
     delete formData['noiThuongTru']
     delete formData['noiDangKiTamTru']
     delete formData['ngayDangKyTamTru']
@@ -68,10 +70,11 @@ form.onSubmit = function (formData) {
     }
 
     let obj = {
+        'maTT': maTT,
         'nhanKhauTamTru': JSON.stringify(nhanKhauTamTru),
         'nhanKhau': JSON.stringify(formData)
     }
-    fetch("/congan/api/tamtru/add-tam-tru-ho", {
+    fetch("/congan/api/tamtru/add-tam-tru-ho-trong-ho", {
         method: 'post',
         body: JSON.stringify(obj),
         headers: {

@@ -14,7 +14,7 @@
                     class="card-header text-white text-center"
                     style="background-color: #009cde"
             >
-                Danh sách chi tiết nhân khẩu tạm trú (Hộ gia đình)
+               Danh sách  <span th:text="${dangKyHoSos[0].loaiHoSo.tenLHS}"></span>
             </div>
             <div class="card-body">
                 <br />
@@ -26,45 +26,33 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th scope="col" class="text-center">Mã nhân khẩu</th>
+                                    <th scope="col" class="text-center">Mã hồ sơ</th>
                                     <th scope="col" class="text-center">Họ và tên</th>
                                     <th scope="col" class="text-center">CMND</th>
-                                    <th scope="col" class="text-center">Nơi đăng ký tạm trú</th>
-                                    <th scope="col" class="text-center">Tạm trú từ ngày</th>
-                                    <th scope="col" class="text-center">Tạm trú đến ngày</th>
+                                    <th scope="col" class="text-center">Địa chỉ</th>
+                                    <th scope="col" class="text-center">Ngày đăng ký</th>
                                     <th scope="col" class="text-center">Tác vụ</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="nktt : ${nhanKhauTamTrus}">
-                                    <th scope="row" class="text-center" th:text="${nktt.nhanKhau.maNK}"/>
-                                    <td class="text-center" th:text="${nktt.nhanKhau.hoVaTen}"/>
-                                    <td class="text-center" th:text="${nktt.nhanKhau.cmnd}"/>
-                                    <td class="text-center" th:text="${nktt.noiDangKiTamTru}"/>
-                                    <td class="text-center" th:text="${nktt.tamTruTuNgay}"/>
-                                    <td class="text-center" th:text="${nktt.tamTruDenNgay}"/>
+                                <tr th:each="dKHS : ${dangKyHoSos}">
+                                    <th scope="row" class="text-center" th:text="${dKHS.maHS}"/>
+                                    <td class="text-center" th:text="${dKHS.hoVaTen}"/>
+                                    <td class="text-center" th:text="${dKHS.cmnd}"/>
+                                    <td class="text-center" th:text="${dKHS.diaChi}"/>
+                                    <td class="text-center" th:text="${dKHS.ngayDangKy}"/>
                                     <td class="text-center" >
-                                        <a th:href="@{/congan/tamtru/danh-sach-chi-tiet-tam-tru/chitiet(
-                                                            maTT=${nktt.nhanKhauTamTruPK.maTT},
-                                                            maNK=${nktt.nhanKhauTamTruPK.maNK})}" class="text-success">
+                                        <a th:href="@{/congan/bieumau/ho-so/xem(maLHS=${dKHS.loaiHoSo.maLHS},
+                                                                          maHS=${dKHS.maHS}
+                                                                          )}"  class="text-success">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
                                         &nbsp;
-                                        <a th:href="@{/congan/tamtru/danh-sach-chi-tiet-tam-tru/giahan(
-                                                            maTT=${nktt.nhanKhauTamTruPK.maTT},
-                                                            maNK=${nktt.nhanKhauTamTruPK.maNK})}" class="text-primary">
-                                            <i class="fa-solid fa-user-clock"></i>
+                                        <a th:href="@{/congan/bieumau/ho-so/duyet(maHS=${dKHS.maHS})}" class="text-primary">
+                                            <i class="fa-solid fa-check"></i>
                                         </a>
                                         &nbsp;
-                                        <a th:href="@{/congan/tamtru/danh-sach-chi-tiet-tam-tru/chinhsua(
-                                                            maTT=${nktt.nhanKhauTamTruPK.maTT},
-                                                            maNK=${nktt.nhanKhauTamTruPK.maNK})}" class="text-info">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-                                        &nbsp;
-                                        <a th:href="@{/congan/tamtru/danh-sach-chi-tiet-tam-tru/xoa(
-                                                            maTT=${nktt.nhanKhauTamTruPK.maTT},
-                                                            maNK=${nktt.nhanKhauTamTruPK.maNK})}" class="text-secondary text-danger">
+                                        <a th:href="@{/congan/bieumau/ho-so/tuchoi(maHS=${dKHS.maHS})}" class="text-secondary text-danger">
                                             <i class="fa-solid fa-square-minus"></i>
                                         </a>
                                     </td>
@@ -73,17 +61,6 @@
 
                                 </tbody>
                             </table>
-                            <div class="d-flex justify-content-right">
-                                <a
-                                        th:href="@{/congan/tamtru/quanlytramtru}"
-                                        class="btn"
-                                        style="background-color: #009cde; color: white"
-                                >
-                                    <i class="fa-solid fa-backward"></i>
-                                    &nbsp;
-                                    Quay lại
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>

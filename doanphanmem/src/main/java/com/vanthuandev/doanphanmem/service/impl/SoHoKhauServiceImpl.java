@@ -4,6 +4,7 @@ import com.vanthuandev.doanphanmem.pojos.SoHoKhau;
 import com.vanthuandev.doanphanmem.repository.SoHoKhauRepository;
 import com.vanthuandev.doanphanmem.service.SoHoKhauService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,5 +27,11 @@ public class SoHoKhauServiceImpl implements SoHoKhauService {
     @Override
     public Optional<SoHoKhau> findById(Integer integer) {
         return soHoKhauRepository.findById(integer);
+    }
+
+
+    @Override
+    public Optional<SoHoKhau> findSoHoKhauBySoHK(int soHK, int tt) {
+        return soHoKhauRepository.findSoHoKhauBySoHK(soHK, tt);
     }
 }

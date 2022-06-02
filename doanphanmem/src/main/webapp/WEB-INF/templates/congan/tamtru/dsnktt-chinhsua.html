@@ -1,10 +1,388 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/congan/base">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-$END$
+<div class="col-md-12" layout:fragment="content">
+    <form id="myForm">
+        <div class="card">
+            <div
+                    class="card-header text-white text-center"
+                    style="background-color: #009cde"
+            >
+                Chỉnh sửa tạm trú
+            </div>
+            <div class="card-body">
+                <div class="card">
+                    <div class="card-header">Thông tin hồ sơ</div>
+                    <div class="card-body">
+                        <div class="row mb-12">
+                            <div class="col-sm-6 form-group">
+                                <label>Nơi thường lưu trú</label>
+                                <input
+                                        type="text"
+                                        name="noiThuongTru"
+                                        th:value="${nhanKhauTamTru.noiThuongTru}"
+                                        rules="required"
+                                        class="form-control"
+                                />
+                                <span class="text-danger form-message"></span>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Nơi đăng ký tạm trú</label>
+                                <input
+                                        type="text"
+                                        name="noiDangKiTamTru"
+                                        th:value="${nhanKhauTamTru.noiDangKiTamTru}"
+                                        rules="required"
+                                        class="form-control"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        modal-form
+                                />
+                                <span class="text-danger form-message"></span>
+                            </div>
+                        </div>
+                        <div class="row mb-12">
+
+                            <div class="col-sm-3 form-group">
+                                <label>Số hộ khẩu tạm trú</label>
+
+                                <input
+                                        type="text"
+                                        name="maTT"
+                                        th:value="${maTT}"
+                                        rules="required"
+                                        class="form-control"
+                                        disabled
+                                />
+                                <span class="text-danger form-message"></span>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>Ngày ĐK tạm trú</label>
+
+                                <input
+                                        type="date"
+                                        name="ngayDangKyTamTru"
+                                        th:value="${nhanKhauTamTru.ngayDangKyTamTru}"
+                                        rules="required"
+                                        class="form-control"
+                                />
+                                <span class="text-danger form-message"></span>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>Tạm trú từ ngày</label>
+                                <input
+                                        type="date"
+                                        name="tamTruTuNgay"
+                                        th:value="${nhanKhauTamTru.tamTruTuNgay}"
+                                        rules="required"
+                                        class="form-control"
+                                />
+                                <span class="text-danger form-message"></span>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>Tạm trú đến ngày</label>
+                                <input
+                                        type="date"
+                                        name="tamTruDenNgay"
+                                        th:value="${nhanKhauTamTru.tamTruDenNgay}"
+                                        class="form-control"
+                                        rules="required"
+                                />
+                                <span class="text-danger form-message"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="card">
+                    <div class="card-header">Thông tin nhân khẩu</div>
+                    <div class="card">
+                        <div class="card-header">Thông tin nhân khẩu</div>
+                        <div class="card-body">
+                            <div class="row mb-12">
+                                <div class="col-sm-2 form-group">
+                                    <label>Quan hệ với chủ hộ</label>
+                                    <select id="selectQuanHe" rules="required" name="quanHe" value=""
+                                            class="form-control selectpicker" data-live-search="true">
+                                        <option value="">Chọn quan hệ</option>
+                                        <option th:each="quanHe : ${quanHes}"
+                                                th:value="${quanHe.maQH}"
+                                                th:text="${quanHe.tenQH}"
+                                                th:selected="${nhanKhau.quanHe.maQH == quanHe.maQH}">
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="col-sm-2 form-group">
+                                    <label>Học vấn</label>
+
+                                    <select id="selectHocVan" rules="required" name="hocVan"
+                                            class="form-control selectpicker" data-live-search="true">
+                                        <option value="">Chọn học vấn</option>
+                                        <option th:each="hocVan : ${hocVans}"
+                                                th:value="${hocVan.maHV}"
+                                                th:text="${hocVan.tenHV}"
+                                                th:selected="${nhanKhau.hocVan.maHV == hocVan.maHV}">
+                                        </option>
+                                        <span class="text-danger form-message"></span>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2 form-group">
+                                    <label>Trình độ chuyên môn</label>
+                                    <input
+                                            type="text"
+                                            name="trinhDoChuyenMon"
+                                            th:value="${nhanKhau.trinhDoChuyenMon}"
+                                            class="form-control"
+                                    />
+                                    <span class="text-danger form-message"></span>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label>Nơi sinh</label>
+                                    <input
+                                            type="text"
+                                            name="noiSinh"
+                                            th:value="${nhanKhau.noiSinh}"
+                                            class="form-control"
+                                            data-toggle="modal"
+                                            data-target="#exampleModal"
+                                            rules="required"
+                                            modal-form
+                                    />
+                                    <span class="text-danger form-message"></span>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row mb-12">
+                                <div class="col-sm-2 form-group">
+                                    <label>Họ và tên</label>
+                                    <div>
+                                        <input
+                                                type="text"
+                                                name="hoVaTen"
+                                                th:value="${nhanKhau.hoVaTen}"
+                                                class="form-control"
+                                                rules="required"
+                                        />
+                                        <span class="text-danger form-message"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2 form-group">
+                                    <label>Nghề nghiệp</label>
+
+                                    <input
+                                            type="text"
+                                            name="ngheNghiep"
+                                            th:value="${nhanKhau.ngheNghiep}"
+                                            class="form-control"
+                                            rules="required"
+                                    />
+                                    <span class="text-danger form-message"></span>
+                                </div>
+                                <div class="col-sm-2 form-group">
+                                    <label>Trình độ ngoại ngữ</label>
+                                    <input
+                                            type="text"
+                                            name="trinhDoNgoaiNgu"
+                                            th:value="${nhanKhau.trinhDoNgoaiNgu}"
+                                            class="form-control"
+                                    />
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label>Nguyên quán</label>
+                                    <input
+                                            type="text"
+                                            name="nguyenQuan"
+                                            th:value="${nhanKhau.nguyenQuan}"
+                                            class="form-control"
+                                            data-toggle="modal"
+                                            data-target="#exampleModal"
+                                            rules="required"
+                                            modal-form
+                                    />
+                                    <span class="text-danger form-message"></span>
+                                </div>
+                            </div>
+
+                            <br/>
+                            <div class="row mb-12">
+                                <div class="col-sm-2 form-group">
+                                    <label>Tên gọi khác</label>
+                                    <div>
+                                        <input
+                                                type="text"
+                                                name="tenGoiKhac"
+                                                th:value="${nhanKhau.tenGoiKhac}"
+                                                class="form-control"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2 form-group">
+                                    <label>Dân tộc</label>
+
+                                    <select id="selectDanToc" rules="required" name="danToc"
+                                            class="form-control selectpicker" data-live-search="true">
+                                        <option value="">Chọn dân tộc</option>
+                                        <option th:each="danToc : ${danTocs}"
+                                                th:value="${danToc.maDT}"
+                                                th:text="${danToc.tenDT}"
+                                                th:selected="${nhanKhau.danToc.maDT == danToc.maDT}">
+                                        </option>
+                                        <span class="text-danger form-message"></span>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2 form-group">
+                                    <label>Tôn giáo</label>
+                                    <select id="selectTonGiao" rules="required" name="tonGiao"
+                                            class="form-control selectpicker" data-live-search="true">
+                                        <option value="">Chọn tôn giáo</option>
+                                        <option th:each="tonGiao : ${tonGiaos}"
+                                                th:value="${tonGiao.maTG}"
+                                                th:text="${tonGiao.tenTG}"
+                                                th:selected="${nhanKhau.tonGiao.maTG == tonGiao.maTG}">
+                                        </option>
+                                        <span class="text-danger form-message"></span>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label>Nơi ở hiện nay</label>
+                                    <input
+                                            type="text"
+                                            name="noiOHienNay"
+                                            th:value="${nhanKhau.noiOHienNay}"
+                                            class="form-control"
+                                            data-toggle="modal"
+                                            data-target="#exampleModal"
+                                            rules="required"
+                                            modal-form
+                                    />
+                                    <span class="text-danger form-message"></span>
+                                </div>
+                            </div>
+
+                            <br/>
+                            <div class="row mb-12">
+                                <div class="col-sm-2 form-group">
+                                    <label>Ngày sinh</label>
+                                    <div>
+                                        <input
+                                                type="date"
+                                                name="ngaySinh"
+                                                th:value="${nhanKhau.ngaySinh}"
+                                                class="form-control"
+                                                rules="required"
+                                        />
+                                        <span class="text-danger form-message"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2 form-group">
+                                    <label>Số CMND/CCCD</label>
+
+                                    <input
+                                            type="text"
+                                            name="cmnd"
+                                            th:value="${nhanKhau.cmnd}"
+                                            class="form-control"
+                                    />
+                                </div>
+                                <div class="col-sm-2 form-group">
+                                    <label>Quốc tịch</label>
+                                    <input
+                                            type="text"
+                                            name="quocTich"
+                                            th:value="${nhanKhau.quocTich}"
+                                            class="form-control"
+                                            rules="required"
+                                    />
+                                    <span class="text-danger form-message"></span>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label>Nơi làm việc</label>
+                                    <input
+                                            type="text"
+                                            name="noiLamViec"
+                                            th:value="${nhanKhau.noiLamViec}"
+                                            class="form-control"
+                                            data-toggle="modal"
+                                            data-target="#exampleModal"
+                                            modal-form
+                                    />
+                                    <span class="text-danger form-message"></span>
+                                </div>
+                            </div>
+
+                            <br/>
+                            <div class="row mb-12">
+                                <div class="col-sm-2 form-group">
+                                    <label>Số hộ chiếu</label>
+                                    <input
+                                            type="text"
+                                            name="soHoChieu"
+                                            th:value="${nhanKhau.soHoChieu}"
+                                            class="form-control"
+                                    />
+                                </div>
+                                <div class="col-sm-2 form-group">
+                                    <label>Biết tiếng dân tộc</label>
+                                    <input
+                                            type="text"
+                                            name="bietTiengDanToc"
+                                            th:value="${nhanKhau.bietTiengDanToc}"
+                                            class="form-control"
+                                    />
+                                </div>
+
+                                <div class="col-md-2 form-group">
+                                    <label>Giới tính</label>
+                                    <select name="gioiTinh" class="form-control">
+                                        <option value="1" th:selected="${nhanKhau.gioiTinh == 1}">Nam</option>
+                                        <option value="2" th:selected="${nhanKhau.gioiTinh == 2}">Nữ</option>
+                                    </select>
+                                </div>
+
+                                <input type="hidden" name="maNK" th:value="${maNK}">
+                            </div>
+                            <br/>
+
+                            <div class="d-flex justify-content-between">
+                                    <a
+                                            th:href="@{'/congan/tamtru/danh-sach-chi-tiet-tam-tru?maTT=' + ${maTT}}"
+                                            class="btn"
+                                            style="background-color: #009cde; color: white">
+                                        <i class="fa-solid fa-backward"></i>
+                                        Quay lại
+                                    </a>
+                                    <div class="col text-center">
+                                        <button
+                                                class="btn "
+                                                style="background-color: #009cde; color: white">
+                                            Cập nhật
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 </body>
+<th:block layout:fragment="validator">
+    <script th:src="@{/js/validator.js}"></script>
+</th:block>
+<th:block layout:fragment="script">
+    <script th:src="@{/js/tamtru/edit-tam-tru-trong-ho.js}"></script>
+</th:block>
 </html>

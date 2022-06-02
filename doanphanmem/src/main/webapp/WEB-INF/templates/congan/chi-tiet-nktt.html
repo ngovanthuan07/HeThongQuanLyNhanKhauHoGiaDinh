@@ -1,10 +1,183 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/congan/base">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
 </head>
 <body>
-$END$
+<div layout:fragment="content">
+
+    <div class="col-md-12">
+        <div class="card">
+            <div
+                    class="card-header text-white text-center"
+                    style="background-color: #009cde"
+            >
+                Thông tin nhân khẩu thường trú
+            </div>
+            <br>
+
+            <div class="d-flex justify-content-end mr-3">
+                <a
+                        th:href="@{/congan/chi-tiet-nhan-khau/edit(maNK=${nhanKTT.nhanKhau.maNK})}"
+                        type="submit"
+                        class="btn"
+                        style="background-color: #e74c3c; color: white"
+                >
+                    <i class="fa-solid fa-pen"></i>
+                    &nbsp;
+                    Sửa thông tin
+                </a>
+            </div>
+            <div class="card-body">
+                <br />
+                <!-- table 1 -->
+                <div class="card">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <div class="col-md-12 col-sm-12">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Trường</th>
+                                    <th scope="col">Nội dung</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Họ tên</td>
+                                    <td th:text="${nhanKTT.nhanKhau.hoVaTen}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Ngày sinh</td>
+                                    <td th:text="${nhanKTT.nhanKhau.ngaySinh}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Giới tính</td>
+                                    <td th:text="${nhanKTT.nhanKhau.ngaySinh == 1 ? 'Nam' : 'Nữ'}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Thường trú</td>
+                                    <td th:text="${nhanKTT.soHoKhau.noiDangKyThuongTru}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Nguyên quán</td>
+                                    <td th:text="${nhanKTT.nhanKhau.nguyenQuan}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Nơi sinh</td>
+                                    <td th:text="${nhanKTT.nhanKhau.noiSinh}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Nơi làm việc</td>
+                                    <td th:text="${nhanKTT.nhanKhau.noiLamViec}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Dân tộc</td>
+                                    <td  th:text="${nhanKTT.nhanKhau.danToc.tenDT}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Tôn giáo</td>
+                                    <td th:text="${nhanKTT.nhanKhau.tonGiao.tenTG}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Quốc tịch</td>
+                                    <td th:text="${nhanKTT.nhanKhau.quocTich}"></td>
+                                </tr>
+                                <tr>
+                                    <td>CMND số</td>
+                                    <td th:text="${nhanKTT.nhanKhau.cmnd}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Hộ chiếu số</td>
+                                    <td th:text="${nhanKTT.nhanKhau.soHoChieu}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Trình độ học vấn</td>
+                                    <td th:text="${nhanKTT.nhanKhau.hocVan.tenHV}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Trình độ chuyện môn</td>
+                                    <td th:text="${nhanKTT.nhanKhau.trinhDoChuyenMon}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Biết tiếng dân tộc</td>
+                                    <td th:text="${nhanKTT.nhanKhau.bietTiengDanToc}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Nghề nghiệp</td>
+                                    <td th:text="${nhanKTT.nhanKhau.ngheNghiep}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Hộ ngoài huyện đến</td>
+                                    <td th:text="${nhanKTT.nhanKhau.hoNgoaiHuyenDen == 1 ? 'Hộ ngoài huyện đến' : ''}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Nhân khẩu mới sinh</td>
+                                    <td th:text="${nhanKTT.nhanKhau.nhanKhauMoiSinh == 1? 'Nhân khẩu mới sinh' : ''}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Tiền án tiền sự</td>
+                                    <td th:text="${nhanKTT.nhanKhau.tienAn}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <br>
+                            <div class="col-md-12 col-sm-12">
+                                <div class="row mb-12 form-group">
+                                    <div class="col-md-12">
+                                        <label>Tóm tắt bản thân (Từ đủ 14 tuổi trở lên đến nay ở đâyở đâu, làm gì)</label>
+                                        <textarea name="tomTatBanThan" id="tomTatBanThan"></textarea>
+                                        <input type="hidden" id="tomTatBanThanInput" name="tomTatBanThan" th:value="${nhanKTT.nhanKhau.tomTatBanThan}">
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row mb-12 form-group">
+                                    <div class="col-md-12">
+                                        <label>Tóm tắt gia đình</label>
+                                        <textarea name="tomTatGiaDinh" id="tomTatGiaDinh"></textarea>
+                                        <input type="hidden" id="tomTatGiaDinhInput" name="tomTatGiaDinh" th:value="${nhanKTT.nhanKhau.tomTatGiaDinh}">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <br>
+                            <script>
+                                CKEDITOR.replace('tomTatBanThan');
+                                CKEDITOR.replace('tomTatGiaDinh');
+                                CKEDITOR.instances['tomTatBanThan'].setData(document.getElementById('tomTatBanThanInput').value);
+                                CKEDITOR.instances['tomTatGiaDinh'].setData(document.getElementById('tomTatGiaDinhInput').value);
+
+                            </script>
+
+                        </div>
+                        <br />
+
+                        <div class="d-flex justify-content-end">
+
+                            <a
+                                    th:href="@{/congan/danh-sach-chi-tiet-nhan-khau-thuong-tru(soHK=${nhanKTT.soHoKhau.soHK})}"
+                                    type="submit"
+                                    class="btn"
+                                    style="background-color: #009cde; color: white"
+                            >
+                                <i class="fa-solid fa-backward"></i>
+                                &nbsp;
+                                Quay lại
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo content -->
+</div>
 </body>
 </html>

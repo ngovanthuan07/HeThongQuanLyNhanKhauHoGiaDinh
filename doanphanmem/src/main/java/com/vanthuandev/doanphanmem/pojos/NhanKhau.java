@@ -91,6 +91,10 @@ public class NhanKhau  {
 
     private String ghiChu;
 
+    private int hoNgoaiHuyenDen;
+
+    private int nhanKhauMoiSinh;
+
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ngayCapNhat;

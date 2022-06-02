@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -20,5 +21,17 @@ public class NhanKhauServiceImpl implements NhanKhauService {
     @Override
     public <S extends NhanKhau> S save(S entity) {
         return nhanKhauRepository.save(entity);
+    }
+
+
+    @Override
+    public Optional<NhanKhau> findById(Integer integer) {
+        return nhanKhauRepository.findById(integer);
+    }
+
+
+    @Override
+    public <S extends NhanKhau> List<S> saveAll(Iterable<S> entities) {
+        return nhanKhauRepository.saveAll(entities);
     }
 }

@@ -1,10 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/congan/base">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
 </head>
 <body>
-$END$
+<div layout:fragment="content">
+    <!-- End Header/Navbar -->
+    <br>
+    <!-- content -->
+    <div class="col-md-12">
+        <div class="card">
+            <div
+                    class="card-header text-white text-center"
+                    style="background-color: #009cde"
+            >
+                Danh sách nhân khẩu thường trú bị xoá
+            </div>
+            <div class="card-body">
+                <br />
+                <!-- table 1 -->
+                <div class="card">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <div class="col-md-12 col-sm-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="text-center" >Nhân khẩu</th>
+                                    <th scope="col" class="text-center" >Họ tên</th>
+                                    <th scope="col" class="text-center" >Quan hệ với chủ</th>
+                                    <th scope="col" class="text-center" >CMND</th>
+                                    <th scope="col" class="text-center" >Ngày xoá</th>
+                                    <th scope="col" class="text-center" >Lý do</th>
+                                    <th scope="col" class="text-center" >Nơi chuyển đến</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="nktt : ${nhanKhauThuongKhauTru}">
+                                    <th scope="row" class="text-center" th:text="${nktt.nhanKhau.maNK}"></th>
+                                    <td class="text-center" th:text="${nktt.nhanKhau.hoVaTen}"></td>
+                                    <td class="text-center" th:text="${nktt.nhanKhau.quanHe.tenQH}"></td>
+                                    <td class="text-center" th:text="${nktt.nhanKhau.cmnd}"></td>
+                                    <td class="text-center" th:text="${nktt.ngayCapNhat}"></td>
+                                    <td class="text-center" th:text="${nktt.lyDo}"></td>
+                                    <td class="text-center" th:text="${nktt.noiChuyenDen}"></td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+
+
+                            <div class="float-right">
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <a th:href="@{/congan/danh-sach-chi-tiet-nhan-khau-thuong-tru(soHK=${nhanKhauThuongKhauTru[0].soHoKhau.soHK})}" class="btn"  style="background-color:#009cde; color:white">
+                                            <i class="fa-solid fa-backward"></i>&nbsp; Về trang chủ</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

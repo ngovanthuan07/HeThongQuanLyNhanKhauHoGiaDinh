@@ -7,73 +7,82 @@
 </head>
 <body>
 <div class="col-md-12" layout:fragment="content">
-    <!-- End Header/Navbar -->
-    <br />
-    <div class="text-center">
-        <a  class="btn btn-outline-info"><i class="fa-solid fa-people-roof"></i>&nbsp; Thêm sổ (Gia đình)</a>
-        <a class="btn btn-outline-info"><i class="fa-solid fa-user-plus"></i>&nbsp; Thêm sổ (Cá nhân)</a>
-        <a  class="btn btn-outline-info"><i class="fa-solid fa-bullhorn"></i>&nbsp; Báo cáo nhân khẩu</a>
-    </div>
-    <br>
-    <!-- content -->
-    <div class="col-md-12">
-        <div class="card">
-            <div
-                    class="card-header text-white text-center"
-                    style="background-color: #009cde"
-            >
-                Danh sách tạm trú
-            </div>
-            <div class="card-body">
-                <br />
-                <!-- table 1 -->
-                <div class="card">
-                    <div class="card-header"></div>
-                    <div class="card-body">
-                        <div class="col-md-12 col-sm-12">
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th scope="col" class="text-center">Sổ tạm trú số</th>
-                                    <th scope="col" class="text-center">Người đại diện</th>
-                                    <th scope="col" class="text-center">Loại sổ</th>
-                                    <th scope="col" class="text-center">Nơi thường trú</th>
-                                    <th scope="col" class="text-center">Nơi đăng ký tạm trú</th>
-                                    <th scope="col" class="text-center">Tác vụ</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="nktt : ${nhanKhauTamTrus}">
-                                    <th scope="row" class="text-center" th:text="${nktt.nhanKhauTamTruPK.maTT}"/>
-                                    <td class="text-center" th:text="${nktt.nhanKhau.hoVaTen}"/>
-                                    <td class="text-center" th:if="${nktt.loaiTamTru.startsWith('Gia đình')}">
-                                        <span style="padding:5px;background-color:#3498db; border-radius: 10px; color: white;" th:text="${nktt.loaiTamTru}"/>
-                                    </td>
-                                    <td class="text-center" th:if="${nktt.loaiTamTru.startsWith('Cá nhân')}">
-                                        <span style="padding:5px;background-color:#f1c40f; border-radius: 10px; color: white;" th:text="${nktt.loaiTamTru}"/>
-                                    </td>
-                                    <td class="text-center" th:text="${nktt.noiThuongTru}"/>
-                                    <td class="text-center" th:text="${nktt.noiDangKiTamTru}"/>
-                                    <td class="text-center" >
-                                        <a th:href="@{'/congan/tamtru/danh-sach-chi-tiet-tam-tru?maTT= '+ ${nktt.nhanKhauTamTruPK.maTT}}" class="text-success">
-                                            <i class="fa-solid fa-eye"></i>
-                                        </a>
-                                        &nbsp;
-                                        <a th:href="@{'/congan/tamtru/add-them-thanh-vien-tam-tru?maTT= '+ ${nktt.nhanKhauTamTruPK.maTT}}" class="text-primary" th:if="${nktt.loaiTamTru.startsWith('Gia đình')}">
-                                            <i class="fa-solid fa-user-plus"></i>
-                                        </a>
-                                        &nbsp;
-                                        <a href="" class="text-secondary text-danger">
-                                            <i class="fa-solid fa-square-minus"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
+    <div class="card">
+        <div
+                class="card-header text-white text-center"
+                style="background-color: #009cde"
+        >
+            Thông tin chi tiết nhân khẩu tạm trú
+        </div>
+        <div class="card-body">
+            <br />
+            <!-- table 1 -->
+            <div class="card">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    <div class="col-md-12 col-sm-12">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Trường</th>
+                                <th scope="col">Nội dung</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Họ tên</td>
+                                <td th:text="${nhanKhauTamTru.nhanKhau.hoVaTen}"></td>
+                            </tr>
+                            <tr>
+                                <td>Ngày sinh</td>
+                                <td th:text="${nhanKhauTamTru.nhanKhau.ngaySinh}">01/01/2001</td>
+                            </tr>
 
-                                </tbody>
-                            </table>
-
-                        </div>
+                            <tr>
+                                <td>Giới tính</td>
+                                <td th:text="${nhanKhauTamTru.nhanKhau.gioiTinh == 1 ? 'Nam' : 'Nữ'}"></td>
+                            </tr>
+                            <tr>
+                                <td>Tạm trú từ</td>
+                                <td th:text="${nhanKhauTamTru.tamTruTuNgay}"></td>
+                            </tr>
+                            <tr>
+                                <td>Tạm trú đến</td>
+                                <td th:text="${nhanKhauTamTru.tamTruDenNgay}"></td>
+                            </tr>
+                            <tr>
+                                <td>Thường trú</td>
+                                <td th:text="${nhanKhauTamTru.noiThuongTru}"></td>
+                            </tr>
+                            <tr>
+                                <td>Nguyên quán</td>
+                                <td th:text="${nhanKhauTamTru.nhanKhau.nguyenQuan}"></td>
+                            </tr>
+                            <tr>
+                                <td>Nơi làm việc</td>
+                                <td th:text="${nhanKhauTamTru.nhanKhau.noiLamViec}"></td>
+                            </tr>
+                            <tr>
+                                <td>Dân tộc</td>
+                                <td th:text="${nhanKhauTamTru.nhanKhau.danToc.tenDT}"></td>
+                            </tr>
+                            <tr>
+                                <td>Quốc tích</td>
+                                <td th:text="${nhanKhauTamTru.nhanKhau.quocTich}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-right">
+                        <a
+                                th:href="@{'/congan/tamtru/danh-sach-chi-tiet-tam-tru?maTT=' + ${maTT}}"
+                                class="btn"
+                                style="background-color: #009cde; color: white"
+                        >
+                            <i class="fa-solid fa-backward"></i>
+                            &nbsp;
+                            Quay lại
+                        </a>
                     </div>
                 </div>
             </div>
