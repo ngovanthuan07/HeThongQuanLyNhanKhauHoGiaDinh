@@ -59,33 +59,9 @@
 </nav><!-- End Header/Navbar -->
 
 <main id="main" style="margin-top:10px">
-  <form th:action="@{/nguoidung/trangcanhan/capnhat}" th:method="post" th:object="${nguoiDung}" enctype="multipart/form-data">
+  <form th:action="@{/nguoidung/trangcanhan/thaydoimatkhau}" th:method="post">
     <div class='row justify-content-center'>
       <div class='col-md-3'>
-        <div class="card">
-          <div class="card-header text-white text-center" style="background-color:#009cde">
-            TRANG CÁ NHÂN
-          </div>
-          <input type="hidden" th:field="*{maNguoiDung}">
-          <div class="card-body">
-            <img th:if="${nguoiDung.image != null
-                                       &&  nguoiDung.image.startsWith('https') == true}"
-                 th:src="${nguoiDung.image}"
-                 th:alt="${nguoiDung.username}" style="width: 80px; height: 80px; object-fit: cover;" class="rounded mx-auto d-block mb-3" id="preview">
-
-            <img th:if="${nguoiDung.image == null
-                                              || nguoiDung.image.startsWith('https') != true}"
-                 src="https://res.cloudinary.com/lap-trinh-java/image/upload/v1651459284/kr8hcgyka6yk8c3w3mor.jpg"
-                 th:alt="${nguoiDung.username}" style="width: 80px; height: 80px; object-fit: cover;" class="rounded mx-auto d-block mb-3" id="preview">
-
-            <input type="file" th:field="*{file}" class='form-control' id="file-image" onchange="previewImage()" accept="image/*" style="display: none"/>
-            <div class='text-center'>
-              <label for="file-image"><i class="fa-solid fa-image"></i></label>
-            </div>
-            <p class='text-center mt-3' style="font-weight: bold" th:text="${nguoiDung.tenNguoiDung}"></p>
-          </div>
-        </div>
-        <br />
         <div class="card">
           <div class="card-header">
             Quản lý thông tin cá nhân
@@ -105,7 +81,7 @@
       <div class='col-md-8'>
         <div class="card">
           <div class="card-header text-white text-center" style="background-color:#009cde">
-            THAY ĐỔI THÔNG TIN CÁ NHÂN
+            THAY ĐỔI MẬT KHẨU
           </div>
           <div class="card-body">
             <div class="card">
@@ -115,81 +91,41 @@
               <div class="card-body">
                 <div class='row mb-3'>
                   <div class='col-md-3'>
-                    <label>Họ và tên</label>
+                    <label>Mật khẩu cũ</label>
                   </div>
 
                   <div class='col-md-6'>
-                    <input type='text'
-                           th:field="*{tenNguoiDung}"
+                    <input type='password'
+                           name="matKhauCu"
                            class='form-control' />
+                    <span class="text-danger" th:if="${matKhauCu}" th:text="${'Mật khẩu cũ không khớp'}"></span>
                   </div>
                 </div>
 
                 <div class='row mb-3'>
                   <div class='col-md-3'>
-                    <label>Ngày sinh</label>
+                    <label>Mật khẩu mới</label>
                   </div>
 
                   <div class='col-md-6'>
-                    <input placeholder="dd-mm-yyyy"
-                           th:field="*{ngaySinh}"
-                           type="date"
+                    <input
+                            name="matKhauMoi"
+                           type="password"
                            class='form-control' />
+                    <span class="text-danger" th:if="${matKhauMoi}" th:text="${message}"></span>
                   </div>
                 </div>
 
                 <div class='row mb-3'>
                   <div class='col-md-3'>
-                    <label>Địa chỉ</label>
+                    <label>Nhập lại mật khẩu</label>
                   </div>
 
                   <div class='col-md-6'>
-                    <input type="text"
-                           class='form-control'
-                           th:field="*{diaChi}" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <br />
-            <div class="card">
-              <div class="card-header">
-                Thông tin liên hệ
-              </div>
-              <div class="card-body">
-                <div class='row mb-3'>
-                  <div class='col-md-3'>
-                    <label>Số điện thoại</label>
-                  </div>
-
-                  <div class='col-md-6'>
-                    <input th:field="*{soDT}"
-                           type="text"
-                           class='form-control' />
-                  </div>
-                </div>
-
-                <div class='row mb-3'>
-                  <div class='col-md-3'>
-                    <label>Email</label>
-                  </div>
-
-                  <div class='col-md-6'>
-                    <input th:field="*{email}"
-                           type="text"
-                           class='form-control' />
-                  </div>
-                </div>
-
-                <div class='row mb-3'>
-                  <div class='col-md-3'>
-                    <label>CMND / CCCD</label>
-                  </div>
-
-                  <div class='col-md-6'>
-                    <input th:field="*{cmnd}"
-                           type="text"
-                           class='form-control' />
+                    <input  name="xacNhanMatKhau"
+                            type="password"
+                            class='form-control'/>
+                    <span class="text-danger" th:if="${xacNhanMatKhau}" th:text="${'Mật khẩu không khớp'}"></span>
                   </div>
                 </div>
 
@@ -200,12 +136,9 @@
                     </div>
                   </div>
                 </div>
-
               </div>
-
             </div>
-
-
+            <br />
           </div>
 
         </div>

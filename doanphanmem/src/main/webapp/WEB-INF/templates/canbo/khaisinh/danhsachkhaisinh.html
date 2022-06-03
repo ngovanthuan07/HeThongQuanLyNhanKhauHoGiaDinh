@@ -1,10 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/canbo/base">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
 </head>
 <body>
-$END$
+<div class="col-md-12" layout:fragment="content">
+    <!-- content -->
+    <div class="col-md-12">
+        <div class="card">
+            <div
+                    class="card-header text-white text-center"
+                    style="background-color: #009cde"
+            >
+                Danh sách giấy khai sinh
+            </div>
+            <div class="card-body">
+                <br />
+                <!-- table 1 -->
+                <div class="card">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <div class="col-md-12 col-sm-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="text-center">Mã KS</th>
+                                    <th scope="col" class="text-center">Họ và tên khai sinh</th>
+                                    <th scope="col" class="text-center">Ngày sinh</th>
+                                    <th scope="col" class="text-center">Nơi sinh</th>
+                                    <th scope="col" class="text-center">Họ tên cha</th>
+                                    <th scope="col" class="text-center">Họ tên mẹ</th>
+                                    <th scope="col" class="text-center">Tác vụ</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="ks : ${listKhaiSinh}">
+                                    <th scope="row" class="text-center" th:text="${ks.maKS}"/>
+                                    <td class="text-center" th:text="${ks.hoTenKhaiSinh}"/>
+                                    <td class="text-center" th:text="${ks.ngaySinh}"/>
+                                    <td class="text-center" th:text="${ks.noiSinh}"/>
+                                    <td class="text-center" th:text="${ks.hoTenCha}"/>
+                                    <td class="text-center" th:text="${ks.hoTenMe}"/>
+                                    <td class="text-center" >
+                                        <a th:href="@{/canbo/khaisinh/danhsachkhaisinh/chinhsua(maKS=${ks.maKS})}"  class="text-primary">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                        &nbsp;
+                                        <a th:href="@{/canbo/khaisinh/danhsachkhaisinh/xoa(maKS=${ks.maKS})}" class="text-danger">
+                                            <i class="fa-solid fa-square-minus"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -17,12 +17,12 @@
       Cấp giấy chứng tử
     </div>
     <div class="card-body">
-      <form th:action="@{/canbo/chungtu/capgiaychungtu}" method="post" th:object="${giayChungTu}">
+      <form th:action="@{/canbo/chungtu/danhsachchungtu/chinhsua}" method="post" th:object="${giayChungTu}">
         <div class="card">
           <div class="card-header">Thông tin</div>
           <div class="card-body">
+            <input type="hidden" th:field="*{maCT}">
             <div class="row mb-12">
-
               <div class="col-sm-2 form-group">
                 <label>Họ tên khai sinh</label>
                 <input
@@ -36,8 +36,8 @@
               <div class="col-sm-2 form-group">
                 <label>Giới tính</label>
                 <select name="gioiTinh" class="form-control">
-                  <option value="1">Nam</option>
-                  <option value="2">Nữ</option>
+                  <option value="1" th:selected="${giayChungTu.gioiTinh == 1}">Nam</option>
+                  <option value="2" th:selected="${giayChungTu.gioiTinh == 2}">Nữ</option>
                 </select>
               </div>
 
@@ -77,7 +77,8 @@
                   <option value="">Chọn dân tộc</option>
                   <option th:each="danToc : ${danTocs}"
                           th:value="${danToc.maDT}"
-                          th:text="${danToc.tenDT}">
+                          th:text="${danToc.tenDT}"
+                          th:selected="${danToc.maDT == giayChungTu.danToc}">
                   </option>
                 </select>
                 <span class="text-danger form-message"></span>
@@ -186,12 +187,19 @@
 
             <div class="container">
               <div class="row">
-                <div class="col text-center">
-                  <button
-                          type="submit"
+                <div class="d-flex justify-content-between">
+                  <a
+                          th:href="@{/canbo/chungtu/danhsachchungtu}"
                           class="btn "
                           style="background-color: #009cde; color: white">
-                    Lưu
+                    <i class="fa-solid fa-backward"></i>
+                    &nbsp;
+                    Quay lại
+                  </a>
+                  <button
+                          type="submit"
+                          class="btn btn-success">
+                    Cập nhật
                   </button>
                 </div>
               </div>

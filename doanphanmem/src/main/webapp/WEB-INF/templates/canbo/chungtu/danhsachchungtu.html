@@ -26,29 +26,29 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th scope="col" class="text-center">Mã KS</th>
+                                    <th scope="col" class="text-center">Mã CT</th>
                                     <th scope="col" class="text-center">Họ và tên khai sinh</th>
                                     <th scope="col" class="text-center">Ngày sinh</th>
-                                    <th scope="col" class="text-center">Nơi sinh</th>
-                                    <th scope="col" class="text-center">Họ tên cha</th>
-                                    <th scope="col" class="text-center">Họ tên mẹ</th>
+                                    <th scope="col" class="text-center">CMND</th>
+                                    <th scope="col" class="text-center">Nới thường trú cuối cùng</th>
+                                    <th scope="col" class="text-center">Ngày chết</th>
                                     <th scope="col" class="text-center">Tác vụ</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="ks : ${listKhaiSinh}">
-                                    <th scope="row" class="text-center" th:text="${ks.maKS}"/>
-                                    <td class="text-center" th:text="${ks.hoTenKhaiSinh}"/>
-                                    <td class="text-center" th:text="${ks.ngaySinh}"/>
-                                    <td class="text-center" th:text="${ks.noiSinh}"/>
-                                    <td class="text-center" th:text="${ks.hoTenCha}"/>
-                                    <td class="text-center" th:text="${ks.hoTenMe}"/>
+                                <tr th:each="ct : ${listChungTu}">
+                                    <th scope="row" class="text-center" th:text="${ct.maCT}"/>
+                                    <td class="text-center" th:text="${ct.hoTenKhaiSinh}"/>
+                                    <td class="text-center" th:text="${ct.ngaySinh}"/>
+                                    <td class="text-center" th:text="${ct.cmnd}"/>
+                                    <td class="text-center" th:text="${ct.noiThuongTru}"/>
+                                    <td class="text-center" th:text="${ct.ngayChet}"/>
                                     <td class="text-center" >
-                                        <a th:href="@{/canbo/khaisinh/danhsachkhaisinh/chinhsua(maKS=${ks.maKS})}"  class="text-primary">
+                                        <a th:href="@{/canbo/chungtu/danhsachchungtu/chinhsua(maCT=${ct.maCT})}"  class="text-primary">
                                             <i class="fa-solid fa-pen"></i>
                                         </a>
                                         &nbsp;
-                                        <a th:href="@{/canbo/khaisinh/danhsachkhaisinh/xoa(maKS=${ks.maKS})}" class="text-danger">
+                                        <a th:href="@{/canbo/chungtu/danhsachchungtu/xoa(maCT=${ct.maCT})}" class="text-danger">
                                             <i class="fa-solid fa-square-minus"></i>
                                         </a>
                                     </td>

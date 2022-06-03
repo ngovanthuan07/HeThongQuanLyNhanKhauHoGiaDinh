@@ -1,10 +1,207 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/canbo/base">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>Title</title>
 </head>
 <body>
-$END$
+<div class="col-md-12" layout:fragment="content">
+  <div class="card">
+    <div
+            class="card-header text-white text-center"
+            style="background-color: #009cde">
+      Cấp giấy chứng tử
+    </div>
+    <div class="card-body">
+      <form th:action="@{/canbo/chungtu/capgiaychungtu}" method="post" th:object="${giayChungTu}">
+        <div class="card">
+          <div class="card-header">Thông tin</div>
+          <div class="card-body">
+            <div class="row mb-12">
+
+              <div class="col-sm-2 form-group">
+                <label>Họ tên khai sinh</label>
+                <input
+                        type="text"
+                        th:field="*{hoTenKhaiSinh}"
+                        class="form-control"
+                />
+                <span class="text-danger form-message"></span>
+              </div>
+
+              <div class="col-sm-2 form-group">
+                <label>Giới tính</label>
+                <select name="gioiTinh" class="form-control">
+                  <option value="1">Nam</option>
+                  <option value="2">Nữ</option>
+                </select>
+              </div>
+
+              <div class="col-sm-2 form-group">
+                <label>Ngày sinh</label>
+                <div>
+                  <input
+                          type="date"
+                          th:field="*{ngaySinh}"
+                          class="form-control"
+                          rules="required"
+                  />
+                  <span class="text-danger form-message"></span>
+                </div>
+              </div>
+
+              <div class="col-sm-2 form-group">
+                <label>CMND</label>
+                <div>
+                  <input
+                          type="text"
+                          th:field="*{cmnd}"
+                          class="form-control"
+                          rules="required"
+                  />
+                  <span class="text-danger form-message"></span>
+                </div>
+              </div>
+
+            </div>
+            <br />
+            <div class="row mb-12">
+              <div class="col-sm-2 form-group">
+                <label>Dân tộc</label>
+
+                <select id="selectDanToc" rules="required" name="danToc" class="form-control selectpicker" data-live-search="true">
+                  <option value="">Chọn dân tộc</option>
+                  <option th:each="danToc : ${danTocs}"
+                          th:value="${danToc.maDT}"
+                          th:text="${danToc.tenDT}">
+                  </option>
+                </select>
+                <span class="text-danger form-message"></span>
+              </div>
+              <div class="col-sm-2 form-group">
+                <label>Quốc tịch</label>
+                <input
+                        type="text"
+                        th:field="*{quocTich}"
+                        class="form-control"
+                />
+                <span class="text-danger form-message"></span>
+              </div>
+
+              <div class="col-sm-6 form-group">
+                <label>Nơi thường trú/tạm trú cuối cùng</label>
+                <input
+                        type="text"
+                        th:field="*{noiThuongTru}"
+                        class="form-control"
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                        rules="required"
+                        modal-form
+                />
+                <span class="text-danger form-message"></span>
+              </div>
+            </div>
+
+            <br />
+            <!-- ----------------------- thong tin   -----------------------  -->
+            <div class="row mb-12">
+              <div class="col-sm-2 form-group">
+                <label>Ngày chết</label>
+                <div>
+                  <input
+                          type="date"
+                          th:field="*{ngayChet}"
+                          class="form-control"
+                  />
+                </div>
+              </div>
+
+              <div class="col-sm-2 form-group">
+                <label>Nơi chết</label>
+                <div>
+                  <input
+                          type="text"
+                          th:field="*{noiChet}"
+                          class="form-control"
+                          data-toggle="modal"
+                          data-target="#exampleModal"
+                          rules="required"
+                          modal-form
+                  />
+                </div>
+              </div>
+
+              <div class="col-sm-6 form-group">
+                <label>Nguyên nhân chết</label>
+                <div>
+                  <input
+                          type="text"
+                          th:field="*{nguyenNhanChet}"
+                          class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <br />
+
+
+
+            <div class="row mb-12">
+              <div class="col-sm-2 form-group">
+                <label>Nơi đăng ký</label>
+                <div>
+                  <input
+                          type="text"
+                          th:field="*{noiDangKy}"
+                          class="form-control"
+                  />
+                </div>
+              </div>
+
+              <div class="col-sm-2 form-group">
+                <label>Ghi chú</label>
+                <div>
+                  <input
+                          type="text"
+                          th:field="*{ghiChu}"
+                          class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+
+
+
+            <br />
+
+            <!-- ----------------------- nút bấm  -----------------------  -->
+
+            <br />
+
+            <div class="container">
+              <div class="row">
+                <div class="col text-center">
+                  <button
+                          type="submit"
+                          class="btn "
+                          style="background-color: #009cde; color: white">
+                    Lưu
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
 </body>
 </html>

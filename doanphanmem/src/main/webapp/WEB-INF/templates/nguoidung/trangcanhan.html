@@ -59,21 +59,30 @@
 </nav><!-- End Header/Navbar -->
 
 <main id="main" style="margin-top:10px">
-  <form encType='multipart/form-data'>
+  <form th:action="@{/nguoidung/trangcanhan/capnhat}" th:method="post" th:object="${nguoiDung}" enctype="multipart/form-data">
     <div class='row justify-content-center'>
       <div class='col-md-3'>
         <div class="card">
           <div class="card-header text-white text-center" style="background-color:#009cde">
             TRANG CÁ NHÂN
           </div>
-
+          <input type="hidden" th:field="*{maNguoiDung}">
           <div class="card-body">
-            <img src="images/1.jpg" alt="" style="width: 80px; height: 80px; object-fit: cover;" class="rounded mx-auto d-block mb-3" id="preview"/>
-            <input type="file" name="image" class='form-control' id="file-image" onchange="previewImage()" accept="image/*" style="display: none"/>
+            <img th:if="${nguoiDung.image != null
+                                       &&  nguoiDung.image.startsWith('https') == true}"
+                 th:src="${nguoiDung.image}"
+                 th:alt="${nguoiDung.username}" style="width: 80px; height: 80px; object-fit: cover;" class="rounded mx-auto d-block mb-3" id="preview">
+
+            <img th:if="${nguoiDung.image == null
+                                              || nguoiDung.image.startsWith('https') != true}"
+                 src="https://res.cloudinary.com/lap-trinh-java/image/upload/v1651459284/kr8hcgyka6yk8c3w3mor.jpg"
+                 th:alt="${nguoiDung.username}" style="width: 80px; height: 80px; object-fit: cover;" class="rounded mx-auto d-block mb-3" id="preview">
+
+            <input type="file" th:field="*{file}" class='form-control' id="file-image" onchange="previewImage()" accept="image/*" style="display: none"/>
             <div class='text-center'>
               <label for="file-image"><i class="fa-solid fa-image"></i></label>
             </div>
-            <p class='text-center mt-3' style="font-weight: bold">Nguoen Van A</p>
+            <p class='text-center mt-3' style="font-weight: bold" th:text="${nguoiDung.tenNguoiDung}"></p>
           </div>
         </div>
         <br />
@@ -84,24 +93,13 @@
           <div class="card-body">
             <ul class="nav flex-column">
               <li class="nav-item"><a class="nav-link text-info" th:href="@{/nguoidung/trangcanhan}"><i class="fa-solid fa-address-card"></i> &nbsp; Thông tin cá nhân</a></li>
-              <li class="nav-item"><a class="nav-link text-danger" th:href="@{/nguoidung/thaydoimatkhau}"><i class="fa-solid fa-key"></i>&nbsp; Thay đổi mật khẩu</a></li>
+              <li class="nav-item"><a class="nav-link text-danger" th:href="@{/nguoidung/trangcanhan/thaydoimatkhau}"><i class="fa-solid fa-key"></i>&nbsp; Thay đổi mật khẩu</a></li>
               <li class="nav-item"><a class="nav-link text-primary" th:href="@{/nguoidung}"><i class="fa-solid fa-house"></i>&nbsp; Quay lại trang chủ</a></li>
               <li class="nav-item"><a class="nav-link text-warning" th:href="@{/nguoidung-panel/logout}"><i class="fa-solid fa-right-from-bracket"></i> &nbsp; Đăng xuất</a></li>
             </ul>
           </div>
         </div>
         <br />
-        <!-- <div class="card">
-            <div class="card-header">
-                Quản lý tin đăng
-            </div>
-            <div class="card-body">
-                <ul>
-                    <li><a>Đăng mới</a></li>
-                    <li><a>Danh sách tin</a></li>
-                </ul>
-            </div>
-        </div> -->
       </div>
 
       <div class='col-md-8'>
@@ -121,7 +119,9 @@
                   </div>
 
                   <div class='col-md-6'>
-                    <input type='text' name='name' value='' class='form-control' />
+                    <input type='text'
+                           th:field="*{tenNguoiDung}"
+                           class='form-control' />
                   </div>
                 </div>
 
@@ -131,20 +131,10 @@
                   </div>
 
                   <div class='col-md-6'>
-                    <input placeholder="dd-mm-yyyy" name='ngaySinh'  value="" type="date" class='form-control' />
-                  </div>
-                </div>
-
-                <div class='row mb-3'>
-                  <div class='col-md-3'>
-                    <label>Giới tính</label>
-                  </div>
-
-                  <div class='col-md-2'>
-                    <select name="gioiTinh" value="" class='form-control'>
-                      <option value="1" >Nam</option>
-                      <option value="2" >Nữ</option>
-                    </select>
+                    <input placeholder="dd-mm-yyyy"
+                           th:field="*{ngaySinh}"
+                           type="date"
+                           class='form-control' />
                   </div>
                 </div>
 
@@ -154,18 +144,11 @@
                   </div>
 
                   <div class='col-md-6'>
-                                        <textarea name='diaChi'
-                                                  value=""
-                                                  class='form-control'
-                                                  style="resize: false"
-                                                  data-toggle="modal"
-                                                  data-target="#exampleModal"
-                                                  modal-form
-                                        ></textarea>
+                    <input type="text"
+                           class='form-control'
+                           th:field="*{diaChi}" />
                   </div>
                 </div>
-
-
               </div>
             </div>
             <br />
@@ -180,7 +163,9 @@
                   </div>
 
                   <div class='col-md-6'>
-                    <input name='soDienThoai'  type="text" class='form-control' />
+                    <input th:field="*{soDT}"
+                           type="text"
+                           class='form-control' />
                   </div>
                 </div>
 
@@ -190,7 +175,9 @@
                   </div>
 
                   <div class='col-md-6'>
-                    <input name='email' type="text" class='form-control' />
+                    <input th:field="*{email}"
+                           type="text"
+                           class='form-control' />
                   </div>
                 </div>
 
@@ -200,7 +187,9 @@
                   </div>
 
                   <div class='col-md-6'>
-                    <input name='cmnd' type="text" class='form-control' />
+                    <input th:field="*{cmnd}"
+                           type="text"
+                           class='form-control' />
                   </div>
                 </div>
 

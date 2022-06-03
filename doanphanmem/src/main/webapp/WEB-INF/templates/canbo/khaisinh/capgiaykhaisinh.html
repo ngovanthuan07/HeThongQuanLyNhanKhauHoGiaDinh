@@ -1,10 +1,301 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/canbo/base">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<div class="col-md-12" layout:fragment="content">
+    <div class="card">
+        <div
+                class="card-header text-white text-center"
+                style="background-color: #009cde">
+            Cấp giấy khai sinh
+        </div>
+        <div class="card-body">
+            <form th:action="@{/canbo/khaisinh/capgiaykhaisinh}" th:method="post" th:object="${giayKhaiSinh}">
+                <div class="card">
+                    <div class="card-header">Thông tin</div>
+                    <div class="card-body">
+                        <div class="row mb-12">
+                            <div class="col-sm-2 form-group">
+                                <label>Họ tên khai sinh</label>
+                                <input
+                                        type="text"
+                                        th:field="*{hoTenKhaiSinh}"
+                                        class="form-control"
+                                />
+                                <span class="text-danger form-message"></span>
+                            </div>
+
+                            <div class="col-sm-2 form-group">
+                                <label>Giới tính</label>
+                                <select name="gioiTinh" class="form-control">
+                                    <option value="1">Nam</option>
+                                    <option value="2">Nữ</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-2 form-group">
+                                <label>Ngày sinh</label>
+                                <div>
+                                    <input
+                                            type="date"
+                                            name="ngaySinh"
+                                            th:field="*{ngaySinh}"
+                                            class="form-control"
+                                            rules="required"
+                                    />
+                                    <span class="text-danger form-message"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 form-group">
+                                <label>Nơi sinh</label>
+                                <input
+                                        type="text"
+                                        th:field="*{noiSinh}"
+                                        value=""
+                                        class="form-control"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        rules="required"
+                                        modal-form
+                                />
+                                <span class="text-danger form-message"></span>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row mb-12">
+                            <div class="col-sm-2 form-group">
+                                <label>Dân tộc</label>
+
+                                <select rules="required" name="danToc" class="form-control selectpicker" data-live-search="true">
+                                    <option value="">Chọn dân tộc</option>
+                                    <option th:each="danToc : ${danTocs}"
+                                            th:value="${danToc.maDT}"
+                                            th:text="${danToc.tenDT}">
+                                    </option>
+                                </select>
+                                <span class="text-danger form-message"></span>
+                            </div>
+                            <div class="col-sm-2 form-group">
+                                <label>Quốc tịch</label>
+                                <input
+                                        type="text"
+                                        th:field="*{quocTich}"
+                                        class="form-control"
+                                />
+                                <span class="text-danger form-message"></span>
+                            </div>
+
+                            <div class="col-sm-6 form-group">
+                                <label>Quê quán</label>
+                                <input
+                                        type="text"
+                                        th:field="*{queQuan}"
+                                        class="form-control"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        rules="required"
+                                        modal-form
+                                />
+                                <span class="text-danger form-message"></span>
+                            </div>
+                        </div>
+
+                        <br />
+                        <!-- ----------------------- cha  -----------------------  -->
+                        <div class="row mb-12">
+                            <div class="col-sm-2 form-group">
+                                <label>Họ tên cha</label>
+                                <div>
+                                    <input
+                                            type="text"
+                                            th:field="*{hoTenCha}"
+                                            class="form-control"
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-sm-2 form-group">
+                                <label>Năm sinh</label>
+                                <div>
+                                    <input
+                                            th:field="*{namSinhCha}"
+                                            name="tenGoiKhac"
+                                            class="form-control"
+                                    />
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-2 form-group">
+                                <label>Dân tộc</label>
+
+                                <select rules="required" name="danTocCuaCha" class="form-control selectpicker" data-live-search="true">
+                                    <option value="">Chọn dân tộc</option>
+                                    <option th:each="danToc : ${danTocs}"
+                                            th:value="${danToc.maDT}"
+                                            th:text="${danToc.tenDT}">
+                                    </option>
+                                </select>
+                                <span class="text-danger form-message"></span>
+                            </div>
+
+                            <div class="col-sm-2 form-group">
+                                <label>Quốc tịch</label>
+                                <div>
+                                    <input
+                                            th:field="*{quocTichCuaCha}"
+                                            name="tenGoiKhac"
+                                            class="form-control"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <label>Nơi thường cư trú</label>
+                                <input
+                                        type="text"
+                                        th:field="*{noiThuongTruCuaCha}"
+                                        class="form-control"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        modal-form
+                                />
+                                <span class="text-danger form-message"></span>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <!-- ----------------------- mẹ  -----------------------  -->
+                        <div class="row mb-12">
+                            <div class="col-sm-2 form-group">
+                                <label>Họ tên mẹ</label>
+                                <div>
+                                    <input
+                                            type="text"
+                                            th:field="*{hoTenMe}"
+                                            class="form-control"
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-sm-2 form-group">
+                                <label>Năm sinh</label>
+                                <div>
+                                    <input
+                                            type="text"
+                                            th:field="*{namSinhMe}"
+                                            class="form-control"
+                                    />
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-2 form-group">
+                                <label>Dân tộc</label>
+
+                                <select rules="required" name="danTocCuaMe" class="form-control selectpicker" data-live-search="true">
+                                    <option value="">Chọn dân tộc</option>
+                                    <option th:each="danToc : ${danTocs}"
+                                            th:value="${danToc.maDT}"
+                                            th:text="${danToc.tenDT}">
+                                    </option>
+                                </select>
+                                <span class="text-danger form-message"></span>
+                            </div>
+
+                            <div class="col-sm-2 form-group">
+                                <label>Quốc tịch</label>
+                                <div>
+                                    <input
+                                            type="text"
+                                            th:field="*{quocTichCuaMe}"
+                                            class="form-control"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <label>Nơi thường cư trú</label>
+                                <input
+                                        type="text"
+                                        th:field="*{noiThuongTruCuaMe}"
+                                        class="form-control"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        modal-form
+                                />
+                                <span class="text-danger form-message"></span>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row mb-12">
+                            <div class="col-sm-2 form-group">
+                                <label>Nơi đăng ký khai sinh</label>
+                                <div>
+                                    <input
+                                            type="text"
+                                            th:field="*{noiDangKyKhaiSinh}"
+                                            class="form-control"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2 form-group">
+                                <label>Họ tên người khai</label>
+                                <div>
+                                    <input
+                                            type="text"
+                                            th:field="*{hoTenNguoiDiKhaiSinh}"
+                                            class="form-control"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2 form-group">
+                                <label>Quan hệ với người được khai</label>
+                                <div>
+                                    <input
+                                            type="text"
+                                            th:field="*{quanHeVoiNguoiDuocKhaiSinh}"
+                                            class="form-control"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <!-- ----------------------- nút bấm  -----------------------  -->
+
+                        <br />
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <button
+                                            type="submit"
+                                            class="btn "
+                                            style="background-color: #009cde; color: white">
+                                        cấp giấy khai sinh
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>

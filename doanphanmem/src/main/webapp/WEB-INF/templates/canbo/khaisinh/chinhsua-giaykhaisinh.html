@@ -17,11 +17,16 @@
             Cấp giấy khai sinh
         </div>
         <div class="card-body">
-            <form th:action="@{/canbo/khaisinh/capgiaykhaisinh}" th:method="post" th:object="${giayKhaiSinh}">
+            <form th:action="@{/canbo/khaisinh/danhsachkhaisinh/chinhsua}" th:method="post" th:object="${giayKhaiSinh}">
                 <div class="card">
                     <div class="card-header">Thông tin</div>
                     <div class="card-body">
                         <div class="row mb-12">
+                            <input
+                                    type="hidden"
+                                    th:field="*{maKS}"
+                                    class="form-control"
+                            />
                             <div class="col-sm-2 form-group">
                                 <label>Họ tên khai sinh</label>
                                 <input
@@ -78,7 +83,8 @@
                                     <option value="">Chọn dân tộc</option>
                                     <option th:each="danToc : ${danTocs}"
                                             th:value="${danToc.maDT}"
-                                            th:text="${danToc.tenDT}">
+                                            th:text="${danToc.tenDT}"
+                                            th:selected="${danToc.maDT == giayKhaiSinh.danToc}">
                                     </option>
                                 </select>
                                 <span class="text-danger form-message"></span>
@@ -140,7 +146,8 @@
                                     <option value="">Chọn dân tộc</option>
                                     <option th:each="danToc : ${danTocs}"
                                             th:value="${danToc.maDT}"
-                                            th:text="${danToc.tenDT}">
+                                            th:text="${danToc.tenDT}"
+                                            th:selected="${danToc.maDT == giayKhaiSinh.danTocCuaCha}">
                                     </option>
                                 </select>
                                 <span class="text-danger form-message"></span>
@@ -204,7 +211,8 @@
                                     <option value="">Chọn dân tộc</option>
                                     <option th:each="danToc : ${danTocs}"
                                             th:value="${danToc.maDT}"
-                                            th:text="${danToc.tenDT}">
+                                            th:text="${danToc.tenDT}"
+                                            th:selected="${danToc.maDT == giayKhaiSinh.danTocCuaMe}">
                                     </option>
                                 </select>
                                 <span class="text-danger form-message"></span>
@@ -279,12 +287,19 @@
 
                         <div class="container">
                             <div class="row">
-                                <div class="col text-center">
-                                    <button
-                                            type="submit"
+                                <div class="d-flex justify-content-between">
+                                    <a
+                                            th:href="@{/canbo/khaisinh/danhsachkhaisinh}"
                                             class="btn "
                                             style="background-color: #009cde; color: white">
-                                        cấp giấy khải sinh
+                                        <i class="fa-solid fa-backward"></i>
+                                        &nbsp;
+                                        Quay lại
+                                    </a>
+                                    <button
+                                            type="submit"
+                                            class="btn btn-success">
+                                        Cập nhật
                                     </button>
                                 </div>
                             </div>

@@ -27,4 +27,6 @@ public interface NguoiDungService extends UserDetailsService {
     Page<NguoiDung> findNguoiDungByTrangThaiContaining(int trangThai, Pageable pageable);
 
     List<NguoiDung> findAll();
+
+    NguoiDung updateUser(NguoiDung nguoiDung);
 }

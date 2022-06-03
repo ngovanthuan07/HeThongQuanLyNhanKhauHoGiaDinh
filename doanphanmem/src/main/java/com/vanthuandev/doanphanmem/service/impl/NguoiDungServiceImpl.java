@@ -1,5 +1,8 @@
 package com.vanthuandev.doanphanmem.service.impl;
 
+
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.vanthuandev.doanphanmem.constants.ApplicationRole;
 import com.vanthuandev.doanphanmem.pojos.NguoiDung;
 import com.vanthuandev.doanphanmem.repository.NguoiDungRepository;
@@ -14,10 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.io.IOException;
+import java.util.*;
 
 @Service("nguoiDungService")
 @Transactional
@@ -28,6 +29,9 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 
     @Autowired
     private NguoiDungRepository nguoiDungRepository;
+
+    @Autowired
+    private Cloudinary cloudinary;
 
 
     @Override
@@ -121,6 +125,29 @@ public class NguoiDungServiceImpl implements NguoiDungService {
     @Override
     public List<NguoiDung> findAll() {
         return nguoiDungRepository.findAll();
+    }
+
+    @Override
+    public NguoiDung updateUser(NguoiDung nguoiDung) {
+        try {
+            if(nguoiDung.getFile() != null && !nguoiDung.getFile().isEmpty())
+            {
+                if(nguoiDung.getImage().startsWith("https")
+                        && !nguoiDung.getImage().equals("")
+                        && nguoiDung.getImage() != null
+                        && !nguoiDung.getPublicId().equals("")
+                        && nguoiDung.getPublicId() != null) {
+                  cloudinary.uploader().destroy(nguoiDung.getPublicId(), ObjectUtils.asMap("resource_type", "image"));
+                }
+                Map r = cloudinary.uploader().upload(nguoiDung.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+                nguoiDung.setImage((String) r.get("secure_url"));
+                nguoiDung.setPublicId((String) r.get("public_id"));
+            }
+            return nguoiDungRepository.save(nguoiDung);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

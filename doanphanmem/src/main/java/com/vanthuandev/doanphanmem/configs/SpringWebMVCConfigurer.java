@@ -1,5 +1,8 @@
 package com.vanthuandev.doanphanmem.configs;
 
+
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -101,6 +104,17 @@ public class SpringWebMVCConfigurer implements WebMvcConfigurer {
 //
 //        return  resolver;
 //    }
+
+    @Bean
+    public Cloudinary cloudinary() {
+        Cloudinary c = new Cloudinary(ObjectUtils.asMap(
+                "cloud_name", "lap-trinh-java",
+                "api_key", "431218625765133",
+                "api_secret", "T_1S6MZmo_T5xKZxnNW2byMRtAM",
+                "secure", true
+        ));
+        return c;
+    }
 
     @Bean
     public CharacterEncodingFilter characterEncodingFilter() {

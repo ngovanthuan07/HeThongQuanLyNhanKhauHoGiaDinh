@@ -1,10 +1,12 @@
 package com.vanthuandev.doanphanmem.pojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -48,12 +50,17 @@ public class NguoiDung {
 
     private String image;
 
+    private String publicId;
+
     private String diaChi;
 
     private String soDT;
 
     private int trangThai;
 
+    @Transient
+    @JsonIgnore
+    private MultipartFile file;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoiTao", fetch = FetchType.LAZY)
     private Collection<DangKyHoSo> dangKyHoSos;
