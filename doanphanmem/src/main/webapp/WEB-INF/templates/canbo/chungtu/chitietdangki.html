@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/canbo/base">
+<head>
+</head>
+<body>
+<div class="col-md-12" layout:fragment="content">
+    <!-- content -->
+    <div class="col-md-12">
+        <div class="card-header text-white text-center" style="background-color:#009cde">
+            Thông tin hồ sơ
+        </div>
+        <div class="card-body">
+            <br/>
+            <div class="card">
+                <div class="card-header text-center">
+                    Chi tiết đăng ký
+                </div>
+                <div class="card-body" id="add-maudon">
+                    <form id="from">
+                        <!-- ho va ten -->
+                        <div class='row mb-3 form-group' >
+                            <div class='col-md-3'>
+                                <label>Họ và tên</label>
+                            </div>
+
+                            <div class='col-md-6'>
+                                <input type='text' name='hoVaTen' th:value="${dangKHS.hoVaTen}" class='form-control' rules="required" disabled/>
+                                <span class="text-danger form-message"></span>
+                            </div>
+                        </div>
+
+                        <!-- ho ten chu ho -->
+                        <div class='row mb-3 form-group'>
+                            <div class='col-md-3'>
+                                <label>CMND/CCCD</label>
+                            </div>
+
+                            <div class='col-md-6'>
+                                <input type='text' name='cmnd' th:value="${dangKHS.cmnd}" class='form-control' disabled/>
+                            </div>
+                        </div>
+
+                        <!-- ho va ten -->
+                        <div class='row mb-3 form-group'>
+                            <div class='col-md-3'>
+                                <label>Địa chỉ</label>
+                            </div>
+
+                            <div class='col-md-6'>
+                                <input type='text'
+                                       name='diaChi'
+                                       th:value="${dangKHS.diaChi}"
+                                       class='form-control'
+                                       data-toggle="modal"
+                                       data-target="#exampleModal"
+                                       modal-form rules="required"
+                                       disabled
+                                />
+                                <span class="text-danger form-message"></span>
+                            </div>
+                        </div>
+                        <!-- chon loai thu tuc -->
+                        <div class='row mb-3 form-group'>
+                            <div class='col-md-3'>
+                                <label>Thủ tục hành chính</label>
+                            </div>
+
+                            <div class='col-md-6'>
+                                <select id="loaiHoSo" name="loaiHoSo"  class='form-control' rules="required" disabled>
+                                    <option value="">Vui lòng chọn loài hồ sơ</option>
+                                    <option th:each="lhs : ${loaiHoSo}"
+                                            th:value="${lhs.maLHS}"
+                                            th:text="${lhs.tenLHS}"
+                                            th:selected="${dangKHS.loaiHoSo.maLHS == lhs.maLHS}"/>
+                                </select>
+                                <span class="text-danger form-message"></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class='row mb-3 form-group'>
+                            <div class='col-md-3'>
+                                <label>Đơn đăng ký</label>
+                            </div>
+                            <div class="col-md-6">
+                                <textarea name="mauDon" id="mauDon"></textarea>
+                                <span class="text-danger form-message"></span>
+                            </div>
+                        </div>
+                        <input type="hidden" id="myMauDon" name="md" th:value="${dangKHS.mauDon}">
+
+                        <dib class="row">
+                            <div class="d-flex justify-content-between">
+                                <a th:href="@{/canbo/khaisinh/danhsachdangkykhaisinh}" class="btn"  style="background-color:#009cde; color:white">
+                                    <i class="fa-solid fa-backward"></i>
+                                    &nbsp;
+                                    Quay lại
+                                </a>
+                                <a th:href="@{'/canbo/khaisinh/danhsachdangkykhaisinh/duyet?maHS=' + ${dangKHS.maHS}}" class="btn"  style="background-color:#2ecc71; color:white">
+                                    <i class="fa-solid fa-check"></i>
+                                    &nbsp;
+                                    Duyệt
+                                </a>
+                                <a th:href="@{'/canbo/khaisinh/danhsachdangkykhaisinh/tuchoi?maHS=' + ${dangKHS.maHS}}" class="btn"  style="background-color:#e74c3c; color:white">
+                                    <i class="fa-solid fa-circle-minus"></i>
+                                    &nbsp;
+                                    Từ chối
+                                </a>
+                            </div>
+                        </dib>
+                    </form>
+
+                </div>
+            </div>
+            <br/>
+        </div>
+    </div>
+    <script>
+        let myMauDon = document.getElementById('myMauDon').value
+        CKEDITOR.replace('mauDon');
+        CKEDITOR.instances['mauDon'].setData(myMauDon);
+    </script>
+</div>
+</body>
+</html>

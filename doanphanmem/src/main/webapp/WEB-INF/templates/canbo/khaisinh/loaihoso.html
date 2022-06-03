@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/congan/base">
+<head>
+</head>
+<body>
+<div class="col-md-12" layout:fragment="content">
+    <!-- content -->
+    <div class="col-md-12">
+        <div class="card">
+            <div
+                    class="card-header text-white text-center"
+                    style="background-color: #009cde"
+            >
+               Danh sách  <span th:text="${dangKyHoSos[0].loaiHoSo.tenLHS}"></span>
+            </div>
+            <div class="card-body">
+                <br />
+                <!-- table 1 -->
+                <div class="card">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <div class="col-md-12 col-sm-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="text-center">Mã hồ sơ</th>
+                                    <th scope="col" class="text-center">Họ và tên</th>
+                                    <th scope="col" class="text-center">CMND</th>
+                                    <th scope="col" class="text-center">Địa chỉ</th>
+                                    <th scope="col" class="text-center">Ngày đăng ký</th>
+                                    <th scope="col" class="text-center">Tác vụ</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="dKHS : ${dangKyHoSos}">
+                                    <th scope="row" class="text-center" th:text="${dKHS.maHS}"/>
+                                    <td class="text-center" th:text="${dKHS.hoVaTen}"/>
+                                    <td class="text-center" th:text="${dKHS.cmnd}"/>
+                                    <td class="text-center" th:text="${dKHS.diaChi}"/>
+                                    <td class="text-center" th:text="${dKHS.ngayDangKy}"/>
+                                    <td class="text-center" >
+                                        <a th:href="@{/congan/bieumau/ho-so/xem(maLHS=${dKHS.loaiHoSo.maLHS},
+                                                                          maHS=${dKHS.maHS}
+                                                                          )}"  class="text-success">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        &nbsp;
+                                        <a th:href="@{/congan/bieumau/ho-so/duyet(maHS=${dKHS.maHS})}" class="text-primary">
+                                            <i class="fa-solid fa-check"></i>
+                                        </a>
+                                        &nbsp;
+                                        <a th:href="@{/congan/bieumau/ho-so/tuchoi(maHS=${dKHS.maHS})}" class="text-secondary text-danger">
+                                            <i class="fa-solid fa-square-minus"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
