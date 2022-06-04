@@ -1,6 +1,7 @@
 package com.vanthuandev.doanphanmem.controllers.police;
 
 
+import com.vanthuandev.doanphanmem.pdf.PDFGenerator;
 import com.vanthuandev.doanphanmem.pojos.NhanKhau;
 import com.vanthuandev.doanphanmem.pojos.NhanKhauTamTru;
 import com.vanthuandev.doanphanmem.pojos.NhanKhauThuongTru;
@@ -14,10 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.crypto.Data;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -84,6 +86,21 @@ public class TamTruController {
         model.addAttribute("nhanKhauTamTrus", nktt);
         return "congan/tamtru/danh-sach-nhan-khau-tam-tru";
     }
+
+    @GetMapping("/quanlytamtru/timkiem")
+    public String search(Model model, @RequestParam("search") String search) {
+        List<NhanKhauTamTru> nktt = null;
+        if(search != null && !search.isEmpty()) {
+            nktt = nhanKhauTamTruService.search(search.trim(), 1);
+        } else {
+            nktt = nhanKhauTamTruService.findAllByNhanKhauTamTruByTrangThai(1);
+        }
+        model.addAttribute("nhanKhauTamTrus", nktt);
+        return "congan/tamtru/danh-sach-nhan-khau-tam-tru";
+    }
+
+
+
     @GetMapping("/danh-sach-chi-tiet-tam-tru")
     public String danhSachChiTietNhanKhauTamTru(Model model,
                                                 @RequestParam(value = "maTT", required = false) Integer maTT) {

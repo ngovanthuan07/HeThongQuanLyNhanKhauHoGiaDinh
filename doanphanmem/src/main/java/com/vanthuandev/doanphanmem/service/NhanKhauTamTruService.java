@@ -18,4 +18,6 @@ public interface NhanKhauTamTruService {
     List<NhanKhauTamTru> findNhanKhauTamTruByMaTTAndTrangThai(int maTT, int trangThai);
 
     Optional<NhanKhauTamTru> findNhanKhauTamTruByMaTTAndMaNK(int maTT, int maNK);
+
+    List<NhanKhauTamTru> search(String keyword, int trangThai);
 }

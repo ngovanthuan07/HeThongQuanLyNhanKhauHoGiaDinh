@@ -14,7 +14,7 @@
                     class="card-header text-white text-center"
                     style="background-color: #009cde"
             >
-                Thống kê
+                Lọc
             </div>
             <form th:action="@{/congan/loc/timkiem}" th:method="get">
             <div class="card-body">
@@ -139,7 +139,7 @@
             </div>
             </form>
             <div class="card-body">Tìm thấy
-                <strong style="color: #e67e22">1</strong>
+                <strong style="color: #e67e22" th:text="${ketQua}"></strong>
                 kết quả
             </div>
             <div class="card-body">
@@ -152,24 +152,33 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th scope="col" class="text-center">Hồ sơ số</th>
+                                    <th scope="col" class="text-center">Mã thường trú</th>
                                     <th scope="col" class="text-center">Hộ khẩu số</th>
                                     <th scope="col" class="text-center">Họ tên chủ</th>
+                                    <th scope="col" class="text-center">CMND/CCCD</th>
                                     <th scope="col" class="text-center">Nơi thường trú</th>
+                                    <th scope="col" class="text-center">Dân tộc</th>
+                                    <th scope="col" class="text-center">Giới tính</th>
+                                    <th scope="col" class="text-center">Ngày sinh</th>
+                                    <th scope="col" class="text-center">Ngày ĐKTT</th>
                                     <th scope="col" class="text-center">Tác vụ</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row" class="text-center">1</th>
-                                    <td class="text-center">1</td>
-                                    <td class="text-center">Nguyễn Văn A</td>
-                                    <td class="text-center">23/14 Trần Kế Xương, Hải Châu, Đà Nẵng</td>
+                                <tr th:each="nktt : ${listNKTT}">
+                                    <th scope="row" class="text-center" th:text="${nktt.maNKTT}"></th>
+                                    <td class="text-center" th:text="${nktt.soHoKhau.soHK}"></td>
+                                    <td class="text-center" th:text="${nktt.nhanKhau.hoVaTen}"></td>
+                                    <td class="text-center" th:text="${nktt.nhanKhau.cmnd}"></td>
+                                    <td class="text-center" th:text="${nktt.soHoKhau.noiDangKyThuongTru}"></td>
+                                    <td class="text-center" th:text="${nktt.nhanKhau.danToc.tenDT}"></td>
+                                    <td class="text-center" th:text="${nktt.nhanKhau.gioiTinh == 1 ? 'Nam' : 'Nữ'}"></td>
+                                    <td class="text-center" th:text="${nktt.nhanKhau.ngaySinh}"></td>
+                                    <td class="text-center" th:text="${nktt.nhanKhau.ngayDKTT}"></td>
                                     <td class="text-center" >
-                                        <button href="" class="btn btn-success">
+                                        <a th:href="@{'/congan/danh-sach-chi-tiet-nhan-khau-thuong-tru?soHK=' + ${nktt.soHoKhau.soHK}}" class="btn btn-success">
                                             Xem chi tiết
-
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>
                                 <tr>

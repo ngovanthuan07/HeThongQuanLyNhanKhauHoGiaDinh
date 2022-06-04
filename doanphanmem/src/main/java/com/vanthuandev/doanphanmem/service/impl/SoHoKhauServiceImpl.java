@@ -34,4 +34,19 @@ public class SoHoKhauServiceImpl implements SoHoKhauService {
     public Optional<SoHoKhau> findSoHoKhauBySoHK(int soHK, int tt) {
         return soHoKhauRepository.findSoHoKhauBySoHK(soHK, tt);
     }
+
+    @Override
+    public void deleteById(Integer integer) {
+        soHoKhauRepository.deleteById(integer);
+    }
+
+    @Override
+    public void delete(SoHoKhau entity) {
+        soHoKhauRepository.delete(entity);
+    }
+
+    @Override
+    public void deleteAllById(Iterable<? extends Integer> integers) {
+        soHoKhauRepository.deleteAllById(integers);
+    }
 }

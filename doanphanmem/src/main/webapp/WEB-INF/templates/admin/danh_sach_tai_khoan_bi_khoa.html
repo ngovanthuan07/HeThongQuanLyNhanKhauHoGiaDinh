@@ -46,7 +46,7 @@
         </div>
         <form action="" th:if="${nguoiDungPage.hasContent()}">
             <div class="form-inline float-left">
-                <label for="size">Page size: </label>
+                <label for="size">Điều chỉnh số trang: </label>
                 <select name="size" id="size" aria-controls="datatable-buttons"
                         class="form-control input-sm" onchange="this.form.submit()">
                     <option th:selected="${nguoiDungPage.size == 5}" value="5">5</option>

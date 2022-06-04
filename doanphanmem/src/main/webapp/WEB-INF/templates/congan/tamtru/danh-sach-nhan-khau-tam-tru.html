@@ -8,12 +8,27 @@
 <body>
 <div class="col-md-12" layout:fragment="content">
     <!-- End Header/Navbar -->
-    <br />
     <div class="text-center">
         <a th:href="@{/congan/tamtru/tamtruho}" class="btn btn-outline-info"><i class="fa-solid fa-people-roof"></i>&nbsp; Thêm sổ (Gia đình)</a>
         <a th:href="@{/congan/tamtru/tamtrucanhan}" class="btn btn-outline-info"><i class="fa-solid fa-user-plus"></i>&nbsp; Thêm sổ (Cá nhân)</a>
-        <a  class="btn btn-outline-info"><i class="fa-solid fa-bullhorn"></i>&nbsp; Báo cáo nhân khẩu</a>
+<!--        <a th:href="@{/congan/tamtru/baocao}" class="btn btn-outline-info"><i class="fa-solid fa-bullhorn"></i>&nbsp; Báo cáo nhân khẩu</a>-->
     </div>
+    <form th:action="@{/congan/tamtru/quanlytamtru/timkiem}" th:method="get">
+    <div class="d-flex justify-content-end">
+        <div div class="row" style="margin-right:2%">
+            <div class="input-group">
+
+                    <div class="form-outline">
+                        <input id="search-focus" type="search" name="search" class="form-control" placeholder="Tìm kiếm..."/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+
+            </div>
+        </div>
+    </div>
+    </form>
     <br>
     <!-- content -->
     <div class="col-md-12">
@@ -39,6 +54,7 @@
                                     <th scope="col" class="text-center">Loại sổ</th>
                                     <th scope="col" class="text-center">Nơi thường trú</th>
                                     <th scope="col" class="text-center">Nơi đăng ký tạm trú</th>
+                                    <th scope="col" class="text-center">CMND</th>
                                     <th scope="col" class="text-center">Tác vụ</th>
                                 </tr>
                                 </thead>
@@ -54,6 +70,7 @@
                                     </td>
                                     <td class="text-center" th:text="${nktt.noiThuongTru}"/>
                                     <td class="text-center" th:text="${nktt.noiDangKiTamTru}"/>
+                                    <td class="text-center" th:text="${nktt.nhanKhau.cmnd}"/>
                                     <td class="text-center" >
                                         <a th:href="@{'/congan/tamtru/danh-sach-chi-tiet-tam-tru?maTT= '+ ${nktt.nhanKhauTamTruPK.maTT}}" class="text-success">
                                             <i class="fa-solid fa-eye"></i>

@@ -38,7 +38,6 @@ public class NhanKhau  {
     @NotNull
     private int gioiTinh;
 
-    @NotNull
     @Size(max = 50)
     private String cmnd;
 

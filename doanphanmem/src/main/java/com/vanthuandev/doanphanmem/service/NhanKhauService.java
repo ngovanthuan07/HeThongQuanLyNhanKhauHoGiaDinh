@@ -3,6 +3,7 @@ package com.vanthuandev.doanphanmem.service;
 import com.vanthuandev.doanphanmem.pojos.NhanKhau;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface NhanKhauService {
@@ -13,4 +14,5 @@ public interface NhanKhauService {
     Optional<NhanKhau> findById(Integer integer);
 
     <S extends NhanKhau> List<S> saveAll(Iterable<S> entities);
+
 }

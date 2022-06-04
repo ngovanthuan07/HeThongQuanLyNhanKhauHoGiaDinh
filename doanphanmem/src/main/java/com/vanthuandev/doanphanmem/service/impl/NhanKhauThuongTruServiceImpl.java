@@ -1,6 +1,7 @@
 package com.vanthuandev.doanphanmem.service.impl;
 
 import com.vanthuandev.doanphanmem.pojos.NhanKhauThuongTru;
+import com.vanthuandev.doanphanmem.repository.NhanKhauCustomRepository;
 import com.vanthuandev.doanphanmem.repository.NhanKhauThuongTruRepository;
 import com.vanthuandev.doanphanmem.service.NhanKhauThuongTruService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -16,6 +18,9 @@ import java.util.Optional;
 public class NhanKhauThuongTruServiceImpl implements NhanKhauThuongTruService {
     @Autowired
     private NhanKhauThuongTruRepository nhanKhauThuongTruRepository;
+
+    @Autowired
+    private NhanKhauCustomRepository nhanKhauCustomRepository;
 
 
     @Override
@@ -58,5 +63,16 @@ public class NhanKhauThuongTruServiceImpl implements NhanKhauThuongTruService {
     @Override
     public <S extends NhanKhauThuongTru> List<S> saveAll(Iterable<S> entities) {
         return nhanKhauThuongTruRepository.saveAll(entities);
+    }
+
+    @Override
+    public List<NhanKhauThuongTru> filterNhanKhau(Map<String, String> map) {
+        return nhanKhauCustomRepository.filterNhanKhauThuongTru(map);
+    }
+
+
+    @Override
+    public List<NhanKhauThuongTru> search(String keyword, int trangThai) {
+        return nhanKhauThuongTruRepository.search(keyword, trangThai);
     }
 }

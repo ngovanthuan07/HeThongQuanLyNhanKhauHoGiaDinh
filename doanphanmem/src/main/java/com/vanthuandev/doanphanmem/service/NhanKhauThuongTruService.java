@@ -3,6 +3,7 @@ package com.vanthuandev.doanphanmem.service;
 import com.vanthuandev.doanphanmem.pojos.NhanKhauThuongTru;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface NhanKhauThuongTruService {
@@ -21,4 +22,8 @@ public interface NhanKhauThuongTruService {
     Optional<NhanKhauThuongTru> findById(Integer integer);
 
     <S extends NhanKhauThuongTru> List<S> saveAll(Iterable<S> entities);
+
+    List<NhanKhauThuongTru> filterNhanKhau(Map<String, String> map);
+
+    List<NhanKhauThuongTru> search(String keyword, int trangThai);
 }

@@ -10,4 +10,10 @@ public interface SoHoKhauService {
     Optional<SoHoKhau> findById(Integer integer);
 
     Optional<SoHoKhau> findSoHoKhauBySoHK(int soHK, int tt);
+
+    void deleteById(Integer integer);
+
+    void delete(SoHoKhau entity);
+
+    void deleteAllById(Iterable<? extends Integer> integers);
 }

@@ -1,6 +1,7 @@
 package com.vanthuandev.doanphanmem.controllers.police;
 
 import com.vanthuandev.doanphanmem.pojos.NhanKhau;
+import com.vanthuandev.doanphanmem.pojos.NhanKhauTamTru;
 import com.vanthuandev.doanphanmem.pojos.NhanKhauThuongTru;
 import com.vanthuandev.doanphanmem.pojos.SoHoKhau;
 import com.vanthuandev.doanphanmem.service.*;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,6 +80,18 @@ public class PoliceController {
         model.addAttribute("nhanKhauThuongKhauTru", nhanKhauThuongTruList);
         return "congan/quanly";
     }
+    @RequestMapping(value="/quanly/timkiem", method = RequestMethod.GET)
+    public String timKiem(Model model, @RequestParam(value = "search", required = false) String search) {
+        List<NhanKhauThuongTru> nhanKhauThuongTruList = null;
+        if(search != null && !search.isEmpty()) {
+            nhanKhauThuongTruList = nhanKhauThuongTruService.search(search.trim(), 1);
+        } else {
+            nhanKhauThuongTruList = nhanKhauThuongTruService.findAllByTrangThai(1);
+        }
+        model.addAttribute("nhanKhauThuongKhauTru", nhanKhauThuongTruList);
+        return "congan/quanly";
+    }
+
 
     @RequestMapping(value="/danh-sach-chi-tiet-nhan-khau-thuong-tru", method = RequestMethod.GET)
     public String danhSachChiTietNhanLhauThuongTru(Model model,
@@ -117,6 +131,8 @@ public class PoliceController {
         model.addAttribute("tonGiaos", tonGiaoService.findAll());
         model.addAttribute("hocVans", hocVanService.findAll());
         model.addAttribute("quanHes", quanHeService.findAll());
+        NhanKhauThuongTru nhanKhauThuongTru = nhanKhau.get().getNhanKhauThuongTrus().iterator().next();
+        model.addAttribute("soHK", nhanKhauThuongTru.getSoHoKhau().getSoHK());
 
         return "congan/nhankhau-thuongtru-edit";
     }
@@ -139,5 +155,30 @@ public class PoliceController {
         model.addAttribute("soHK", soHK);
         model.addAttribute("nhanKhauThuongKhauTru", nktt);
         return "congan/tach-nhan-khau-thuong-tru";
+    }
+
+    // chinh sua so ho khau
+    @RequestMapping(value = "/hoso/edit-hokhau", method = RequestMethod.GET)
+    public String chinhSuaHoKhau(Model model, @RequestParam(value = "soHK") Integer soHK) {
+        SoHoKhau soHoKhau = soHoKhauService.findById(soHK).get();
+        model.addAttribute("hoKhau", soHoKhau);
+        return "congan/edit-hoso";
+    }
+
+    @RequestMapping(value = "/hoso/capnhathoso", method = RequestMethod.POST)
+    public String capNhatHoSoHoKhau(Model model, @ModelAttribute SoHoKhau soHoKhau) {
+        SoHoKhau newHK = soHoKhauService.findById(soHoKhau.getSoHK()).get();
+        newHK.setToSo(soHoKhau.getToSo());
+        newHK.setNgayNopLuu(soHoKhau.getNgayNopLuu());
+        newHK.setNoiDangKyThuongTru(soHoKhau.getNoiDangKyThuongTru());
+        newHK.setNgayCapNhat(new Date());
+        soHoKhauService.save(newHK);
+        return "redirect:/congan/quanly";
+    }
+
+    @RequestMapping(value = "/hoso/xoa-hokhau", method = RequestMethod.GET)
+    public String xoaHoKhau(Model model, @RequestParam(value = "soHK") Integer soHK) {
+        soHoKhauService.deleteById(soHK);
+        return "redirect:/congan/quanly";
     }
 }

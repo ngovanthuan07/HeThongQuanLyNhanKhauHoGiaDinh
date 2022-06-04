@@ -2,7 +2,6 @@ package com.vanthuandev.doanphanmem.service.impl;
 
 import com.vanthuandev.doanphanmem.pojos.NhanKhauTamTru;
 import com.vanthuandev.doanphanmem.repository.NhanKhauTamTruRepository;
-import com.vanthuandev.doanphanmem.service.NhanKhauService;
 import com.vanthuandev.doanphanmem.service.NhanKhauTamTruService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -51,5 +50,10 @@ public class NhanKhauTamTruServiceImpl implements NhanKhauTamTruService {
     @Override
     public Optional<NhanKhauTamTru> findNhanKhauTamTruByMaTTAndMaNK(int maTT, int maNK) {
         return nhanKhauTamTruRepository.findNhanKhauTamTruByMaTTAndMaNK(maTT, maNK);
+    }
+
+    @Override
+    public List<NhanKhauTamTru> search(String keyword, int trangThai) {
+        return nhanKhauTamTruRepository.search(keyword, trangThai);
     }
 }

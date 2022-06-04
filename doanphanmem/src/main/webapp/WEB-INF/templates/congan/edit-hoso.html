@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="col-md-12" layout:fragment="content">
-    <form id="myForm">
+    <form th:action="@{/congan/hoso/capnhathoso}" th:method="post" th:object="${hoKhau}">
         <div class="card">
             <div
                     class="card-header text-white text-center"
@@ -19,7 +19,8 @@
                 <div class="card">
                     <div class="card-header">Thông tin hồ sơ</div>
                     <div class="card-body">
-                        <!-- dan toc  -->
+                        <input type="hidden" th:field="*{soHK}">
+                        <!-- to so  -->
                         <div class="row mb-3 form-group">
 
                             <div class="col-md-3">
@@ -29,8 +30,7 @@
                             <div class="col-md-2">
                                 <input
                                         type="text"
-                                        name="toSo"
-                                        value=""
+                                        th:field="*{toSo}"
                                         class="form-control"
                                         rules="required"
                                 />
@@ -46,8 +46,7 @@
                             <div class="col-md-6">
                                 <input
                                         placeholder="dd-mm-yyyy"
-                                        name="ngayNopLuu"
-                                        value=""
+                                        th:field="*{ngayNopLuu}"
                                         type="date"
                                         class="form-control"
                                         rules="required"
@@ -63,10 +62,8 @@
 
                             <div class="col-md-6">
                                 <input
-                                        name="noiDangKyThuongTru"
-                                        value=""
+                                        th:field="*{noiDangKyThuongTru}"
                                         class="form-control"
-                                        style="resize: false"
                                         data-toggle="modal"
                                         data-target="#exampleModal"
                                         rules="required"
@@ -84,7 +81,7 @@
                                     id="saveSoTamTruAndNhanKhau"
                                     class="btn "
                                     style="background-color: #009cde; color: white">
-                                Tiếp tục
+                                Cập nhật
                             </button>
                         </div>
                     </div>
@@ -94,11 +91,4 @@
     </form>
 </div>
 </body>
-<th:block layout:fragment="validator">
-    <script th:src="@{/js/validator.js}"></script>
-</th:block>
-<th:block layout:fragment="script">
-    <script type="module" th:src="@{/js/hoso.js}"></script>
-</th:block>
-
 </html>

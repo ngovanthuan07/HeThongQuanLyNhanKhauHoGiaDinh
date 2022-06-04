@@ -2,6 +2,7 @@ package com.vanthuandev.doanphanmem.service.impl;
 
 import com.vanthuandev.doanphanmem.pojos.NhanKhau;
 import com.vanthuandev.doanphanmem.pojos.NhanKhauThuongTru;
+import com.vanthuandev.doanphanmem.repository.NhanKhauCustomRepository;
 import com.vanthuandev.doanphanmem.repository.NhanKhauRepository;
 import com.vanthuandev.doanphanmem.service.NhanKhauService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -17,6 +19,9 @@ public class NhanKhauServiceImpl implements NhanKhauService {
 
     @Autowired
     private NhanKhauRepository nhanKhauRepository;
+
+    @Autowired
+    private NhanKhauCustomRepository nhanKhauCustomRepository;
 
     @Override
     public <S extends NhanKhau> S save(S entity) {
@@ -34,4 +39,5 @@ public class NhanKhauServiceImpl implements NhanKhauService {
     public <S extends NhanKhau> List<S> saveAll(Iterable<S> entities) {
         return nhanKhauRepository.saveAll(entities);
     }
+
 }
