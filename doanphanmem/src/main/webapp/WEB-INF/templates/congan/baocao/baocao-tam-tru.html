@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/congan/base">
+<head>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="col-md-12">
+        <div class="card">
+            <div
+                    class="card-header text-white text-center"
+                    style="background-color: #009cde"
+            >
+                Thống kê
+            </div>
+            <form th:action="@{/congan/baocao/xuat-bao-cao-nhan-khau-thuong-tru}" th:method="get">
+            <div class="card-body">
+                <br />
+                <!-- table 1 -->
+                <div class="card">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <div class="row mb-12">
+                            <div class="col-sm-3">
+                                <label>Xã đăng ký thường trú</label>
+                                <input
+                                        type="text"
+                                        name="dangKyXaThuongTru"
+                                        class="form-control"
+                                />
+                            </div>
+                            <div class="col-sm-3">
+                                <label>Đăng ký từ ngày</label>
+                                <input
+                                        type="date"
+                                        name="dangKyTuNgay"
+                                        class="form-control"
+                                />
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>Đăng ký đến ngày</label>
+                                <input
+                                        type="date"
+                                        name="dangKyDenNgay"
+                                        class="form-control"
+                                />
+                            </div>
+                        </div>
+                        <br>
+                        <div class="d-flex justify-content-center">
+                            <button
+                                    type="submit"
+                                    class="btn"
+                                    style="background-color: #e15415; color: white"
+                            >
+                                <i class="fa-solid fa-file-pdf"></i>
+                                &nbsp;
+                                In ra
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/congan/base">
+<head>
+</head>
+<body>
+<div class="col-md-12" layout:fragment="content">
+    <form id="myForm">
+        <div class="card">
+            <div
+                    class="card-header text-white text-center"
+                    style="background-color: #009cde">
+                Nhập hồ sơ hộ khẩu
+            </div>
+            <div class="card-body">
+                <div class="card">
+                    <div class="card-header">Thông tin hồ sơ</div>
+                    <div class="card-body">
+                        <!-- dan toc  -->
+                        <div class="row mb-3 form-group">
+
+                            <div class="col-md-3">
+                                <label>Tờ số</label>
+                            </div>
+
+                            <div class="col-md-2">
+                                <input
+                                        type="text"
+                                        name="toSo"
+                                        value=""
+                                        class="form-control"
+                                        rules="required"
+                                />
+                                <span class="text-danger form-message"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 form-group">
+                            <div class="col-md-3">
+                                <label>Ngày nộp lưu</label>
+                            </div>
+
+                            <div class="col-md-6">
+                                <input
+                                        placeholder="dd-mm-yyyy"
+                                        name="ngayNopLuu"
+                                        value=""
+                                        type="date"
+                                        class="form-control"
+                                        rules="required"
+                                />
+                                <span class="text-danger form-message"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 form-group">
+                            <div class="col-md-3">
+                                <label>Nơi đăng ký thường trú</label>
+                            </div>
+
+                            <div class="col-md-6">
+                                <input
+                                        name="noiDangKyThuongTru"
+                                        value=""
+                                        class="form-control"
+                                        style="resize: false"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        rules="required"
+                                        modal-form>
+                                <span class="text-danger form-message"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <button
+                                    id="saveSoTamTruAndNhanKhau"
+                                    class="btn "
+                                    style="background-color: #009cde; color: white">
+                                Tiếp tục
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<th:block layout:fragment="validator">
+    <script th:src="@{/js/validator.js}"></script>
+</th:block>
+<th:block layout:fragment="script">
+    <script type="module" th:src="@{/js/hoso.js}"></script>
+</th:block>
+
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/congan/base">
+<head>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="col-md-12">
+        <div class="card">
+            <div
+                    class="card-header text-white text-center"
+                    style="background-color: #009cde"
+            >
+                Thống kê
+            </div>
+            <form th:action="@{/congan/loc/timkiem}" th:method="get">
+            <div class="card-body">
+                <br />
+                <!-- table 1 -->
+                <div class="card">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <div class="row mb-12">
+                            <div class="col-sm-3">
+                                <label>Họ tên</label>
+                                <input
+                                        type="text"
+                                        name="hoVaTen"
+                                        class="form-control"
+                                />
+                            </div>
+                            <div class="col-sm-3">
+                                <label>Ngày sinh từ ngày</label>
+                                <input
+                                        type="date"
+                                        name="sinhTuNgay"
+                                        class="form-control"
+                                />
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>Xã đăng ký thường trú</label>
+                                <input
+                                        type="text"
+                                        name="dangKyXaThuongTru"
+                                        class="form-control"
+                                />
+                            </div>
+
+
+                            <div class="col-sm-3">
+                                <label>Giới tính</label>
+                                <select name="gioiTinh" value="" class='form-control'>
+                                    <option value="-1" >Xem tất cả</option>
+                                    <option value="1" >Nam</option>
+                                    <option value="2" >Nữ</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row mb-12">
+                            <div class="col-sm-3">
+                                <label>Đăng ký từ ngày</label>
+                                <input
+                                        type="date"
+                                        name="dangKyTuNgay"
+                                        class="form-control"
+                                />
+                            </div>
+                            <div class="col-sm-3">
+                                <label>Ngày sinh đến ngày</label>
+                                <input
+                                        type="date"
+                                        name="sinhDenNgay"
+                                        class="form-control"
+                                />
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>Nghề nghiệp</label>
+                                <input
+                                        type="text"
+                                        name="ngheNghiep"
+                                        class="form-control"
+                                />
+                            </div>
+
+
+                            <div class="col-sm-3">
+                                <label>CMND/CCCD</label>
+                                <input
+                                        type="text"
+                                        name="cmnd"
+                                        class="form-control"
+                                />
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row mb-12">
+                            <div class="col-sm-3">
+                                <label>Đăng ký ngày đến</label>
+                                <input
+                                        type="date"
+                                        name="dangKyDenNgay"
+                                        value=""
+                                        class="form-control"
+                                />
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label>Dân tộc</label>
+                                <select id="selectDanToc" rules="required" name="danToc" class="form-control selectpicker" data-live-search="true">
+                                    <option value="-1">Chọn dân tộc</option>
+                                    <option th:each="danToc : ${danTocs}"
+                                            th:value="${danToc.maDT}"
+                                            th:text="${danToc.tenDT}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="d-flex justify-content-between">
+                            <button
+                                    type="submit"
+                                    class="btn"
+                                    style="background-color: #009cde; color: white"
+                            >
+                                Lọc kết quả
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+            <div class="card-body">Tìm thấy
+                <strong style="color: #e67e22">1</strong>
+                kết quả
+            </div>
+            <div class="card-body">
+                <br />
+                <!-- table 1 -->
+                <div class="card">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <div class="col-md-12 col-sm-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="text-center">Hồ sơ số</th>
+                                    <th scope="col" class="text-center">Hộ khẩu số</th>
+                                    <th scope="col" class="text-center">Họ tên chủ</th>
+                                    <th scope="col" class="text-center">Nơi thường trú</th>
+                                    <th scope="col" class="text-center">Tác vụ</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row" class="text-center">1</th>
+                                    <td class="text-center">1</td>
+                                    <td class="text-center">Nguyễn Văn A</td>
+                                    <td class="text-center">23/14 Trần Kế Xương, Hải Châu, Đà Nẵng</td>
+                                    <td class="text-center" >
+                                        <button href="" class="btn btn-success">
+                                            Xem chi tiết
+
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>
