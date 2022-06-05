@@ -69,17 +69,16 @@
                     <li><a href="#">Khác</a></li>
                 </ul>
             </li>
-<!--            <li class="nav-item">-->
-<!--                <a href="#thongke" class="nav-link text-dark" data-toggle="collapse">-->
-<!--                    <i class="fa fa-cubes mr-3 text-primary fa-fw"></i>-->
-<!--                    Thống Kê-->
-<!--                </a>-->
-<!--                <ul class="collapse list-unstyled sidebarContent" id="thongke">-->
-<!--                    <li><a href="#">Thống Kê 1</a></li>-->
-<!--                    <li><a href="#">Thống Kê 2</a></li>-->
-<!--                    <li><a href="#">Thống Kê 3</a></li>-->
-<!--                </ul>-->
-<!--            </li>-->
+            <li class="nav-item">
+                <a href="#thongke" class="nav-link text-dark" data-toggle="collapse">
+                    <i class="fa fa-cubes mr-3 text-primary fa-fw"></i>
+                    Thống Kê
+                </a>
+                <ul class="collapse list-unstyled sidebarContent" id="thongke">
+                    <li><a th:href="@{/congan/thongke/thong-ke-thuong-tru}">Thống kê thường trú</a></li>
+                    <li><a th:href="@{/congan/thongke/thong-ke-tam-tru}">Thống kê tạm trú</a></li>
+                </ul>
+            </li>
             <li class="nav-item">
                 <a href="#taikhoan" class="nav-link text-dark" data-toggle="collapse">
                     <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>

@@ -1,10 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragment/congan/base">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
 </head>
 <body>
-$END$
+<div class="col-md-12" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <p class="card-subtitle mb-2 text-primary">Hồ sơ đăng ký</p>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="card-text" th:text="${hoSo}"></h4>
+                        <h3 class="fa-solid fa-file" style="color: #ff7675"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <p class="card-subtitle mb-2 text-primary">Nhân khẩu</p>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="card-text" th:text="${nhanKhau}"></h4>
+                        <h3 class="fa fa-users" style="color: #2980b9"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <p class="card-subtitle mb-2 text-primary">Nhân khẩu nữ</p>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="card-text" th:text="${nhanKhauNu}"></h4>
+                        <h3 class="fa-solid fa-venus" style="color: #fd79a8"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <p class="card-subtitle mb-2 text-primary">Nhân khẩu từ 14 tuổi</p>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="card-text" th:text="${nhanKhauLonHonMuoiBon}"></h4>
+                        <h3 class="fa fa-user" style="color: #6c5ce7"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>
