@@ -13,4 +13,6 @@ public interface GiayKhaiSinhService {
     List<GiayKhaiSinh> findAll();
 
     void deleteById(Integer integer);
+
+    List<GiayKhaiSinh> findAllGiayKhaiSinhByHoTenKhaiSinh(String keyword);
 }

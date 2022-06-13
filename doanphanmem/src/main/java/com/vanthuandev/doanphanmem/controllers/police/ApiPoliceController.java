@@ -64,7 +64,7 @@ public class ApiPoliceController {
                 nhanKhauThuongTru.setTrangThai(1);
                 NhanKhauThuongTru newNKTT = nhanKhauThuongTruService.save(nhanKhauThuongTru);
 
-                return new ResponseEntity<>(new Gson().toJson("Success"), HttpStatus.OK);
+                return new ResponseEntity<>(new Gson().toJson(String.format("Success|%s", newNKTT.getSoHoKhau().getSoHK())), HttpStatus.OK);
             }
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -155,7 +155,4 @@ public class ApiPoliceController {
 
         return new ResponseEntity<>(new Gson().toJson("Error"),HttpStatus.BAD_REQUEST);
     }
-
-
-    // Tạm trú
 }

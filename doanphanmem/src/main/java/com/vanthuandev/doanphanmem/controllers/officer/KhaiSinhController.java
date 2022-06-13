@@ -58,6 +58,12 @@ public class KhaiSinhController {
         return "canbo/khaisinh/danhsachkhaisinh";
     }
 
+    @GetMapping("/danhsachkhaisinh/timkiem")
+    public String timKiemDanhSachKhaiSinh(Model model, @RequestParam(value = "search", required = false) String search) {
+        model.addAttribute("listKhaiSinh", giayKhaiSinhService.findAllGiayKhaiSinhByHoTenKhaiSinh(search));
+        return "canbo/khaisinh/danhsachkhaisinh";
+    }
+
     @GetMapping("/danhsachkhaisinh/chinhsua")
     public String chinhSuaKhaiSinh(Model model, @RequestParam(value = "maKS", required = false) Integer maKS) {
         GiayKhaiSinh giayKhaiSinh = giayKhaiSinhService.findById(maKS).get();

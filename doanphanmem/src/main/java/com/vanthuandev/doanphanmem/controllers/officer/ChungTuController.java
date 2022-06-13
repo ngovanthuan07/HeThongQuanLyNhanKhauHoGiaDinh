@@ -53,6 +53,12 @@ public class ChungTuController {
         return "canbo/chungtu/danhsachchungtu";
     }
 
+    @GetMapping("/danhsachchungtu/timkiem")
+    public String timKiemDanhSachChungTu(Model model, @RequestParam(value = "search", required = false) String search) {
+        model.addAttribute("listChungTu", giayChungTuService.findAllGiayChungTuByHoTenKhaiSinh(search));
+        return "canbo/chungtu/danhsachchungtu";
+    }
+
     @GetMapping("/danhsachchungtu/chinhsua")
     public String chinhSuaChungTu(Model model,
                                   @RequestParam(value = "maCT", required = false) Integer maCT) {

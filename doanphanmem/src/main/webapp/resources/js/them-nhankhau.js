@@ -95,9 +95,10 @@ form.onSubmit = function (formData) {
 
     }).then( data => {
         if(data.includes("Success")) {
-            let isCheck =  window.confirm("Tách hộ khẩu thành công");
+            let isCheck =  window.confirm("Thêm thành công");
             if(isCheck) {
-                window.location.replace("/congan/quanly");
+                let r = data.split("|")
+                window.location.replace("/congan/danh-sach-chi-tiet-nhan-khau-thuong-tru?soHK="+ r[1]);
             } else {
                 window.location.reload();
             }

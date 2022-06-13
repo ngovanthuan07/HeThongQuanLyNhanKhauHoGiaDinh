@@ -16,4 +16,6 @@ public interface GiayChungTuService {
     Optional<GiayChungTu> findById(Integer integer);
 
     void deleteById(Integer integer);
+
+    List<GiayChungTu> findAllGiayChungTuByHoTenKhaiSinh(String keyword);
 }

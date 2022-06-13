@@ -6,6 +6,7 @@ import com.vanthuandev.doanphanmem.repository.GiayChungTuRepository;
 import com.vanthuandev.doanphanmem.repository.GiayKhaiSinhRepository;
 import com.vanthuandev.doanphanmem.service.GiayChungTuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,5 +42,11 @@ public class GiayChungTuServiceImpl implements GiayChungTuService {
     @Override
     public void deleteById(Integer integer) {
         giayChungTuRepository.deleteById(integer);
+    }
+
+
+    @Override
+    public List<GiayChungTu> findAllGiayChungTuByHoTenKhaiSinh(String keyword) {
+        return giayChungTuRepository.findAllGiayChungTuByHoTenKhaiSinh(keyword);
     }
 }
